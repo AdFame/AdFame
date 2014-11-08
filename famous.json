@@ -1,0 +1,13 @@
+{
+  "type": "famous",
+  "name": "famous/templates/starter-kit",
+  "namespace": "famous/templates",
+  "main": "main",
+  "description": "Starter-Kit Template",
+  "authors": [
+    "Mike O'Brien <mike@famo.us>"
+  ],
+  "version": "0.0.1",
+  "local": [ "main" ],
+  "paths": [ "app" ]
+}
