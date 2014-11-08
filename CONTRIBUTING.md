@@ -11,11 +11,11 @@ The steps for contributing a new feature are outlined here command-by-command. T
 * Fork the repo on GitHub
 * Clone down your fork
 ```bash
-git clone https://github.com/code-duel/code-duel.git
+git clone https://github.com/AdFame/AdFame.git
 ```
 * Add this repo as upstream remote
 ```bash
-git remote add upstream https://github.com/code-duel/code-duel.git
+git remote add upstream https://github.com/AdFame/AdFame.git
 ```
 
 ### Every time you are contributing:
@@ -52,7 +52,7 @@ git rebase --continue
 ```bash
 git push origin feat/oauth
 ```
-* Make a pull request from the feature branch of your fork to the master branch of the code-duel organization
+* Make a pull request from the feature branch of your fork to the master branch of the AdFame organization
 * Wait for another contributor to review your code and pull you in
 * Make sure to go back to your master branch on your local repo
 ```bash
@@ -101,7 +101,7 @@ git branch -D feat/oauth
 Use github’s interface to make a fork of the repo, then add that repo as an upstream remote:
 
 ```
-git remote add upstream https://github.com/code-duel/code-duel.git
+git remote add upstream https://github.com/AdFame/AdFame.git
 ```
 
 ### Cut a namespaced feature branch from master
@@ -138,7 +138,7 @@ changes.
 
 #### Commit Message Guidelines
 
-- Commit messages should be written in the present tense; e.g. "Fix continuous
+- Commit messages should be written in the past tense; e.g. "Fix continuous
   integration script".
 - The first line of your commit message should be a brief summary of what the
   commit changes. Aim for about 70 characters max. Remember: This is a summary,
