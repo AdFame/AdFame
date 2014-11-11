@@ -1,32 +1,26 @@
-// load css
+// Load css
 require('./styles');
-
 // Load polyfills
 require('famous-polyfills');
+// Load AdGenerator
+var AppView = require('./AdGenerator');
 
-// import dependencies
+// Import Dependencies
 var Engine = require('famous/core/Engine');
-var Modifier = require('famous/core/Modifier');
-var Transform = require('famous/core/Transform');
-var ImageSurface = require('famous/surfaces/ImageSurface');
+var DrawerLayout = require('famous/views/DrawerLayout');
+var Surface = require('famous/core/Surface')
 
-// create the main context
-var mainContext = Engine.createContext();
+// Create container and set to main context
+ var el = document.getElementById('famous-container');
+Engine.setOptions({ appMode: false });
+var container = Engine.createContext(el);
 
-// your app here
-var logo = new ImageSurface({
-  size: [200, 200],
-  content: 'images/famous_logo.png',
-  classes: ['backfaceVisibility']
-});
+createContainer();
 
-var initialTime = Date.now();
-var centerSpinModifier = new Modifier({
-  align: [0.5, 0.5],
-  origin: [0.5, 0.5],
-  transform: function() {
-    return Transform.rotateY(.002 * (Date.now() - initialTime));
-  }
-});
+// Fill container with a layout and content from the AdGenerator
+function createContainer() {
+	var layout = new Surface();
+	container.add(layout);
 
-mainContext.add(centerSpinModifier).add(logo);
+	container.add(AppView());
+}
