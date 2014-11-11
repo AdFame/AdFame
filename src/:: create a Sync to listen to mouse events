@@ -1,0 +1,85 @@
+    // create a Sync to listen to mouse events
+    var sync = new MouseSync();
+    
+    var sliders = new Surface({
+        size: [100,100],
+        content: 
+        "<input id='posZ' type='range' min='-100' max='120'>Z</input>" +
+        "<input id='posY' type='range' min='-100' max='120'>Y</input>" +
+        "<input id='posX' type='range' min='-100' max='120'>X</input>" +
+        "<input id='velocity' type='range' min='-100' max='120'>velocity</input>" +
+        "<input id='duration' type='range' min='1000' max='15000'>duration</input>" 
+
+    });  
+    
+    var reset = new Surface({
+      content: '<button id="reset">reset</button>'
+    }); 
+
+    var animate= new Surface ({
+        content: '<button id ="animate">Animate</button>'
+    
+    })
+   
+    var mod1 = new Modifier({
+      size: [100,100]
+    });
+
+    var mod2 = new Modifier({
+      size:[100,100]
+    });
+
+    var mod3 = new Modifier({
+      size:[100,100],
+      origin: [.5,.5 ],
+        align:[.8,.5],
+    });
+
+
+  
+    mainContext.add(mod1).add(sliders);
+    mainContext.add(mod2).add(reset);
+    mainContext.add(mod3).add(animate);
+
+
+    Transitionable.registerMethod('spring', SpringTransition);
+    var transition = {
+        method: "spring",
+        period: 1,
+        dampingRatio: 2,
+        velocity: 0
+
+    }
+
+    surface.on('click', function(){ 
+        console.log('clicked')
+        sync.on('update', function(data){
+            console.log('updated')
+            position[0] += data.delta[0];
+            position[1] += data.delta[1];
+        });
+    })
+
+    animate.on('click', function(){
+      var veloc =(document.getElementById('velocity').value / 100)
+      // var posZ =(document.getElementById('posZ').value / 100)
+      var posZ=0
+      var posY =(document.getElementById('posY').value / 100)
+      var posX =(document.getElementById('posX').value / 100)
+      console.log(posX)
+      var duration = (document.getElementById('duration').value)
+      
+      console.log("velocity: ", veloc, "posZ: ", posZ, "posY: ", posY, "posX: ", posX, "durtation: ", duration )
+      
+       modifier.setTransform(Transform.rotate(posX, posY, posZ), { duration: duration, curve: 'spring', dampingRatio: .0001, velocity:veloc });
+
+    });
+   
+    reset.on('click', function(){
+        console.log('clicked')
+       modifier.setTransform(Transform.rotate(0, 0, 0));
+    }); 
+
+    mainContext.add(modifier).add(positionModifier).add(surface);
+   
+});

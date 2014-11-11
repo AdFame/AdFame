@@ -3,7 +3,7 @@ require('./styles');
 // Load polyfills
 require('famous-polyfills');
 // Load AdGenerator
-var AppView = require('./AdGenerator');
+var AdGenerator = require('./AdGenerator');
 
 // Import Dependencies
 var Engine = require('famous/core/Engine');
@@ -19,8 +19,11 @@ createContainer();
 
 // Fill container with a layout and content from the AdGenerator
 function createContainer() {
-	var layout = new Surface();
-	container.add(layout);
+	console.log(AdGenerator());
+	var adObject = AdGenerator();
 
-	container.add(AppView());
+	container
+		.add(adObject.modifier)
+		.add(adObject.positionModifier)
+		.add(adObject.logo);
 }

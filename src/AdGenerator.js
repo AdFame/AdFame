@@ -28,7 +28,17 @@ var sync = new GenericSync(
 );
 
 // Constructor function for our AppView class
-function AppView() {
+function AdGenerator() {
+    var logo = getLogo();
+    var modifier = getModifier();
+    var positionModifier = getPositionModifier();
+
+    logo.pipe(sync)
+
+    return {logo: logo, modifier: modifier, positionModifier: positionModifier};
+}
+
+function getLogo() {
     var logo = new ImageSurface({
       size: [300, 100],
       content: 'images/Coca-Cola.png',
@@ -39,9 +49,29 @@ function AppView() {
       }
     });
 
-    logo.pipe(sync)
-
     return logo;
 }
 
-module.exports = AppView;
+function getModifier() {
+    var modifier = new Modifier({
+        size: [100,100],
+        origin: [.5,1 ],
+        align:[.5,.08],
+        transform: Transform.rotate(2,0,0.1)
+    });
+
+    return modifier;
+}
+
+function getPositionModifier() {
+    var position = [0, 0];
+    var positionModifier = new Modifier({
+        transform : function(){
+            return Transform.translate(position[0], position[1], 0);
+        }
+    });
+
+    return positionModifier;
+}
+
+module.exports = AdGenerator;
