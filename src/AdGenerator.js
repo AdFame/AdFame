@@ -19,31 +19,25 @@ var Scroll = require('./scroll.js');
 var EventHandler = require('famous/core/EventHandler');
 
 //listen to scroll events
-var targetReachedListener = new EventHandler();
-var targetEndReachedListener = new EventHandler();
-var targetNotYetReached = new EventHandler();
-var positionYListener = new EventHandler();
+var scrollEventListener = new EventHandler();
 
 //subscribe to scroll events
-targetReachedListener.subscribe(Scroll.targetReached);
-targetEndReachedListener.subscribe(Scroll.targetEndReached);
-targetNotYetReached.subscribe(Scroll.targetNotReached);
-positionYListener.subscribe(Scroll.positionY);
+scrollEventListener.subscribe(Scroll.scrollEvents);
 
 //act on srcoll events
-targetReachedListener.on('targetreached', function(){
+scrollEventListener.on('targetreached', function(){
   console.log('target reached');
 });
 
-targetEndReachedListener.on('targetendreached', function(){
+scrollEventListener.on('targetendreached', function(){
   console.log('target end reached');
 });
 
-targetNotYetReached.on('targetnotreached', function(){
+scrollEventListener.on('targetnotreached', function(){
   console.log('target not yet reached');
 });
 
-positionYListener.on('positionYChange', function(y){
+scrollEventListener.on('positionYChange', function(y){
   console.log('position y is:', y.position )
 });
 

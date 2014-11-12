@@ -4,16 +4,10 @@ var windowScrollEvents = {}
 
 
 //set up event handlers ** short names more readable in conditionals below **
-var targetReached = new EventHandler();
-var targetEndReached = new EventHandler();
-var targetNotReached = new EventHandler();
-var positionY = new EventHandler();
+var scrollEvents = new EventHandler();
 
 //set handlers to main exported object
-windowScrollEvents.targetReached = targetReached;
-windowScrollEvents.targetEndReached = targetEndReached;
-windowScrollEvents.targetNotReached = targetNotReached;
-windowScrollEvents.positionY = positionY
+windowScrollEvents.scrollEvents = scrollEvents;
 
 //switches so event handlers are only called once on scroll
 windowScrollEvents.called = false;
@@ -28,47 +22,47 @@ var elementIdEnd = 'end';
 //native scroll main function
 window.onscroll = function(){
 
-	//position variables
-	var targetPosition = document.getElementById(elementIdStart).offsetTop;
-	var targetEndPosition = document.getElementById(elementIdEnd).offsetTop; 
-	var windowTopPosition = window.pageYOffset;
+//position variables
+var targetPosition = document.getElementById(elementIdStart).offsetTop;
+var targetEndPosition = document.getElementById(elementIdEnd).offsetTop; 
+var windowTopPosition = window.pageYOffset;
 
-	//emits window position  
-	 positionY.emit('positionYChange', {position: windowTopPosition});
-	 
-	 //check to see if you are at the target element
-	 if(!windowScrollEvents.called && (windowTopPosition + 100) > targetPosition){
-	  windowScrollEvents.called = true;
-	  
-	  //emit event when target position is reached
-	  targetReached.emit('targetreached');
+//emits window position  
+ scrollEvents.emit('positionYChange', {position: windowTopPosition});
+ 
+ //check to see if you are at the target element
+ if(!windowScrollEvents.called && (windowTopPosition + 100) > targetPosition){
+  windowScrollEvents.called = true;
+  
+  //emit event when target position is reached
+  scrollEvents.emit('targetreached');
 
-	 } 
-	 
-	 //if you are not yet at the target element, windowScrollEvents.called is false
-	 if((windowTopPosition + 100) < targetPosition){
-	  
-	  windowScrollEvents.called = false;
-	  windowScrollEvents.hitEnd = false;
-    
-    //emit event when target not reached 
-    targetNotReached.emit('targetnotreached');
-    
-	 }
+ } 
+ 
+ //if you are not yet at the target element, windowScrollEvents.called is false
+ if((windowTopPosition + 100) < targetPosition){
+  
+  windowScrollEvents.called = false;
+  windowScrollEvents.hitEnd = false;
+  
+  //emit event when target not reached 
+  scrollEvents.emit('targetnotreached');
+  
+ }
 
-	 //if you reach the 'targetEndPosition' element alert and only call once
-	 if(!windowScrollEvents.hitEnd && (windowTopPosition > targetEndPosition)) {
-	  windowScrollEvents.hitEnd = true;
+ //if you reach the 'targetEndPosition' element alert and only call once
+ if(!windowScrollEvents.hitEnd && (windowTopPosition > targetEndPosition)) {
+  windowScrollEvents.hitEnd = true;
 
-   //emit event when target end is reached 
-	  targetEndReached.emit('targetendreached');
+ //emit event when target end is reached 
+  scrollEvents.emit('targetendreached');
 
-	 }
+ }
 
-	 //if you reach X duration pixels below target element alert abd only call once
-	 // if(!windowScrollEvents.hitEnd && windowTopPosition > (targetPosition+duration)){
-	 //  windowScrollEvents.hitEnd = true;
-	 // }
+ //if you reach X duration pixels below target element alert abd only call once
+ // if(!windowScrollEvents.hitEnd && windowTopPosition > (targetPosition+duration)){
+ //  windowScrollEvents.hitEnd = true;
+ // }
 
 
 }
