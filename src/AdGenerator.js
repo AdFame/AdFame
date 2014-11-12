@@ -14,7 +14,12 @@ var SpringTransition = require('famous/transitions/SpringTransition');
 var GenericSync = require('famous/inputs/GenericSync');
 var MouseSync   = require('famous/inputs/MouseSync');
 var TouchSync   = require('famous/inputs/TouchSync');
+var Scroll = require('./scroll.js');
 
+setInterval(function(){
+    console.log(Scroll, "test");
+
+}, 5000)
 // Register sync classes globally for later use in GenericSync
 GenericSync.register({
     'mouse' : MouseSync,
