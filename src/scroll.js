@@ -1,7 +1,6 @@
 var EventHandler = require('famous/core/EventHandler');
-
+var Transform = require('famous/core/Transform');
 var windowScrollEvents = {}
-
 
 //set up event handlers ** short names more readable in conditionals below **
 var scrollEvents = new EventHandler();
@@ -19,8 +18,10 @@ var elementIdEnd = 'end';
 //var duration = 1000;
 
 
+
 //native scroll main function
 window.onscroll = function(){
+
 
 //position variables
 var targetPosition = document.getElementById(elementIdStart).offsetTop;
@@ -35,10 +36,10 @@ var windowTopPosition = window.pageYOffset;
   windowScrollEvents.called = true;
   
   //emit event when target position is reached
-  scrollEvents.emit('targetreached');
+  scrollEvents.emit('targetreached', {targetposition: targetPosition, winPos: windowTopPosition});
 
  } 
- 
+
  //if you are not yet at the target element, windowScrollEvents.called is false
  if((windowTopPosition + 100) < targetPosition){
   
