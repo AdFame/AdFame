@@ -40,7 +40,6 @@ function getLogo() {
     var logo = new ImageSurface({
       size: [300, 100],
       content: 'images/Coca-Cola.png',
-      classes: ['backfaceVisibility'],
       properties: {
         textAlign: 'center',
         lineHeight: '100px'
@@ -53,9 +52,9 @@ function getLogo() {
 function getModifier() {
     var modifier = new Modifier({
         size: [100,100],
-        origin: [.5,1 ],
-        align:[.5,.08],
-        transform: Transform.rotate(2,0,0.1)
+        origin: [1,.5 ],
+        align:[.5,.25],
+        transform: Transform.rotate(2,0,.1)
     });
 
     return modifier;
