@@ -6,6 +6,14 @@ var windowScrollEvents = {}
 windowScrollEvents.called = false;
 windowScrollEvents.hitEnd = false;
 
+//set up event handlers
+var targetReached = new EventHandler();
+var targetEndReached = new EventHandler();
+
+//set handlers to object
+windowScrollEvents.targetReached = targetReached;
+windowScrollEvents.targetEndReached = targetEndReached;
+
 //target elements and duration in pixels
 var elementIdStart = 'hello';
 var elementIdEnd = 'end';
@@ -23,6 +31,9 @@ var ending = document.getElementById(elementIdEnd).offsetTop;
  //check to see if you are at the target element
  if(!windowScrollEvents.called && (windowTopPosition + 100) > elementPosition){
    windowScrollEvents.called = true;
+  
+   targetReached.emit('targetreached');
+
    alert('target reached')
  } 
  
@@ -36,6 +47,7 @@ var ending = document.getElementById(elementIdEnd).offsetTop;
  //if you reach the 'ending' element alert and only call once
  if(!windowScrollEvents.hitEnd && (windowTopPosition > ending)) {
   windowScrollEvents.hitEnd = true;
+  targetEndReached.emit('targetendreached')
   console.log('reached      '+ elementIdEnd, windowTopPosition, ending, windowTopPosition > ending, !windowScrollEvents.hitEnd )
  }
 

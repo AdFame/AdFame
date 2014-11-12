@@ -16,10 +16,31 @@ var MouseSync   = require('famous/inputs/MouseSync');
 var TouchSync   = require('famous/inputs/TouchSync');
 var Scroll = require('./scroll.js');
 
+var EventHandler = require('famous/core/EventHandler');
+
 setInterval(function(){
     console.log(Scroll, "test");
 
 }, 5000)
+
+//listen to scroll events
+var targetReachedListener = new EventHandler();
+var targetEndReachedListener = new EventHandler();
+
+//subscribe to scroll events
+targetReachedListener.subscribe(Scroll.targetReached);
+targetEndReachedListener.subscribe(Scroll.targetEndReached);
+
+//act on events
+
+targetReachedListener.on('targetreached', function(){
+  console.log('great success!!!!!!!!!');
+});
+
+targetEndReachedListener.on('targetendreached', function(){
+  console.log('yipppppeeee!!')
+});
+
 // Register sync classes globally for later use in GenericSync
 GenericSync.register({
     'mouse' : MouseSync,
