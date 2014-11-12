@@ -14,6 +14,32 @@ var SpringTransition = require('famous/transitions/SpringTransition');
 var GenericSync = require('famous/inputs/GenericSync');
 var MouseSync   = require('famous/inputs/MouseSync');
 var TouchSync   = require('famous/inputs/TouchSync');
+var Scroll = require('./scroll.js');
+
+var EventHandler = require('famous/core/EventHandler');
+
+//listen to scroll events
+var scrollEventListener = new EventHandler();
+
+//subscribe to scroll events
+scrollEventListener.subscribe(Scroll.scrollEvents);
+
+//act on srcoll events
+scrollEventListener.on('targetreached', function(){
+  console.log('target reached');
+});
+
+scrollEventListener.on('targetendreached', function(){
+  console.log('target end reached');
+});
+
+scrollEventListener.on('targetnotreached', function(){
+  console.log('target not yet reached');
+});
+
+scrollEventListener.on('positionYChange', function(y){
+  console.log('position y is:', y.position )
+});
 
 // Register sync classes globally for later use in GenericSync
 GenericSync.register({

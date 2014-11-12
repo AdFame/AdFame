@@ -1,3 +1,5 @@
+//load scrolls
+require('./scroll.js');
 // Load css
 require('./styles');
 // Load polyfills
