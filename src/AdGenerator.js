@@ -18,32 +18,33 @@ var Scroll = require('./scroll.js');
 
 var EventHandler = require('famous/core/EventHandler');
 
-setInterval(function(){
-    console.log(Scroll, "test");
-
-}, 5000)
-
 //listen to scroll events
 var targetReachedListener = new EventHandler();
 var targetEndReachedListener = new EventHandler();
 var targetNotYetReached = new EventHandler();
+var positionYListener = new EventHandler();
 
 //subscribe to scroll events
 targetReachedListener.subscribe(Scroll.targetReached);
 targetEndReachedListener.subscribe(Scroll.targetEndReached);
-targetNotYetReached.subscribe(Scroll.targetNotReached)
+targetNotYetReached.subscribe(Scroll.targetNotReached);
+positionYListener.subscribe(Scroll.positionY);
 
 //act on srcoll events
 targetReachedListener.on('targetreached', function(){
-  console.log('great success!!!!!!!!!');
+  console.log('target reached');
 });
 
 targetEndReachedListener.on('targetendreached', function(){
-  console.log('yipppppeeee!!')
+  console.log('target end reached');
 });
 
-targetNotYetReached.on('targetnotreached', function(j){
-  console.log('position is:', j.position)
+targetNotYetReached.on('targetnotreached', function(){
+  console.log('target not yet reached');
+});
+
+positionYListener.on('positionYChange', function(y){
+  console.log('position y is:', y.position )
 });
 
 // Register sync classes globally for later use in GenericSync

@@ -2,68 +2,72 @@ var EventHandler = require('famous/core/EventHandler');
 
 var windowScrollEvents = {}
 
-//switch for only calling events once on scroll
-windowScrollEvents.called = false;
-windowScrollEvents.hitEnd = false;
 
-//set up event handlers
+//set up event handlers ** short names more readable in conditionals below **
 var targetReached = new EventHandler();
 var targetEndReached = new EventHandler();
 var targetNotReached = new EventHandler();
+var positionY = new EventHandler();
 
-//set handlers to object
+//set handlers to main exported object
 windowScrollEvents.targetReached = targetReached;
 windowScrollEvents.targetEndReached = targetEndReached;
-windowScrollEvents.targetNotReached = targetNotReached
+windowScrollEvents.targetNotReached = targetNotReached;
+windowScrollEvents.positionY = positionY
 
-//target elements and duration in pixels
+//switches so event handlers are only called once on scroll
+windowScrollEvents.called = false;
+windowScrollEvents.hitEnd = false;
+
+//target elements and duration in pixels;
 var elementIdStart = 'hello';
 var elementIdEnd = 'end';
-var duration = 1000;
+//var duration = 1000;
 
+
+//native scroll main function
 window.onscroll = function(){
 
 	//position variables
-	var elementPosition = document.getElementById(elementIdStart).offsetTop;
+	var targetPosition = document.getElementById(elementIdStart).offsetTop;
+	var targetEndPosition = document.getElementById(elementIdEnd).offsetTop; 
 	var windowTopPosition = window.pageYOffset;
-	var ending = document.getElementById(elementIdEnd).offsetTop; 
-	 
-	 console.log(windowTopPosition, 'look')
+
+	//emits window position  
+	 positionY.emit('positionYChange', {position: windowTopPosition});
 	 
 	 //check to see if you are at the target element
-	 if(!windowScrollEvents.called && (windowTopPosition + 100) > elementPosition){
+	 if(!windowScrollEvents.called && (windowTopPosition + 100) > targetPosition){
 	  windowScrollEvents.called = true;
 	  
+	  //emit event when target position is reached
 	  targetReached.emit('targetreached');
 
-	  alert('target reached')
 	 } 
 	 
 	 //if you are not yet at the target element, windowScrollEvents.called is false
-	 if((windowTopPosition + 100) < elementPosition){
+	 if((windowTopPosition + 100) < targetPosition){
 	  
-	  var y = { position: windowTopPosition}
-
 	  windowScrollEvents.called = false;
 	  windowScrollEvents.hitEnd = false;
-    targetNotReached.emit('targetnotreached', y);
     
-
+    //emit event when target not reached 
+    targetNotReached.emit('targetnotreached');
+    
 	 }
 
-	 //if you reach the 'ending' element alert and only call once
-	 if(!windowScrollEvents.hitEnd && (windowTopPosition > ending)) {
+	 //if you reach the 'targetEndPosition' element alert and only call once
+	 if(!windowScrollEvents.hitEnd && (windowTopPosition > targetEndPosition)) {
 	  windowScrollEvents.hitEnd = true;
-    
+
+   //emit event when target end is reached 
 	  targetEndReached.emit('targetendreached');
-	  console.log('reached      '+ elementIdEnd, windowTopPosition, ending, windowTopPosition > ending, !windowScrollEvents.hitEnd )
 
 	 }
 
 	 //if you reach X duration pixels below target element alert abd only call once
-	 // if(!windowScrollEvents.hitEnd && windowTopPosition > (elementPosition+duration)){
+	 // if(!windowScrollEvents.hitEnd && windowTopPosition > (targetPosition+duration)){
 	 //  windowScrollEvents.hitEnd = true;
-	 //  alert('end reached');
 	 // }
 
 
