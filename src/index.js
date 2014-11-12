@@ -6,6 +6,8 @@ require('famous-polyfills');
 var AdGenerator = require('./AdGenerator');
 // Load drag
 var drag = require('./drag');
+// Load scroll
+var scrolled = require('./scrolling')
 
 // Import Dependencies
 var Engine = require('famous/core/Engine');
@@ -21,12 +23,13 @@ createContainer();
 // Fill container with a layout and content from the AdGenerator
 function createContainer() {
 	var adObject = AdGenerator();
-
-	dragObject = drag(adObject.logo);
+  var scrollObject = scrolled()
+	var dragObject = drag(adObject.logo);
 
 	container
 		.add(adObject.modifier)
 		.add(adObject.positionModifier)
 		.add(dragObject.positionModifier)
-		.add(dragObject.surface);
+    .add(scrollObject.rotationModifier)
+    .add(dragObject.surface)
 }
