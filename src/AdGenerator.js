@@ -26,17 +26,30 @@ var sync = new GenericSync(
     ["mouse", "touch"],
     {direction : GenericSync.DIRECTION_X}
 );
-
+var logo = getLogo();
+var position = [0, 0];
+var posX = .5;
+var called = false;
+var location = 0;
+var positionModifier = new Modifier({
+    transform : function(){
+        return Transform.translate(position[0], position[1], 0);
+    }
+});
+console.log(position)
+logo.pipe(sync)
 // Constructor function for our AppView class
 function AdGenerator() {
-    var logo = getLogo();
-    var modifier = getModifier();
-    var positionModifier = getPositionModifier();
-
-    logo.pipe(sync)
-
     return {logo: logo, modifier: modifier, positionModifier: positionModifier};
 }
+
+logo.on('click', function(){ 
+
+    sync.on('update', function(data){
+        position[0] += data.delta
+    });
+})
+
 
 function getLogo() {
     var logo = new ImageSurface({
@@ -52,26 +65,28 @@ function getLogo() {
     return logo;
 }
 
-function getModifier() {
-    var modifier = new Modifier({
-        size: [100,100],
-        origin: [.5,1 ],
-        align:[.5,.08],
-        transform: Transform.rotate(2,0,0.1)
-    });
+var modifier = new Modifier({
+    size: [100,100],
+    origin: [.5,1 ],
+    align:[.5,.08],
+    transform: Transform.rotate(2,0,.1)
+});
 
-    return modifier;
-}
-
-function getPositionModifier() {
-    var position = [0, 0];
-    var positionModifier = new Modifier({
-        transform : function(){
-            return Transform.translate(position[0], position[1], 0);
+window.onscroll = function(location, called, posX){
+    if (window.pageYOffset>150 && !called){
+        
+        if (window.pageYOffset>location){
+        posX+=window.pageYOffset/100000
+        called=true;
+        }else{
+            posX-=window.pageYOffset/100000
         }
-    });
-
-    return positionModifier;
-}
+        location=window.pageYOffset;
+    }
+    if (window.pageYOffset>1000){
+        called=false;
+    }
+    modifier.transformFrom(Transform.rotateX(posX));
+};
 
 module.exports = AdGenerator;
