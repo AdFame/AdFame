@@ -26,19 +26,24 @@ setInterval(function(){
 //listen to scroll events
 var targetReachedListener = new EventHandler();
 var targetEndReachedListener = new EventHandler();
+var targetNotYetReached = new EventHandler();
 
 //subscribe to scroll events
 targetReachedListener.subscribe(Scroll.targetReached);
 targetEndReachedListener.subscribe(Scroll.targetEndReached);
+targetNotYetReached.subscribe(Scroll.targetNotReached)
 
-//act on events
-
+//act on srcoll events
 targetReachedListener.on('targetreached', function(){
   console.log('great success!!!!!!!!!');
 });
 
 targetEndReachedListener.on('targetendreached', function(){
   console.log('yipppppeeee!!')
+});
+
+targetNotYetReached.on('targetnotreached', function(j){
+  console.log('position is:', j.position)
 });
 
 // Register sync classes globally for later use in GenericSync
