@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Famo.us</title>
+        <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=no" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+        </div>
+    </head>
+    <body></body>
+        <script>
+
+        var Surface = require("famous/core/Surface");
+        var sliders = new Surface({
+        size: [100,100],
+        content: 
+        "<input id='posZ' type='range' min='-100' max='120'>Z</input>" +
+        "<input id='posY' type='range' min='-100' max='120'>Y</input>" +
+        "<input id='posX' type='range' min='-100' max='120'>X</input>" +
+        "<input id='velocity' type='range' min='-100' max='120'>velocity</input>" +
+        "<input id='duration' type='range' min='1000' max='15000'>duration</input>" 
+
+    }); 
+    </script> 
+        
+    <script type="text/javascript" src="bundle.js">
+    </script>
+</html>
