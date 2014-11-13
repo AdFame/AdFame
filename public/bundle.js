@@ -1,1 +1,1 @@
-console.error("Error: Line 22: Unexpected token : (while famousify was processing /Users/pshatara/Documents/Programming/HackReactor/AdFame/src/AdGenerator.js) while parsing file: /Users/pshatara/Documents/Programming/HackReactor/AdFame/src/AdGenerator.js")
+console.error("Error: Line 103: Unexpected token { (while famousify was processing /Users/pshatara/Documents/Programming/HackReactor/AdFame/src/AdGenerator.js) while parsing file: /Users/pshatara/Documents/Programming/HackReactor/AdFame/src/AdGenerator.js")

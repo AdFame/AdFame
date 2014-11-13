@@ -15,19 +15,32 @@ var SpringTransition = require('famous/transitions/SpringTransition');
 var data = {
     logo: 'images/Coca-Cola.png',
     initialPosition: {x: 0, y: 0, z: 0},
+    initialVelocity: {x: 0, y: 0, z: 0},
     initialRotation: {x: 0, y: 0, z: 0},
     opacity: 1,
     enter: {
         type: rotateInOut,
-        translate: {x: 0, y: 0, z: 0},
-        rotate: {x: 0, y: 0, z: 0},
-        opacity: 1
+        position: {x: 0, y: 0, z: 0},
+        velocity: {x: 0, y: 0, z: 0},
+        rotatation: {x: 0, y: 0, z: 0},
+        period: 1000,
+        dampingRatio: 0,
+        restitution: 0,
+        opacity: 1,
+        duration: 1000,
+        curve: Easing.inOutBack
     },
     exit: {
         type: rotateInOut,
-        translate: {x: 0, y: 0, z: 0},
-        rotate: {x: 0, y: 0, z: 0},
-        opacity: 1
+        position: {x: 0, y: 0, z: 0},
+        velocity: {x: 0, y: 0, z: 0},
+        rotatation: {x: 0, y: 0, z: 0},
+        period: 1000,
+        dampingRatio: 0,
+        restitution: 0,
+        opacity: 1,
+        duration: 1000,
+        curve: Easing.inOutBack
     }
 }
 
@@ -87,7 +100,10 @@ function rotateInOut(data) {
             data.rotate.x, 
             data.rotate.y, 
             data.rotate.z
-        )
+        ), {
+            duration: data.duration,
+            curve: data.curve
+        }
     });
 
     return rotate;
@@ -98,6 +114,21 @@ function springInOut(data) {
 }
 
 function slideInOut(data) {
+    var slide = new Modifier({
+        tranform: Transform.translate(
+            data.position.x,
+            data.position.y,
+            data.position.z
+        ), {
+            duration: data.duration,
+            curve: data.curve
+        }
+    })
+
+    return slide;
+}
+
+function wallInOut(data) {
 
 }
 
