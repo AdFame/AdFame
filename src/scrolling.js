@@ -24,7 +24,6 @@ var rotationModifier = new Modifier({
 scrollEventsListener.on('targetreached', function(element){
   scrollEventsListener.on('positionYChange', function(y){ 
     rotatePosX-=y.position/10000
-    console.log(rotatePosX);
     if(rotatePosX){
        rotationModifier.setTransform(Transform.rotateX(rotatePosX))  
     }

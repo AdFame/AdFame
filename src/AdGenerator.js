@@ -100,10 +100,7 @@ function rotateInOut(data) {
             data.rotate.x, 
             data.rotate.y, 
             data.rotate.z
-        ), {
-            duration: data.duration,
-            curve: data.curve
-        }
+        )
     });
 
     return rotate;
@@ -119,10 +116,7 @@ function slideInOut(data) {
             data.position.x,
             data.position.y,
             data.position.z
-        ), {
-            duration: data.duration,
-            curve: data.curve
-        }
+        )
     })
 
     return slide;
