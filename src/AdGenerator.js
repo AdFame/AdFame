@@ -16,14 +16,18 @@ var data = {
     logo: 'images/Coca-Cola.png',
     initialPosition: {x: 0, y: 0, z: 0},
     initialRotation: {x: 0, y: 0, z: 0},
+    opacity: 1,
     enter: {
         type: rotateInOut,
-        translate:
+        translate: {x: 0, y: 0, z: 0},
         rotate: {x: 0, y: 0, z: 0},
+        opacity: 1
     },
     exit: {
         type: rotateInOut,
+        translate: {x: 0, y: 0, z: 0},
         rotate: {x: 0, y: 0, z: 0},
+        opacity: 1
     }
 }
 
