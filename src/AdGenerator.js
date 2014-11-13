@@ -11,82 +11,90 @@ var Transitionable = require('famous/transitions/Transitionable')
 var Transform = require('famous/core/Transform');
 var SpringTransition = require('famous/transitions/SpringTransition');
 
-var GenericSync = require('famous/inputs/GenericSync');
-var MouseSync   = require('famous/inputs/MouseSync');
-var TouchSync   = require('famous/inputs/TouchSync');
-// var Scroll = require('./scroll.js');
+// Modeling JSON object of input
+var data = {
+    logo: 'images/Coca-Cola.png',
+    initialPosition: {x: 0, y: 0, z: 0},
+    initialRotation: {x: 0, y: 0, z: 0},
+    enter: {
+        type: rotateInOut,
+        translate:
+        rotate: {x: 0, y: 0, z: 0},
+    },
+    exit: {
+        type: rotateInOut,
+        rotate: {x: 0, y: 0, z: 0},
+    }
+}
 
-// var EventHandler = require('famous/core/EventHandler');
-
-// //listen to scroll events
-// var scrollEventListener = new EventHandler();
-
-// //subscribe to scroll events
-// scrollEventListener.subscribe(Scroll.scrollEvents);
-
-// //act on srcoll events
-// scrollEventListener.on('targetreached', function(){
-//   console.log('target reached');
-// });
-
-// scrollEventListener.on('targetendreached', function(){
-//   console.log('target end reached');
-// });
-
-// scrollEventListener.on('targetnotreached', function(){
-//   console.log('target not yet reached');
-// });
-
-// scrollEventListener.on('positionYChange', function(y){
-//   console.log('position y is:', y.position )
-// });
-
-// Register sync classes globally for later use in GenericSync
-GenericSync.register({
-    'mouse' : MouseSync,
-    'touch' : TouchSync
-});
-
-// Assign mouse and touch syncing methods
-var sync = new GenericSync(
-    ['mouse', 'touch'],
-    {direction : GenericSync.DIRECTION_X}
-);
+/* GENERATORS */
 
 // Constructor function for our AppView class
 function AdGenerator() {
     var logo = getLogo();
     var modifier = getModifier();
-    // var positionModifier = getPositionModifier();
+    var enter = enterTransition();
+    var exit = exitTransition();
 
-    return {logo: logo, modifier: modifier};
+    return {logo: logo, modifier: modifier, enter: enter, exit: exit};
 }
 
+// 
 function getLogo() {
     var logo = new ImageSurface({
-      size: [300, 100],
-      content: 'images/Coca-Cola.png',
-      properties: {
-        textAlign: 'center',
-        lineHeight: '100px'
-      }
+        size: [300, 100],
+        origin: [0.5,0.5],
+        align:[.5,0],
+        content: data.logo
     });
 
     return logo;
 }
 
-
-
+// Creates a modifier for startin the starting
+// position
 function getModifier() {
     var modifier = new Modifier({
-        size: [undefined,undefined],
-        origin: [0.5,0.5],
-        align:[.5,0],
+        // size: [undefined,undefined],
+        // origin: [0.5,0.5],
+        // align:[.5,0],
         transform: Transform.rotate(1,0,0)
     });
 
     return modifier;
 }
 
+// Calls a function which returns a modifier
+// depending on the transition type
+function enterTransition() {
+    // return data.type(data.enter);
+}
+
+// Calls a function which returns a modifier
+// depending on the transition type
+function exitTransition() {
+    // return data.type(data.exit);
+}
+
+/* TRANSITIONS */
+function rotateInOut(data) {
+    var rotate = new Modifier({
+        transform: Transform.rotate(
+            data.rotate.x, 
+            data.rotate.y, 
+            data.rotate.z
+        )
+    });
+
+    return rotate;
+}
+
+function springInOut(data) {
+
+}
+
+function slideInOut(data) {
+
+}
 
 module.exports = AdGenerator;
