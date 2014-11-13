@@ -11,53 +11,65 @@ var scrollEventsListener = new EventHandler();
 scrollEventsListener.subscribe(Scroll.scrollEvents);
 
 
-var rotatePosX=1;
-var called = false;
-var location=0;
-
+//initial state
+var initPosX = Math.PI, 
+initPosY = 0,
+initPosZ = 0.1,
+distance = 100;
 
 var rotationModifier = new Modifier({
-    size: [100,100],
-    transform: Transform.rotate(1,0,0.1)
+    transform: Transform.rotate(initPosX,initPosY,initPosZ)
 }); 
 
+
+
+//transform to state
+var endPosX=Math.PI/2;
+var location=0;
+
+ 
+
 scrollEventsListener.on('targetreached', function(element){
+   
   scrollEventsListener.on('positionYChange', function(y){ 
+<<<<<<< HEAD
     rotatePosX-=y.position/10000
     if(rotatePosX){
        rotationModifier.setTransform(Transform.rotateX(rotatePosX))  
+=======
+      var position = element.target - element.padding;      
+      var track = y.position
+
+    rotatePosX = initPosX + ((track - position)/distance);
+    if(rotatePosX <= 5.54 && rotatePosX > Math.PI){
+       rotationModifier.setTransform(Transform.rotate(rotatePosX,0,0))  
+       
+>>>>>>> Added updated scrolling feature
     }
+       console.log(rotatePosX, 'distance', track, position, distance)
+    
   });
 });
 
 scrollEventsListener.on('targetnotreached', function(){
- console.log("haven't yet reached target")
+ if(Scroll.called){
+  Scroll.called = false;
+  rotationModifier.setTransform(Transform.rotate(initPosX,initPosY,initPosZ))  
+ }
 });
 
 scrollEventsListener.on('targetendreached', function(){
-  console.log("target end reached!")
+  console.log("target ends reached!")
+  if(Scroll.called) {
+    Scroll.called = false;
+    rotationModifier.setTransform(Transform.rotate(initPosX,initPosY,initPosZ))  
+  }
+ 
 });
 
-  scrollEventsListener.on('positionYChange', function(y){
+scrollEventsListener.on('positionYChange', function(y){
+ 
+});
 
-  //   if (y.position>20 && !called){
-        
-  //       if (y.position>location){
-  //       rotatePosX+=y.position/10000
-  //       called=true;
-  //       }else{
-  //           rotatePosX-=y.position/10000
-  //       }
-  //       location=y.position;
-  //   }
-  //   if (y.position>1000){
-  //       called=false;
-  //   }
-
-  // rotationModifier.setTransform(Transform.rotateX(rotatePosX));
-
-  })
-
-console.log('this is running!!!!!', rotationModifier);
 
 module.exports = {rotationModifier: rotationModifier};
