@@ -17,7 +17,7 @@ GenericSync.register({
 })
 
 // Create a transitionable for position
-position = new Transitionable([0, 0]);
+var position = new Transitionable([0, 0]);
 
 // Set sync variable for generic sync methods
 var sync = new GenericSync({
@@ -25,8 +25,6 @@ var sync = new GenericSync({
     'touch': {},
     'scroll': {scale : .5}
 });
-
-
 function drag(surface) {
     // Links sync to our surface parameter
     surface.pipe(sync);
@@ -34,12 +32,38 @@ function drag(surface) {
     // Updates position of transitionable
     sync.on('update', function(data){
         var currentPosition = position.get();
-
+        console.log(currentPosition)
         position.set([
             currentPosition[0] + data.delta[0],
             currentPosition[1]
         ]);
     });
+
+    // on dragging to right, like page and open link, else not like and close ad
+    surface.on('mouseup', function(){
+        var currentPosition = position.get();
+        if (currentPosition[0] > 80) {
+            console.log('liked');
+            surface.setProperties({visibility: 'hidden'})
+        } else if (currentPosition[0] < (-80)) {
+            console.log('disliked')
+        }else{
+            position.set([0,0], {curve : 'easeOutBounce', duration : 300});
+            console.log('here')
+        }
+    })
+    // on touch drag right like, left dislike
+    surface.on('touchend', function(){
+        if (currentPosition[0] > 80) {
+            console.log('liked');
+            surface.setProperties({visibility: 'hidden'})
+        } else if (currentPosition[0] < (-80)) {
+            console.log('disliked');
+        }else{
+            position.set([0,0], {curve : 'easeOutBounce', duration : 300});
+
+        }
+    })
 
     // Applies updated position to surface
     var positionModifier = new Modifier({
