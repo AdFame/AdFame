@@ -32,19 +32,12 @@ var location=0;
 scrollEventsListener.on('targetreached', function(element){
    
   scrollEventsListener.on('positionYChange', function(y){ 
-<<<<<<< HEAD
-    rotatePosX-=y.position/10000
-    if(rotatePosX){
-       rotationModifier.setTransform(Transform.rotateX(rotatePosX))  
-=======
       var position = element.target - element.padding;      
       var track = y.position
 
     rotatePosX = initPosX + ((track - position)/distance);
     if(rotatePosX <= 5.54 && rotatePosX > Math.PI){
        rotationModifier.setTransform(Transform.rotate(rotatePosX,0,0))  
-       
->>>>>>> Added updated scrolling feature
     }
        console.log(rotatePosX, 'distance', track, position, distance)
     

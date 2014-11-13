@@ -3,7 +3,8 @@ var View = require('famous/core/View');
 var Surface = require('famous/core/Surface');
 var Transform = require('famous/core/Transform');
 var Modifier   = require('famous/core/Modifier');
-var ImageSurface = require('famous/surfaces/ImageSurface')
+var ImageSurface = require('famous/surfaces/ImageSurface');
+var Easing = require('famous/transitions/Easing');
 
 var StateModifier = require('famous/modifiers/StateModifier');
 var GridLayout = require('famous/views/GridLayout');
@@ -60,7 +61,7 @@ function AdGenerator() {
 function getLogo() {
     var logo = new ImageSurface({
       size: [300, 100],
-      content: 'images/apple.jpg',
+      content: data.logo,
       properties: {
         textAlign: 'center',
         lineHeight: '100px'
