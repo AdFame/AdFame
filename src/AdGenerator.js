@@ -11,6 +11,7 @@ var Transitionable = require('famous/transitions/Transitionable')
 var Transform = require('famous/core/Transform');
 var SpringTransition = require('famous/transitions/SpringTransition');
 
+<<<<<<< HEAD
 // Modeling JSON object of input
 var data = {
     logo: 'images/Coca-Cola.png',
@@ -43,6 +44,19 @@ var data = {
         curve: Easing.inOutBack
     }
 }
+=======
+var GenericSync = require('famous/inputs/GenericSync');
+var MouseSync   = require('famous/inputs/MouseSync');
+var TouchSync   = require('famous/inputs/TouchSync');
+
+
+
+// Register sync classes globally for later use in GenericSync
+GenericSync.register({
+    'mouse' : MouseSync,
+    'touch' : TouchSync
+});
+>>>>>>> 177fc4275d65e38dddb1414569bbed2f0db5b518
 
 /* GENERATORS */
 
@@ -59,10 +73,19 @@ function AdGenerator() {
 // 
 function getLogo() {
     var logo = new ImageSurface({
+<<<<<<< HEAD
         size: [300, 100],
         origin: [0.5,0.5],
         align:[.5,0],
         content: data.logo
+=======
+      size: [300, 100],
+      content: 'images/apple.jpg',
+      properties: {
+        textAlign: 'center',
+        lineHeight: '100px'
+      }
+>>>>>>> 177fc4275d65e38dddb1414569bbed2f0db5b518
     });
 
     return logo;

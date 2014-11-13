@@ -15,6 +15,7 @@ windowScrollEvents.hitEnd = false;
 //target elements and duration in pixels;
 var elementIdStart = 'hello';
 var elementIdEnd = 'end';
+var padding = 100;
 //var duration = 1000;
 
 
@@ -32,16 +33,16 @@ var windowTopPosition = window.pageYOffset;
  scrollEvents.emit('positionYChange', {position: windowTopPosition});
  
  //check to see if you are at the target element
- if(!windowScrollEvents.called && (windowTopPosition + 100) > targetPosition){
+ if(!windowScrollEvents.called && (windowTopPosition + padding) > targetPosition){
   windowScrollEvents.called = true;
   
   //emit event when target position is reached
-  scrollEvents.emit('targetreached', {targetposition: targetPosition, winPos: windowTopPosition});
+  scrollEvents.emit('targetreached', {target:targetPosition, padding:padding });
 
  } 
 
  //if you are not yet at the target element, windowScrollEvents.called is false
- if((windowTopPosition + 100) < targetPosition){
+ if((windowTopPosition + padding) < targetPosition){
   
   windowScrollEvents.called = false;
   windowScrollEvents.hitEnd = false;
