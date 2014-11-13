@@ -95,13 +95,11 @@ function exitTransition() {
 
 /* TRANSITIONS */
 function rotateInOut(data) {
-    var rotate = new Modifier({
-        transform: Transform.rotate(
-            data.rotate.x, 
-            data.rotate.y, 
-            data.rotate.z
-        )
-    });
+    var rotate = new Modifier;
+    rotate.setTransform(
+        Transform.translate(data.position.x, data.position.y, data.position.z),
+        {duration: data.duration, curve: data.curve}
+    )
 
     return rotate;
 }
@@ -111,13 +109,11 @@ function springInOut(data) {
 }
 
 function slideInOut(data) {
-    var slide = new Modifier({
-        tranform: Transform.translate(
-            data.position.x,
-            data.position.y,
-            data.position.z
-        )
-    })
+    var slide = new Modifier;
+    slide.setTransform(
+        Transform.translate(data.position.x, data.position.y, data.position.z),
+        {duration: data.duration, curve: data.curve}
+    )
 
     return slide;
 }
