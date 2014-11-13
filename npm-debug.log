@@ -1,26 +1,30 @@
 0 info it worked if it ends with ok
-1 verbose cli [ 'node', '/usr/local/bin/npm', 'run', 'start-dev' ]
-2 info using npm@1.4.23
-3 info using node@v0.10.31
-4 verbose run-script [ 'prestart-dev', 'start-dev', 'poststart-dev' ]
-5 info prestart-dev browserify-seed@0.3.2
-6 info start-dev browserify-seed@0.3.2
-7 verbose unsafe-perm in lifecycle true
-8 info browserify-seed@0.3.2 Failed to exec start-dev script
-9 error browserify-seed@0.3.2 start-dev: `npm run watch & node server.js`
-9 error Exit status 8
-10 error Failed at the browserify-seed@0.3.2 start-dev script.
-10 error This is most likely a problem with the browserify-seed package,
-10 error not with npm itself.
-10 error Tell the author that this fails on your system:
-10 error     npm run watch & node server.js
-10 error You can get their info via:
-10 error     npm owner ls browserify-seed
-10 error There is likely additional logging output above.
-11 error System Darwin 14.0.0
-12 error command "node" "/usr/local/bin/npm" "run" "start-dev"
-13 error cwd /Users/pshatara/Documents/Programming/HackReactor/AdFame
-14 error node -v v0.10.31
-15 error npm -v 1.4.23
-16 error code ELIFECYCLE
-17 verbose exit [ 1, true ]
+1 verbose cli [ 'c:\\Program Files (x86)\\nodejs\\\\node.exe',
+1 verbose cli   'c:\\Program Files (x86)\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'run',
+1 verbose cli   'watch' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.32
+4 verbose node symlink c:\Program Files (x86)\nodejs\\node.exe
+5 verbose run-script [ 'prewatch', 'watch', 'postwatch' ]
+6 info prewatch browserify-seed@0.3.2
+7 info watch browserify-seed@0.3.2
+8 verbose unsafe-perm in lifecycle true
+9 info browserify-seed@0.3.2 Failed to exec watch script
+10 error browserify-seed@0.3.2 watch: `watchify src/index.js -o public/bundle.js --debug --verbose`
+10 error Exit status 8
+11 error Failed at the browserify-seed@0.3.2 watch script.
+11 error This is most likely a problem with the browserify-seed package,
+11 error not with npm itself.
+11 error Tell the author that this fails on your system:
+11 error     watchify src/index.js -o public/bundle.js --debug --verbose
+11 error You can get their info via:
+11 error     npm owner ls browserify-seed
+11 error There is likely additional logging output above.
+12 error System Windows_NT 6.2.9200
+13 error command "c:\\Program Files (x86)\\nodejs\\\\node.exe" "c:\\Program Files (x86)\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "run" "watch"
+14 error cwd c:\Users\Morgan\desktop\newproject\adfame
+15 error node -v v0.10.32
+16 error npm -v 1.4.28
+17 error code ELIFECYCLE
+18 verbose exit [ 1, true ]
