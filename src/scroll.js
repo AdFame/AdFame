@@ -21,11 +21,7 @@ var padding = 100;
 console.log('this is working')
 
 //native scroll main function
-window.onscroll = scrollHandler;
-window.addEventListener("touchmove", scrollHandler, true);
-window.addEventListener("gesturechange", scrollHandler, false)
-
-function scrollHandler(){
+window.onscroll = function (){
 
 //position variables
 var targetPosition = document.getElementById(elementIdStart).offsetTop;

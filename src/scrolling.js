@@ -39,7 +39,6 @@ scrollEventsListener.on('targetreached', function(element){
     if(rotatePosX <= 5.54 && rotatePosX > Math.PI){
        rotationModifier.setTransform(Transform.rotate(rotatePosX,0,0))  
     }
-       console.log(rotatePosX, 'distance', track, position, distance)
     
   });
 });
