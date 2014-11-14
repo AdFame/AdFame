@@ -1,5 +1,6 @@
 html {
   background: #fff;
+  -webkit-overflow-scrolling: none;
 }
 
 .backfaceVisibility {

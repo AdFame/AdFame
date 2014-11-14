@@ -2,7 +2,7 @@
 var Hapi = require('hapi');
 
 var port = Number(process.argv[2]) || 1337;
-var server = Hapi.createServer('localhost', port);
+var server = Hapi.createServer('0.0.0.0', port);
 
 server.pack.register(require('./plugin'), function (err) {
   if (err) { console.error('Failes to load a plugin:', err); }

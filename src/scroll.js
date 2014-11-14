@@ -18,11 +18,10 @@ var elementIdEnd = 'end';
 var padding = 100;
 //var duration = 1000;
 
-
+console.log('this is working')
 
 //native scroll main function
-window.onscroll = function(){
-
+window.onscroll = function (){
 
 //position variables
 var targetPosition = document.getElementById(elementIdStart).offsetTop;
@@ -55,7 +54,7 @@ var windowTopPosition = window.pageYOffset;
  //if you reach the 'targetEndPosition' element alert and only call once
  if(!windowScrollEvents.hitEnd && (windowTopPosition > targetEndPosition)) {
   windowScrollEvents.hitEnd = true;
-
+  
  //emit event when target end is reached 
   scrollEvents.emit('targetendreached');
 
