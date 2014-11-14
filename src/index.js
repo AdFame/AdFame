@@ -34,5 +34,6 @@ function createContainer() {
 		.add(adObject.modifier)
 		.add(dragObject.positionModifier)
     .add(scrollObject.rotationModifier)
+    .add(adObject.enter)
     .add(dragObject.surface)
 }
