@@ -63,7 +63,7 @@ function getLogo() {
       size: [300, 100],
       content: data.logo,
       properties: {
-        textAlign: 'center',
+        // textAlign: 'center',
         lineHeight: '100px'
       }
     });
@@ -76,8 +76,8 @@ function getLogo() {
 function getModifier() {
     var modifier = new Modifier({
         // size: [undefined,undefined],
-        // origin: [0.5,0.5],
-        // align:[.5,0],
+        origin: [0.5,0],
+        align:[0,0],
         transform: Transform.rotate(1,0,0)
     });
 
