@@ -12,40 +12,8 @@ var Transitionable = require('famous/transitions/Transitionable')
 var Transform = require('famous/core/Transform');
 var SpringTransition = require('famous/transitions/SpringTransition');
 
-// Modeling JSON object of input
-var data = {
-    logo: 'images/Coca-Cola.png',
-    initialPosition: {x: 0, y: 0, z: 0},
-    initialVelocity: {x: 0, y: 0, z: 0},
-    initialRotation: {x: 0, y: 0, z: 0},
-    opacity: 1,
-    enter: {
-        type: rotateInOut,
-        position: {x: 0, y: 0, z: 0},
-        velocity: {x: 0, y: 0, z: 0},
-        rotation: {x: 0, y: 0, z: 0},
-        period: 1000,
-        dampingRatio: 0,
-        restitution: 0,
-        opacity: 1,
-        duration: 1000,
-        curve: null,
-        link: 'www.google.com'
-    },
-    exit: {
-        type: slideInOut,
-        position: {x: 0, y: 0, z: 0},
-        velocity: {x: 0, y: 0, z: 0},
-        rotation: {x: 0, y: 0, z: 0},
-        period: 1000,
-        dampingRatio: 0,
-        restitution: 0,
-        opacity: 1,
-        duration: 1000,
-        curve: null,
-        link: 'www.google.com'
-    }
-}
+// Importanting data form data.js dummy file
+var data = require('./data.js')
 
 /* GENERATORS */
 
@@ -89,13 +57,13 @@ function getModifier() {
 // Calls a function which returns a modifier
 // depending on the transition type
 function enterTransition() {
-    return data.enter.type.call(null, data.enter);
+    return eval(data.enter.type).call(null, data.enter);
 }
 
 // Calls a function which returns a modifier
 // depending on the transition type
 function exitTransition() {
-    return data.exit.type.call(null, data.exit);
+    return eval(data.exit.type).call(null, data.exit);
 }
 
 /* TRANSITIONS */
@@ -124,7 +92,20 @@ function slideInOut(dataInput) {
 }
 
 function wallInOut(dataInput) {
+    var wallModifier = new Modifier();
+    Transitionable.registerMethod('wall', WallTransition);
+    
+    var wallProperties = {
+        type: 'wall',
+        period: dataInput.period,
+        dampingRatio : dataInput.dampingRatio,
+        velocity: dataInput.velocity,
+        restitution : dataInput.restitution
+    };
 
+    wallModifier.setTransform(Transform.translate(0,0,0), wallProperties);
+    
+    return wallModifier; 
 }
 
 module.exports = AdGenerator;
