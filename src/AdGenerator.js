@@ -23,25 +23,27 @@ var data = {
         type: rotateInOut,
         position: {x: 0, y: 0, z: 0},
         velocity: {x: 0, y: 0, z: 0},
-        rotatation: {x: 0, y: 0, z: 0},
+        rotation: {x: 0, y: 0, z: 0},
         period: 1000,
         dampingRatio: 0,
         restitution: 0,
         opacity: 1,
         duration: 1000,
-        curve: Easing.inOutBack
+        curve: null,
+        link: 'www.google.com'
     },
     exit: {
-        type: rotateInOut,
+        type: slideInOut,
         position: {x: 0, y: 0, z: 0},
         velocity: {x: 0, y: 0, z: 0},
-        rotatation: {x: 0, y: 0, z: 0},
+        rotation: {x: 0, y: 0, z: 0},
         period: 1000,
         dampingRatio: 0,
         restitution: 0,
         opacity: 1,
         duration: 1000,
-        curve: Easing.inOutBack
+        curve: null,
+        link: 'www.google.com'
     }
 }
 
@@ -63,7 +65,7 @@ function getLogo() {
       size: [300, 100],
       content: data.logo,
       properties: {
-        // textAlign: 'center',
+        textAlign: 'center',
         lineHeight: '100px'
       }
     });
@@ -75,7 +77,7 @@ function getLogo() {
 // position
 function getModifier() {
     var modifier = new Modifier({
-        // size: [undefined,undefined],
+        size: [undefined,undefined],
         origin: [0.5,0],
         align:[0,0],
         transform: Transform.rotate(1,0,0)
@@ -87,41 +89,41 @@ function getModifier() {
 // Calls a function which returns a modifier
 // depending on the transition type
 function enterTransition() {
-    // return data.type(data.enter);
+    return data.enter.type.call(null, data.enter);
 }
 
 // Calls a function which returns a modifier
 // depending on the transition type
 function exitTransition() {
-    // return data.type(data.exit);
+    return data.exit.type.call(null, data.exit);
 }
 
 /* TRANSITIONS */
-function rotateInOut(data) {
+function rotateInOut(dataInput) {
     var rotate = new Modifier;
     rotate.setTransform(
-        Transform.translate(data.position.x, data.position.y, data.position.z),
-        {duration: data.duration, curve: data.curve}
+        Transform.rotate(dataInput.rotation.x, dataInput.rotation.y, dataInput.rotation.z),
+        {duration: dataInput.duration, curve: dataInput.curve}
     )
 
     return rotate;
 }
 
-function springInOut(data) {
+function springInOut(dataInput) {
 
 }
 
-function slideInOut(data) {
+function slideInOut(dataInput) {
     var slide = new Modifier;
     slide.setTransform(
-        Transform.translate(data.position.x, data.position.y, data.position.z),
-        {duration: data.duration, curve: data.curve}
+        Transform.translate(dataInput.position.x, dataInput.position.y, dataInput.position.z),
+        {duration: dataInput.duration, curve: dataInput.curve}
     )
 
     return slide;
 }
 
-function wallInOut(data) {
+function wallInOut(dataInput) {
 
 }
 
