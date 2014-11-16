@@ -4,36 +4,24 @@ require('./scroll.js');
 require('./styles');
 // Load polyfills
 require('famous-polyfills');
-// Load AdGenerator
-var AdGenerator = require('./AdGenerator');
-// Load drag
-var drag = require('./drag');
-// Load scroll
-var scrolled = require('./scrolling')
 
 // Import Dependencies
 var Engine = require('famous/core/Engine');
 var Surface = require('famous/core/Surface');
 var Transform = require('famous/core/Transform');
+var AppView = require('./views/AppView');
 
 // Create container and set to main context
 var el = document.getElementById('famous-container');
 Engine.setOptions({ appMode: false });
 var container = Engine.createContext(el);
 
-createContainer();
+// Add utility function that grabs ad data
+function initAdFame(data) {
+    var appView = new AppView({ data: data });
+    container.add(appView);
+};
 
-// Fill container with a layout and content from the AdGenerator
-function createContainer() {
-	var adObject = AdGenerator();
-  var scrollObject = scrolled;
-	var dragObject = drag(adObject.logo);
-
-	container
-	    
-		.add(adObject.modifier)
-		.add(dragObject.positionModifier)
-    .add(scrollObject.rotationModifier)
-    .add(adObject.enter)
-    .add(dragObject.surface)
-}
+// Instantiate AppView using data
+var data = require('./data')
+initAdFame(data);

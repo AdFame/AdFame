@@ -7,8 +7,9 @@ var ImageSurface = require('famous/surfaces/ImageSurface');
 var Easing = require('famous/transitions/Easing');
 
 var StateModifier = require('famous/modifiers/StateModifier');
+var WallTransition = require('famous/transitions/WallTransition');
 var GridLayout = require('famous/views/GridLayout');
-var Transitionable = require('famous/transitions/Transitionable')
+var Transitionable = require('famous/transitions/Transitionable');
 var Transform = require('famous/core/Transform');
 var SpringTransition = require('famous/transitions/SpringTransition');
 
@@ -27,7 +28,8 @@ function AdGenerator() {
     return {logo: logo, modifier: modifier, enter: enter, exit: exit};
 }
 
-// 
+// Creates a surface using the image
+// provided by the client
 function getLogo() {
     var logo = new ImageSurface({
       size: [300, 100],
@@ -41,8 +43,8 @@ function getLogo() {
     return logo;
 }
 
-// Creates a modifier for startin the starting
-// position
+// Creates a modifier for the starting
+// state
 function getModifier() {
     var modifier = new Modifier({
         size: [undefined,undefined],
@@ -72,7 +74,7 @@ function rotateInOut(dataInput) {
     rotate.setTransform(
         Transform.rotate(dataInput.rotation.x, dataInput.rotation.y, dataInput.rotation.z),
         {duration: dataInput.duration, curve: dataInput.curve}
-    )
+    );
 
     return rotate;
 }
