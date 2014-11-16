@@ -30,13 +30,13 @@ AdView.prototype.constructor = AdView;
 function _createAd() {
     this.add(adObject.modifier)
         .add(dragObject.positionModifier)
-        .add(scrollObject.rotationModifier)
+        .add(scrollObject.mainModifier)
         .add(dragObject.surface);
 }
 
 function _createBanner() {
     this.add(adObject.modifier)
-        .add(scrollObject.rotateModifier);
+        .add(scrollObject.mainModifier);
 }
 
 // Exports AdView
