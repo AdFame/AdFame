@@ -1,8 +1,8 @@
 var Transform = require('famous/core/Transform');
 var Modifier = require('famous/core/Modifier');
+var EventHandler = require('famous/core/EventHandler');
 var Scroll = require('./scroll.js');
 
-var EventHandler = require('famous/core/EventHandler');
 
 //listen to scroll events
 var scrollEventsListener = new EventHandler();
@@ -30,7 +30,7 @@ var location=0;
  
 
 scrollEventsListener.on('targetreached', function(element){
-   
+   console.log("target has been reached")
   scrollEventsListener.on('positionYChange', function(y){ 
       var position = element.target - element.padding;      
       var track = y.position
