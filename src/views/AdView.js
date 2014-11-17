@@ -16,7 +16,7 @@ var scrollObject = scrolled;
 function AdView() {
     View.apply(this, arguments);
     _createAd.call(this);
-    // _createBanner.call(this);
+    _createBanner.call(this);
 }
 
 AdView.prototype = Object.create(View.prototype);
@@ -35,8 +35,14 @@ function _createAd() {
 }
 
 function _createBanner() {
-    this.add(adObject.modifier)
+    
+    var like = this.add(adObject.modifier)
         .add(scrollObject.mainModifier);
+        var notLike= like;
+        like.add(dragObject.opacityYes)
+        .add(dragObject.like);
+        notLike.add(dragObject.opacityNo)
+        .add(dragObject.notLike);
 }
 
 // Exports AdView

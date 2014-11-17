@@ -1,12 +1,11 @@
 // Import additional modules to be used in this view 
-var Transform = require('famous/core/Transform');
-var Modifier = require('famous/core/Modifier');
-
+var Modifier      = require('famous/core/Modifier');
+var Transform     = require('famous/core/Transform');
 var MouseSync     = require('famous/inputs/MouseSync');
 var TouchSync     = require('famous/inputs/TouchSync');
 var ScrollSync    = require('famous/inputs/ScrollSync');
 var GenericSync   = require('famous/inputs/GenericSync');
-
+var ImageSurface = require('famous/surfaces/ImageSurface');
 var Transitionable = require('famous/transitions/Transitionable');
 
 // Register sync inputs
@@ -25,6 +24,34 @@ var sync = new GenericSync({
     'touch': {},
     'scroll': {scale : .5}
 });
+//create the like/dislike surface
+var like = new ImageSurface({
+    size: [70, 70],
+    align: [1,0],
+    content: "images/yes.png",
+    classes: ['backfaceVisibility', "bitch"],
+});
+
+var notLike = new ImageSurface({
+    size: [70, 70],
+    align: [1,0],
+    content: "images/no.png",
+    classes: ['backfaceVisibility', "bitch"],
+});
+
+var yesOpacity = 0; 
+var noOpacity = 0;
+var logoOpacity = 0;
+
+var opacityLogo = new Modifier({
+    opacity:1- logoOpacity
+})
+var opacityYes = new Modifier({
+    opacity: 0+yesOpacity
+})
+var opacityNo = new Modifier({
+    opacity: 0+noOpacity
+})
 function drag(surface) {
     // Links sync to our surface parameter
     surface.pipe(sync);
@@ -32,19 +59,28 @@ function drag(surface) {
     // Updates position of transitionable
     sync.on('update', function(data){
         var currentPosition = position.get();
-        
         position.set([
             currentPosition[0] + data.delta[0],
             currentPosition[1]
         ]);
+            opacityLogo.setOpacity(1-Math.abs(currentPosition[0])/(window.innerWidth*.4));
+            if(currentPosition[0]>0){
+                console.log('yes')
+                opacityYes.setOpacity(currentPosition[0]/window.innerWidth);
+            }
+            if(currentPosition[0]<0){
+                console.log('No')
+                opacityNo.setOpacity(Math.abs(currentPosition[0])/window.innerWidth);
+            }
     });
 
     // on dragging to right, like page and open link, else not like and close ad
+
     surface.on('mouseup', function(){
         var currentPosition = position.get();
         if (currentPosition[0] > 200) {
             position.set([0,0], {curve : 'easeOutBounce', duration : 300});
-            window.open('http://us.coca-cola.com/home/', '_blank');
+            // window.open('http://us.coca-cola.com/home/', '_blank');
         } else if (currentPosition[0] < (-200)) {
             position.set([-window.innerWidth/1.3,window.innerHeight], {curve : 'easeOutBounce', duration : 500});
         }else{
@@ -55,7 +91,7 @@ function drag(surface) {
     surface.on('touchend', function(){
         if (currentPosition[0] > 150) {
             position.set([250,window.innerHeight], {curve : 'easeOutBounce', duration : 300});
-            window.open('https://www.cocacola.com');
+            window.open('https://www.coca-cola.com');
         } else if (currentPosition[0] < (-150)) {
             position.set([-50,window.innerHeight], {curve : 'easeOutBounce', duration : 300});
         }else{
@@ -73,7 +109,7 @@ function drag(surface) {
     });
 
     // Sends back the modified surface and position modifier
-    return {surface: surface, positionModifier: positionModifier};
+    return {surface: surface, positionModifier: positionModifier, like: like, notLike:notLike, opacityNo:opacityNo, opacityYes:opacityYes, opacityLogo:opacityLogo};
 }
 
 module.exports = drag;

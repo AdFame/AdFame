@@ -11,6 +11,8 @@ var Surface = require('famous/core/Surface');
 var Transform = require('famous/core/Transform');
 var AppView = require('./views/AppView');
 
+var Modifier = require('famous/core/Modifier');
+
 // Create container and set to main context
 var el = document.getElementById('famous-container');
 Engine.setOptions({ appMode: false });

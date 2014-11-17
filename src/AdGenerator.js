@@ -5,7 +5,6 @@ var Transform = require('famous/core/Transform');
 var Modifier   = require('famous/core/Modifier');
 var ImageSurface = require('famous/surfaces/ImageSurface');
 var Easing = require('famous/transitions/Easing');
-
 var StateModifier = require('famous/modifiers/StateModifier');
 var WallTransition = require('famous/transitions/WallTransition');
 var GridLayout = require('famous/views/GridLayout');

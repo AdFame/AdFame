@@ -18,12 +18,10 @@ var adGenerator = AdGenerator();
 
 //reset banner to initial state helper function 
 var resetBanner = function(){
-  console.log('reset', targetHit)
   if(targetHit){
     //reset banner to not called   
     targetHit = false;
     //reset banner to initial values
-    console.log('actual reset')
     mainModifier.setTransform(Transform.rotate(initPosX,initPosY,initPosZ))  
   }
 }
