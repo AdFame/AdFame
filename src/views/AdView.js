@@ -5,11 +5,21 @@ var View = require('famous/core/View');
 var BannerView = require('./BannerView');
 var AdGenerator = require('../AdGenerator');
 var drag = require('../Drag');
+<<<<<<< HEAD
 var scrollObject = require('../scrolling')
 
 // Add modifier objects
 var adObject = AdGenerator();
 var dragObject = drag(adObject.logo);
+=======
+var scrolled = require('../scrolling')
+var data = require('../data') 
+
+// Add modifier objects
+var adObject = AdGenerator();
+var dragObject = drag(adObject.logo, data.url);
+var scrollObject = scrolled;
+>>>>>>> nytimes, dragging like and not like feature
 
 // Create Adview
 function AdView() {
@@ -27,8 +37,9 @@ AdView.prototype.constructor = AdView;
 
 // Applies surface and modifier so AdView
 function _createAd() {
-    this.add(adObject.modifier)
+    var mainNode= this.add(adObject.modifier)
         .add(dragObject.positionModifier)
+<<<<<<< HEAD
         .add(scrollObject.mainModifier)
         .add(dragObject.surface);
 }
@@ -36,6 +47,25 @@ function _createAd() {
 function _createBanner() {
     this.add(adObject.modifier)
         .add(scrollObject.mainModifier);
+=======
+        .add(scrollObject.mainModifier);
+        var likeNode= mainNode;
+        mainNode.add(dragObject.surface);
+        likeNode.add(dragObject.opacityYes)
+        .add(dragObject.like);
+        likeNode.add(dragObject.opacityNo)
+        .add(dragObject.notLike);
+>>>>>>> nytimes, dragging like and not like feature
+}
+
+function _createBanner() {
+        // this.add(adObject.modifier)
+        // .add(scrollObject.mainModifier)
+        // var notLike= like;
+        // .add(dragObject.opacityNopacityYes)
+        // .add(dragObject.like);
+        // notLike.add(dragObject.opacityNo)
+        // .add(dragObject.notLike);
 }
 
 // Exports AdView

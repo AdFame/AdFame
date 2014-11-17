@@ -1,0 +1,1 @@
+console.error("Error: Line 8: Unexpected token << (while famousify was processing /Users/alejandrozuccolillo/Desktop/AdFame/src/views/AdView.js) while parsing file: /Users/alejandrozuccolillo/Desktop/AdFame/src/views/AdView.js")
