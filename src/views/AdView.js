@@ -1,5 +1,6 @@
 // Load Dependencies
 var View = require('famous/core/View');
+var Surface = require('famous/core/Surface');
 
 // Load files
 var BannerView = require('./BannerView');
@@ -25,18 +26,25 @@ AdView.prototype.constructor = AdView;
 //     data: undefined
 // }
 
-// Applies surface and modifier so AdView
+// Creates ad surface with modifiers and attaches
+// it to AdView
 function _createAd() {
     this.add(adObject.modifier)
-        .add(dragObject.positionModifier)
         .add(scrollObject.mainModifier)
+        .add(dragObject.positionModifier)
         .add(dragObject.surface);
 }
 
+// Creates background surface with modifiers and
+// attaches it to the AdView
 function _createBanner() {
-    this.add(adObject.modifier)
-        .add(scrollObject.mainModifier);
+    this.add(banner);
 }
+
+var banner = new Surface({
+	size: [100, 100],
+	properties: {backgroundColor: 'blue'}
+});
 
 // Exports AdView
 module.exports = AdView;

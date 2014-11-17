@@ -16,6 +16,13 @@ var SpringTransition = require('famous/transitions/SpringTransition');
 // Importanting data form data.js dummy file
 var data = require('./data.js')
 
+var transitionRegistry = {
+    'rotateInOut': rotateInOut,
+    'slideInOut': slideInOut,
+    'springInOut': springInOut,
+    'wallInOut': wallInOut
+}
+
 /* GENERATORS */
 
 // Constructor function for our AppView class
@@ -59,13 +66,13 @@ function getModifier() {
 // Calls a function which returns a modifier
 // depending on the transition type
 function enterTransition() {
-    return eval(data.enter.type).call(null, data.enter);
+    return transitionRegistry[data.enter.type](data.enter);
 }
 
 // Calls a function which returns a modifier
 // depending on the transition type
 function exitTransition() {
-    return eval(data.exit.type).call(null, data.exit);
+    return transitionRegistry[data.exit.type](data.enter);
 }
 
 /* TRANSITIONS */
