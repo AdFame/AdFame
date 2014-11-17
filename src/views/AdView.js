@@ -5,12 +5,11 @@ var View = require('famous/core/View');
 var BannerView = require('./BannerView');
 var AdGenerator = require('../AdGenerator');
 var drag = require('../Drag');
-var scrolled = require('../scrolling')
+var scrollObject = require('../scrolling')
 
 // Add modifier objects
 var adObject = AdGenerator();
 var dragObject = drag(adObject.logo);
-var scrollObject = scrolled;
 
 // Create Adview
 function AdView() {

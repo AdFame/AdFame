@@ -33,15 +33,15 @@ var resetBanner = function(){
 ******************************************************************/
 
 //default initial state before banner scrolls in 
-var initPosX = Math.PI,  
+var initPosX = 0, //Math.PI,  
 initPosY = 0,
-initPosZ = 0.1,
+initPosZ = 0,
 distance = 100,
 transitionCalled = false
 targetHit = false;
 
 //default state for banner scroll in end 
-var endPosX=5.54;
+var endPosX= 3*Math.PI/2;
 var endPosY=0;
 var endPosZ=0;
 var location=0;
@@ -67,7 +67,9 @@ scrollEventsListener.on('targetreached', function(element){
   
     console.log('transition called', data.enter.duration)
     //set the main modifier to the entry modifier from AdGenerator 
-   //mainModifier = adGenerator.enter;
+    adGenerator.enter(mainModifier);
+   // mainModifier.setTransform(Transform.translate(0,300,0), {duration: 1000})
+    console.log(adGenerator.enter);
 
     //wait until after the transition is over to enable 'scrolling' modifier ( default in and out scroll)
     
