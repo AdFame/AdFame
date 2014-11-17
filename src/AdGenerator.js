@@ -78,16 +78,26 @@ function rotateInOut(dataInput) {
     }
 }
 
-function springInOut(dataInput) {
-
-}
-
 function slideInOut(dataInput) {
     return function(modifier) {
         modifier.setTransform(
             Transform.translate(dataInput.position.x, dataInput.position.y, dataInput.position.z),
             {duration: dataInput.duration, curve: dataInput.curve}
         )
+    }
+}
+
+function springInOut(dataInput) {
+    return function(modifier) {
+        Transitionable.registerMethod('spring', SpringTransition);
+
+        var springProperties = {
+            type: 'spring',
+            period: dataInput.period,
+            dampingRatio: dataInput.dampingRatio,
+        }
+
+        modifier.setTransform(Transform.translate(0,0,0), springProperties)
     }
 }
 
