@@ -2,7 +2,9 @@ var Transform = require('famous/core/Transform');
 var Modifier = require('famous/core/Modifier');
 var EventHandler = require('famous/core/EventHandler');
 var Scroll = require('./scroll.js');
+var AdGenerator = require('./AdGenerator');
 
+var data = require('./data.js');
 
 //listen to scroll events
 var scrollEventsListener = new EventHandler();
@@ -10,58 +12,111 @@ var scrollEventsListener = new EventHandler();
 //subscribe to scroll events
 scrollEventsListener.subscribe(Scroll.scrollEvents);
 
+//add adGenerator that contains entry transitions
+var adGenerator = AdGenerator();
 
-//initial state
-var initPosX = Math.PI, 
+
+//reset banner to initial state helper function 
+var resetBanner = function(){
+  console.log('reset', targetHit)
+  if(targetHit){
+    //reset banner to not called   
+    targetHit = false;
+    //reset banner to initial values
+    console.log('actual reset')
+    mainModifier.setTransform(Transform.rotate(initPosX,initPosY,initPosZ))  
+  }
+}
+
+/******************************************************************
+             MAIN  IN/OUT  SCROLLER  DEFAULTS                                     
+******************************************************************/
+
+//default initial state before banner scrolls in 
+var initPosX = Math.PI,  
 initPosY = 0,
 initPosZ = 0.1,
-distance = 100;
+distance = 100,
+transitionCalled = false
+targetHit = false;
 
-var rotationModifier = new Modifier({
+//default state for banner scroll in end 
+var endPosX=5.54;
+var endPosY=0;
+var endPosZ=0;
+var location=0;
+
+/******************************************************************/
+
+
+//Main rotation modifier with initial state listed above
+var mainModifier = new Modifier({
     transform: Transform.rotate(initPosX,initPosY,initPosZ)
 }); 
 
 
-
-//transform to state
-var endPosX=Math.PI/2;
-var location=0;
-
- 
+/******************************************************************
+             TARGET  REACHED  EVENT  HANDLER                                      
+******************************************************************/
 
 scrollEventsListener.on('targetreached', function(element){
-   console.log("target has been reached")
-  scrollEventsListener.on('positionYChange', function(y){ 
-      var position = element.target - element.padding;      
-      var track = y.position
+  //position is the target position and any padding for the main target div     
+    var position = element.targetPosition - element.padding;      
+   //if transition hasn't been called add the transition from AdGenerator
+  if(!transitionCalled) {
+  
+    console.log('transition called', data.enter.duration)
+    //set the main modifier to the entry modifier from AdGenerator 
+   //mainModifier = adGenerator.enter;
 
+    //wait until after the transition is over to enable 'scrolling' modifier ( default in and out scroll)
+    
+    setTimeout(function(){ 
+      transitionCalled = true;
+    }, data.enter.duration);  
+     
+  }
+
+ /******************************************************************
+    WINDOW POSITION EVENT HANDLER (inside target reached handler)                                   
+  ******************************************************************/
+
+  scrollEventsListener.on('positionYChange', function(y){ 
+    
+    //track current Y positon of window
+    var track = y.position;
+
+    //link the rotation position to the window scroll
     rotatePosX = initPosX + ((track - position)/distance);
-    if(rotatePosX <= 5.54 && rotatePosX > Math.PI){
-       rotationModifier.setTransform(Transform.rotate(rotatePosX,0,0))  
+
+    //only link rotation to scroll if between init and end positions
+    if(rotatePosX <= endPosX && rotatePosX > initPosX && transitionCalled){
+       targetHit = true;
+       console.log('target hit', targetHit)
+       mainModifier.setTransform(Transform.rotate(rotatePosX,0,0))  
     }
     
   });
 });
 
+
+
+/******************************************************************
+             TARGET  NOT  REACHED  EVENT  HANDLER                                      
+******************************************************************/
+
 scrollEventsListener.on('targetnotreached', function(){
- if(Scroll.called){
-  Scroll.called = false;
-  rotationModifier.setTransform(Transform.rotate(initPosX,initPosY,initPosZ))  
- }
-});
-
-scrollEventsListener.on('targetendreached', function(){
-  console.log("target ends reached!")
-  if(Scroll.called) {
-    Scroll.called = false;
-    rotationModifier.setTransform(Transform.rotate(initPosX,initPosY,initPosZ))  
-  }
- 
-});
-
-scrollEventsListener.on('positionYChange', function(y){
- 
+  resetBanner();
 });
 
 
-module.exports = {rotationModifier: rotationModifier};
+/******************************************************************
+             TARGET  END  REACHED  EVENT  HANDLER                                      
+******************************************************************/
+
+scrollEventsListener.on('targetendreached', function(){  
+   resetBanner();
+});
+
+
+module.exports = {mainModifier: mainModifier};

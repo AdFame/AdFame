@@ -29,14 +29,14 @@ var targetEndPosition = document.getElementById(elementIdEnd).offsetTop;
 var windowTopPosition = window.pageYOffset;
 
 //emits window position  
- scrollEvents.emit('positionYChange', {position: windowTopPosition});
+ scrollEvents.emit('positionYChange', {position: windowTopPosition, called:windowScrollEvents.called});
  
  //check to see if you are at the target element
  if(!windowScrollEvents.called && (windowTopPosition + padding) > targetPosition){
   windowScrollEvents.called = true;
   
-  //emit event when target position is reached
-  scrollEvents.emit('targetreached', {target:targetPosition, padding:padding });
+  //emit event when target position is reached only 1x
+  scrollEvents.emit('targetreached', {targetPosition:targetPosition, padding:padding });
 
  } 
 
