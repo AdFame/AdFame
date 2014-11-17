@@ -1,5 +1,6 @@
 var data = {
     logo: 'images/Coca-Cola.png',
+    url: 'http://us.coca-cola.com/home/',
     initialPosition: {x: 0, y: 0, z: 0},
     initialVelocity: {x: 0, y: 0, z: 0},
     initialRotation: {x: 0, y: 0, z: 0},
@@ -14,8 +15,7 @@ var data = {
         restitution: 0,
         opacity: 1,
         duration: 1000,
-        curve: null,
-        link: 'www.google.com'
+        curve: null
     },
     exit: {
         type: 'slideInOut',
@@ -27,8 +27,7 @@ var data = {
         restitution: 0,
         opacity: 1,
         duration: 1000,
-        curve: null,
-        link: 'www.google.com'
+        curve: null
     }
 }
 
