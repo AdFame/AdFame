@@ -50,7 +50,7 @@ function getModifier() {
         size: [undefined,undefined],
         origin: [0.5,0],
         align:[0,0],
-        transform: Transform.rotate(1,0,0)
+        transform: Transform.rotate(0,0,0)
     });
 
     return modifier;
@@ -70,13 +70,12 @@ function exitTransition() {
 
 /* TRANSITIONS */
 function rotateInOut(dataInput) {
-    var rotate = new Modifier;
-    rotate.setTransform(
-        Transform.rotate(dataInput.rotation.x, dataInput.rotation.y, dataInput.rotation.z),
-        {duration: dataInput.duration, curve: dataInput.curve}
-    );
-
-    return rotate;
+    return function(modifier) {
+        modifier.setTransform(
+            Transform.rotate(dataInput.rotation.x, dataInput.rotation.y, dataInput.rotation.z),
+            {duration: dataInput.duration, curve: dataInput.curve}
+        );
+    }
 }
 
 function springInOut(dataInput) {
@@ -84,30 +83,28 @@ function springInOut(dataInput) {
 }
 
 function slideInOut(dataInput) {
-    var slide = new Modifier;
-    slide.setTransform(
-        Transform.translate(dataInput.position.x, dataInput.position.y, dataInput.position.z),
-        {duration: dataInput.duration, curve: dataInput.curve}
-    )
-
-    return slide;
+    return function(modifier) {
+        modifier.setTransform(
+            Transform.translate(dataInput.position.x, dataInput.position.y, dataInput.position.z),
+            {duration: dataInput.duration, curve: dataInput.curve}
+        )
+    }
 }
 
 function wallInOut(dataInput) {
-    var wallModifier = new Modifier();
-    Transitionable.registerMethod('wall', WallTransition);
-    
-    var wallProperties = {
-        type: 'wall',
-        period: dataInput.period,
-        dampingRatio : dataInput.dampingRatio,
-        velocity: dataInput.velocity,
-        restitution : dataInput.restitution
-    };
+    return function(modifier) {
+        Transitionable.registerMethod('wall', WallTransition);
+        
+        var wallProperties = {
+            type: 'wall',
+            period: dataInput.period,
+            dampingRatio : dataInput.dampingRatio,
+            velocity: dataInput.velocity,
+            restitution : dataInput.restitution
+        };
 
-    wallModifier.setTransform(Transform.translate(0,0,0), wallProperties);
-    
-    return wallModifier; 
+        modifier.setTransform(Transform.translate(0,0,0), wallProperties);
+    }
 }
-
+console.log('test', AdGenerator().enter)
 module.exports = AdGenerator;
