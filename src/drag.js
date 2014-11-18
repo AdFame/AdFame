@@ -4,7 +4,6 @@ var Modifier = require('famous/core/Modifier');
 var ImageSurface = require('famous/surfaces/ImageSurface');
 var MouseSync     = require('famous/inputs/MouseSync');
 var TouchSync     = require('famous/inputs/TouchSync');
-var ScrollSync    = require('famous/inputs/ScrollSync');
 var GenericSync   = require('famous/inputs/GenericSync');
 
 var Transitionable = require('famous/transitions/Transitionable');

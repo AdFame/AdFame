@@ -34,13 +34,16 @@ function _createAd() {
     var mainNode= this.add(adObject.modifier)
         .add(dragObject.positionModifier)
         .add(scrollObject.mainModifier);
-        var likeNode= mainNode;
+
+        var likeNode = mainNode;
+        
         mainNode.add(dragObject.surface);
+        
         likeNode.add(dragObject.opacityYes)
         .add(dragObject.like);
+
         likeNode.add(dragObject.opacityNo)
         .add(dragObject.notLike);
-
 }
 
 function _createBanner() {

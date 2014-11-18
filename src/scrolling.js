@@ -24,7 +24,7 @@ var resetBanner = function(){
     targetHit = false;
     //reset banner to initial values
     console.log('actual reset')
-    mainModifier.setTransform(Transform.rotate(initPosX,initPosY,initPosZ))  
+    // mainModifier.setTransform(Transform.rotate(initPosX,initPosY,initPosZ))  
   }
 }
 
@@ -33,7 +33,7 @@ var resetBanner = function(){
 ******************************************************************/
 
 //default initial state before banner scrolls in 
-var initPosX = 0, //Math.PI,  
+var initPosX = 0,
 initPosY = 0,
 initPosZ = 0,
 distance = 100,
@@ -41,10 +41,10 @@ transitionCalled = false
 targetHit = false;
 
 //default state for banner scroll in end 
-var endPosX= 3*Math.PI/2;
-var endPosY=0;
-var endPosZ=0;
-var location=0;
+var endPosX = Math.PI/2;
+var endPosY = 0;
+var endPosZ = 0;
+var location = 0;
 
 /******************************************************************/
 
@@ -64,13 +64,10 @@ scrollEventsListener.on('targetreached', function(element){
     var position = element.targetPosition - element.padding;      
    //if transition hasn't been called add the transition from AdGenerator
   if(!transitionCalled) {
-  
-    console.log('transition called', data.enter.duration)
     //set the main modifier to the entry modifier from AdGenerator 
     adGenerator.enter(mainModifier);
 
     //wait until after the transition is over to enable 'scrolling' modifier ( default in and out scroll)
-    
     setTimeout(function(){ 
       transitionCalled = true;
     }, data.enter.duration);  
@@ -90,11 +87,12 @@ scrollEventsListener.on('targetreached', function(element){
     rotatePosX = initPosX + ((track - position)/distance);
 
     //only link rotation to scroll if between init and end positions
-    if(rotatePosX <= endPosX && rotatePosX > initPosX && transitionCalled){
+    if(rotatePosX <= endPosX && rotatePosX >= initPosX && transitionCalled){
        targetHit = true;
        console.log('target hit', targetHit)
        mainModifier.setTransform(Transform.rotate(rotatePosX,0,0))  
-    }    
+    }
+    
   });
 });
 
@@ -105,7 +103,7 @@ scrollEventsListener.on('targetreached', function(element){
 ******************************************************************/
 
 scrollEventsListener.on('targetnotreached', function(){
-  resetBanner();
+  // resetBanner();
 });
 
 
@@ -114,7 +112,9 @@ scrollEventsListener.on('targetnotreached', function(){
 ******************************************************************/
 
 scrollEventsListener.on('targetendreached', function(){  
-   resetBanner();
+   // resetBanner();
+   console.log('FINISHED')
+   adGenerator.exit(mainModifier)
 });
 
 

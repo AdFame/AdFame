@@ -72,7 +72,7 @@ function enterTransition() {
 // Calls a function which returns a modifier
 // depending on the transition type
 function exitTransition() {
-    return transitionRegistry[data.exit.type](data.enter);
+    return transitionRegistry[data.exit.type](data.exit);
 }
 
 /* TRANSITIONS */
@@ -123,5 +123,4 @@ function wallInOut(dataInput) {
         modifier.setTransform(Transform.translate(0,0,0), wallProperties);
     }
 }
-console.log('test', AdGenerator().enter)
 module.exports = AdGenerator;
