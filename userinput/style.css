@@ -1,0 +1,13 @@
+body {
+font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+font-size: 14px;
+line-height: 1.42857143;
+color: #333;
+background-color: rgb(238, 238, 238);
+}
+
+ul {
+list-style-type:none;
+line-height: 37px;
+padding-left:0px;
+}
