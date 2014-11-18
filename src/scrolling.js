@@ -68,8 +68,6 @@ scrollEventsListener.on('targetreached', function(element){
     console.log('transition called', data.enter.duration)
     //set the main modifier to the entry modifier from AdGenerator 
     adGenerator.enter(mainModifier);
-   // mainModifier.setTransform(Transform.translate(0,300,0), {duration: 1000})
-    console.log(adGenerator.enter);
 
     //wait until after the transition is over to enable 'scrolling' modifier ( default in and out scroll)
     
@@ -96,8 +94,7 @@ scrollEventsListener.on('targetreached', function(element){
        targetHit = true;
        console.log('target hit', targetHit)
        mainModifier.setTransform(Transform.rotate(rotatePosX,0,0))  
-    }
-    
+    }    
   });
 });
 

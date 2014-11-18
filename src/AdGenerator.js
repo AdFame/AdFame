@@ -54,10 +54,10 @@ function getLogo() {
 // state
 function getModifier() {
     var modifier = new Modifier({
-        size: [undefined,undefined],
-        origin: [0.5,0],
-        align:[0,0],
-        transform: Transform.rotate(0,0,0)
+        size: [undefined, undefined],
+        origin: [data.origin.x, data.origin.y, data.origin.z],
+        align:[data.initialPosition.x , data.initialPosition.y, data.initialPosition.z],
+        transform: Transform.rotate(data.initialRotation.x, data.initialRotation.y, data.initialRotation.z)
     });
 
     return modifier;
