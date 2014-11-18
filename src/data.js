@@ -48,9 +48,13 @@ $(function(){
     var selected = $('input[type="radio"]:checked').val()
     
     var $info = $("#" + selected).find;
+    
+    data.logo = $('#logoUrl')
+    data.url = $('#adLink').val();
+    data.origin.x = $('#originX').val();
+    data.origin.y = $('#originY').val();
+    data.orgin.z = $('#originZ').val();
 
-    data.url = $('#adLink').val()
-    data.origin = $('#origin').val()
     data.initialPosition.x = $('#initPosX').val();
     data.initialPosition.y = $('#initPosY').val();
     data.initialPosition.z = $('#initPosZ').val();

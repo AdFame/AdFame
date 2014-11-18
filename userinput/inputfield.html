@@ -7,6 +7,7 @@
 <body >
   <h1>User Input Page</h1>
   <button>Upload logo</button>
+  <input id="logoUrl" type="text"></input>
 	<form id="type">
 	<br>logo must be 65px x 200px**<br>
 	 Ad link <input id="adLink" type="text"></input>
@@ -21,6 +22,7 @@
   <div id="positions" ng-view>
   	 <h2>Positions</h2>
   	 <ul>
+       <li>Origin: X:<input id="originX" type="text" size="4"></input>Y:<input id="originY"type="text" size="4"></input>Z:<input id="originZ"type="text" size="4"></input></li>
     		<li>Initial Position: X:<input id="initPosX" type="text" size="4"></input>Y:<input id="initPosY"type="text" size="4"></input>Z:<input id="initPosZ"type="text" size="4"></input></li>
     	  <li>Initial Velocity: X:<input id="initVelX" type="text" size="4"></input>Y:<input id="initVelY" type="text" size="4"></input>Z:<input id="initVelZ" type="text" size="4"></input></li>
     	  <li>Initial Rotation: X:<input id="initRotX" type="text" size="4"></input>Y:<input id="initRotY" type="text" size="4"></input>Z:<input type="text" id="initRotZ" size="4"></input></li>
