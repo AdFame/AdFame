@@ -55,15 +55,9 @@ function getLogo() {
 function getModifier() {
     var modifier = new Modifier({
         size: [undefined,undefined],
-<<<<<<< HEAD
         origin: [0.5,0],
         align:[0,0],
         transform: Transform.rotate(0,0,0)
-=======
-        origin: [.5,0],
-        align:[.15,0],
-        transform: Transform.rotate(1,0,0)
->>>>>>> nytimes, dragging like and not like feature
     });
 
     return modifier;
