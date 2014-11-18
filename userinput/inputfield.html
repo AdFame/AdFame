@@ -1,96 +1,179 @@
 <!DOCTYPE html>
-<html lang="en"> <!-- ng-app="userInput" -->
+
+<html lang="en">
+<!-- ng-app="userInput" -->
+
 <head>
-	<meta charset="UTF-8">
-	<title>User Input Page</title>
+  <meta charset="UTF-8">
+
+  <title>User Input Page</title>
 </head>
-<body >
-  <h1>User Input Page</h1>
-  <button>Upload logo</button>
-  <input id="logoUrl" type="text"></input>
-	<form id="type">
-	<br>logo must be 65px x 200px**<br>
-	 Ad link <input id="adLink" type="text"></input>
-	 <h2>Transition Type</h2>
-		<input type="radio" name="transitions" value="rotateInOut"  checked>rotateInOut
-	  <br>
-    <input type="radio" name="transitions" value="springInOut" >springInOut
-    <br>     
-		<input type="radio" name="transitions" value="slideInOut" >slideInOut
-	  <br>
-    <input type="radio" name="transitions" value="wallInOut">wallInOut
-  <div id="positions" ng-view>
-  	 <h2>Positions</h2>
-  	 <ul>
-       <li>Origin: X:<input id="originX" type="text" size="4"></input>Y:<input id="originY"type="text" size="4"></input>Z:<input id="originZ"type="text" size="4"></input></li>
-    		<li>Initial Position: X:<input id="initPosX" type="text" size="4"></input>Y:<input id="initPosY"type="text" size="4"></input>Z:<input id="initPosZ"type="text" size="4"></input></li>
-    	  <li>Initial Velocity: X:<input id="initVelX" type="text" size="4"></input>Y:<input id="initVelY" type="text" size="4"></input>Z:<input id="initVelZ" type="text" size="4"></input></li>
-    	  <li>Initial Rotation: X:<input id="initRotX" type="text" size="4"></input>Y:<input id="initRotY" type="text" size="4"></input>Z:<input type="text" id="initRotZ" size="4"></input></li>
-        <li>Opacity:<input id="opacity" type="range" min="0" max="1.0" step=".01"></input></li>
-     </ul>
-  </div> 
 
-  <div id="transitions">
-  <div  class="main" id="rotateInOut">
-  <h2>rotateInOut</h2>
-    <ul>
-    		<li>position X:<input id="rotateInOutPosX" type="text" size="4"></input>Y:<input id="rotateInOutPosY" type="text" size="4"></input>Z:<input id="rotateInOutPosZ" type="text" size="4"></input></li>
-    		<li>velocity X:<input id="rotateInOutVelX" type="text" size="4"></input>Y:<input id="rotateInOutVelY" type="text" size="4"></input>Z:<input id="rotateInOutVelZ" type="text" size="4"></input></li>
-    		<li>rotation X:<input id="rotateInOutRotX" type="text" size="4"></input>Y:<input id="rotateInOutRotY" type="text" size="4"></input>Z:<input id="rotateInOutRotZ" type="text" size="4"></input></li>
-    		<li>period <input id="rotateInOutPeriod" type="range"></input></li>
-    		<li>dampening ratio <input id="rotateInOutDampeningRatio" type="range" min="0" max="1.0" step=".01"></input></li>
-    		<li>opacity <input id="rotateInOutOpacity" type="range" min="0" max="1.0" step=".01"></input></li>
-    		<li>duration <input id="rotateInOutDuration" type="range" min="0" max="5000" step="500"></input></li>
-    		<li>curve <input id="rotateInOutCurve" type="text"></input></li>
-    		</li>
-    	</ul>	
-  </div>
-  <div class="main" id="springInOut">
-   <h2>springInOut</h2>
-  	 <ul>
-    		<li>position X:<input id="springInOutPosX" type="text" size="4"></input>Y:<input id="springInOutPosY" type="text" size="4"></input>Z:<input id="springInOutPosZ" type="text" size="4"></input></li>
-    		<li>velocity X:<input id="springInOutVelX" type="text" size="4"></input>Y:<input id="springInOutVelY" type="text" size="4"></input>Z:<input id="springInOutVelZ" type="text" size="4"></input></li>
-    		<li>rotation X:<input id="springInOutRotX" type="text" size="4"></input>Y:<input id="springInOutRotY" type="text" size="4"></input>Z:<input id="springInOutRotZ" type="text" size="4"></input></li>
-    		<li>period <input id="springInOutPeriod" type="range"></input></li>
-    		<li>dampening ratio <input id="springInOutDampeningRatio" type="range"></input></li>
-    		<li>opacity <input id="springInOutOpacity" type="range"></input></li>
-    		<li>duration <input id="springInOutDuration" type="range"></input></li>
-    	</ul>	
-  </div>
-  <div class="main" id="slideInOut">
-  	 <h2>slideInOut</h2>
-  	 <ul>
-    		<li>position X:<input id="slideInOutPosX" type="text" size="4"></input>Y:<input id="slideInOutPosY" type="text" size="4"></input>Z:<input id="slideInOutPosZ" type="text" size="4"></input></li>
-    		<li>velocity X:<input id="slideInOutVelX" type="text" size="4"></input>Y:<input id="slideInOutVelY" type="text" size="4"></input>Z:<input id="slideInOutVelZ" type="text" size="4"></input></li>
-    		<li>rotation X:<input id="slideInOutRotX" type="text" size="4"></input>Y:<input id="slideInOutRotY" type="text" size="4"></input>Z:<input id="slideInOutRotZ" type="text" size="4"></input></li>
-    		<li>period <input id="slideInOutPeriod" type="range"></input></li>
-    		<li>dampening ratio <input id="slideInOutDampeningRatio" type="range" min="0" max="1.0" step=".01"></input></li>
-    		<li>opacity <input id="slideInOutOpacity" type="range"></input></li>
-    		<li>duration <input id="slideInOutDuration" type="range"></input></li>
-    		<li>curve <input id="slideInOutCurve" type="range"></input></li>
-    	</ul>	
-  </div>
-  <div class="main" id="wallInOut">
-  	<h2>wallInOut</h2>
-  	 <ul>
-    		<li>position X:<input id="wallInOutPosX" type="text" size="4"></input>Y:<input id="wallInOutPosY" type="text" size="4"></input>Z:<input id="wallInOutPosZ" type="text" size="4"></input></li>
-    		<li>velocity X:<input id="wallInOutVelX" type="text" size="4"></input>Y:<input id="wallInOutVelY" type="text" size="4"></input>Z:<input id="wallInOutVelZ" type="text" size="4"></input></li>
-    		<li>rotation X:<input id="wallInOutRotX" type="text" size="4"></input>Y:<input id="wallInOutRotY" type="text" size="4"></input>Z:<input id="wallInOutRotZ" type="text" size="4"></input></li>
-    		<li>period <input id="wallInOutPeriod" type="range"></input></li>
-    		<li>dampening ratio <input id="wallInOutDampeningRatio" type="range" min="0" max="1.0" step=".01"></input></li>
-    		<li>opacity <input id="wallInOutOpacity" type="range"></input></li>
-    		<li>duration <input id="wallInOutDuration" type="range"></input></li>
-    	  <li>restitution <input id="wallInOutResitution" type="range" min="0" max="5000" step="500"></input></li>
-      </ul>	
-  </div>
- </div>
-</form>
- <button id="export">Export Info</button>
- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="../src/data.js">
- 
+<body>
+  <h1>User Input Page</h1><button>Upload logo</button>
 
-</script>
+  <form>
+    <input id="logoUrl" type="text">
+  </form>
+
+  <form id="type" name="type">
+    <br>
+    logo must be 65px x 200px**<br>
+    Ad link <input id="adLink" type="text">
+
+    <h2>Transition Type</h2>
+      <div id="selectTrans">
+        <input checked name="transitions" type="radio" value="rotateInOut">rotateInOut<br>
+        <input name="transitions" type="radio" value="springInOut">springInOut<br>
+        <input name="transitions" type="radio" value="slideInOut">slideInOut<br>
+        <input name="transitions" type="radio" value="wallInOut">wallInOut
+      </div>
+    <div id="positions">
+      <h2>Positions</h2>
+
+      <ul>
+        <li>Origin: X:<input id="originX" size="4" type="text">Y:<input id=
+        "originY" size="4" type="text">Z:<input id="originZ" size="4" type=
+        "text"></li>
+
+        <li>Initial Position: X:<input id="initPosX" size="4" type=
+        "text">Y:<input id="initPosY" size="4" type="text">Z:<input id=
+        "initPosZ" size="4" type="text"></li>
+
+        <li>Initial Velocity: X:<input id="initVelX" size="4" type=
+        "text">Y:<input id="initVelY" size="4" type="text">Z:<input id=
+        "initVelZ" size="4" type="text"></li>
+
+        <li>Initial Rotation: X:<input id="initRotX" size="4" type=
+        "text">Y:<input id="initRotY" size="4" type="text">Z:<input id=
+        "initRotZ" size="4" type="text"></li>
+
+        <li>Opacity:<input id="opacity" max="1.0" min="0" step=".01" type=
+        "range"><output></output></li>
+      </ul>
+    </div>
+
+    <div id="transitions">
+      <div class="main" id="rotateInOut">
+        <h2>rotateInOut</h2>
+
+        <ul>
+          <li>position X:<input id="rotateInOutPosX" size="4" type=
+          "text">Y:<input id="rotateInOutPosY" size="4" type=
+          "text">Z:<input id="rotateInOutPosZ" size="4" type="text"></li>
+
+          <li>velocity X:<input id="rotateInOutVelX" size="4" type=
+          "text">Y:<input id="rotateInOutVelY" size="4" type=
+          "text">Z:<input id="rotateInOutVelZ" size="4" type="text"></li>
+
+          <li>rotation X:<input id="rotateInOutRotX" size="4" type=
+          "text">Y:<input id="rotateInOutRotY" size="4" type=
+          "text">Z:<input id="rotateInOutRotZ" size="4" type="text"></li>
+
+          <li>period <input id="rotateInOutPeriod" name="slider" type="range"><output></output><output></output></li>
+
+          <li>dampening ratio <input id="rotateInOutDampeningRatio" max="1.0"
+          min="0" step=".01" type="range"><output></output></li>
+
+          <li>opacity <input id="rotateInOutOpacity" max="1.0" min="0" step=
+          ".01" type="range"><output></output></li>
+
+          <li>duration <input id="rotateInOutDuration" max="5000" min="0" step=
+          "500" type="range"><output></output></li>
+
+          <li>curve <input id="rotateInOutCurve" type="text"></li>
+        </ul>
+      </div>
+
+      <div class="main" id="springInOut">
+        <h2>springInOut</h2>
+
+        <ul>
+          <li>position X:<input id="springInOutPosX" size="4" type=
+          "text">Y:<input id="springInOutPosY" size="4" type=
+          "text">Z:<input id="springInOutPosZ" size="4" type="text"></li>
+
+          <li>velocity X:<input id="springInOutVelX" size="4" type=
+          "text">Y:<input id="springInOutVelY" size="4" type=
+          "text">Z:<input id="springInOutVelZ" size="4" type="text"></li>
+
+          <li>rotation X:<input id="springInOutRotX" size="4" type=
+          "text">Y:<input id="springInOutRotY" size="4" type=
+          "text">Z:<input id="springInOutRotZ" size="4" type="text"></li>
+
+          <li>period <input id="springInOutPeriod" type="range"><output></output></li>
+
+          <li>dampening ratio <input id="springInOutDampeningRatio" type=
+          "range"><output></output></li>
+
+          <li>opacity <input id="springInOutOpacity" type="range"><output></output></li>
+
+          <li>duration <input id="springInOutDuration" type="range"><output></output></li>
+        </ul>
+      </div>
+
+      <div class="main" id="slideInOut">
+        <h2>slideInOut</h2>
+
+        <ul>
+          <li>position X:<input id="slideInOutPosX" size="4" type=
+          "text">Y:<input id="slideInOutPosY" size="4" type="text">Z:<input id=
+          "slideInOutPosZ" size="4" type="text"></li>
+
+          <li>velocity X:<input id="slideInOutVelX" size="4" type=
+          "text">Y:<input id="slideInOutVelY" size="4" type="text">Z:<input id=
+          "slideInOutVelZ" size="4" type="text"></li>
+
+          <li>rotation X:<input id="slideInOutRotX" size="4" type=
+          "text">Y:<input id="slideInOutRotY" size="4" type="text">Z:<input id=
+          "slideInOutRotZ" size="4" type="text"></li>
+
+          <li>period <input id="slideInOutPeriod" type="range"><output></output></li>
+
+          <li>dampening ratio <input id="slideInOutDampeningRatio" max="1.0"
+          min="0" step=".01" type="range"><output></output></li>
+
+          <li>opacity <input id="slideInOutOpacity" type="range"><output></output></li>
+
+          <li>duration <input id="slideInOutDuration" type="range"><output></output></li>
+
+          <li>curve <input id="slideInOutCurve" type="range"><output></output></li>
+        </ul>
+      </div>
+
+      <div class="main" id="wallInOut">
+        <h2>wallInOut</h2>
+
+        <ul>
+          <li>position X:<input id="wallInOutPosX" size="4" type=
+          "text">Y:<input id="wallInOutPosY" size="4" type="text">Z:<input id=
+          "wallInOutPosZ" size="4" type="text"></li>
+
+          <li>velocity X:<input id="wallInOutVelX" size="4" type=
+          "text">Y:<input id="wallInOutVelY" size="4" type="text">Z:<input id=
+          "wallInOutVelZ" size="4" type="text"></li>
+
+          <li>rotation X:<input id="wallInOutRotX" size="4" type=
+          "text">Y:<input id="wallInOutRotY" size="4" type="text">Z:<input id=
+          "wallInOutRotZ" size="4" type="text"></li>
+
+          <li>period <input id="wallInOutPeriod" type="range"><output></output></li>
+
+          <li>dampening ratio <input id="wallInOutDampeningRatio" max="1.0"
+          min="0" step=".01" type="range"><output></output></li>
+
+          <li>opacity <input id="wallInOutOpacity" type="range"><output></output></li>
+
+          <li>duration <input id="wallInOutDuration" type="range"><output></output></li>
+
+          <li>restitution <input id="wallInOutResitution" max="5000" min="0"
+          step="500" type="range"><output></output></li>
+        </ul>
+      </div>
+    </div>
+  </form><button id="export">Export Info</button> <script src=
+  "http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> <script src="../src/data.js"></script> 
 <!-- <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
- --></body>
+ -->
+</body>
 </html>

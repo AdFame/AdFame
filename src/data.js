@@ -36,13 +36,19 @@ var module = {};
 
 
 $(function(){
+    
+  $('#selectTrans').on('click', function(){
+    var selected = $('input[type="radio"]:checked').val()
+    Array.prototype.forEach.call($('#transitions').children(), function(child){
+      $(child).hide();
+    });
+    $('#'+selected).show();
+  }).trigger('click');
    
   
   $('#export').on('click', function(){
-
     var selected = $('input[type="radio"]:checked').val()
-    
-    var $info = $("#" + selected).find;
+    var $info = $("#" + selected)
     
     data.logo = $('#logoUrl')
     data.url = $('#adLink').val();
@@ -86,8 +92,29 @@ $(function(){
     data.enter.duration = $("#"+selected+"Duration").val()
     data.enter.curve = $("#"+selected+"Curve").val()
 
-    console.log(data);
   });
+
+var el, newPoint, newPlace, offset;
+
+$("input[type='range']").change(function() {
+ 
+   el = $(this);
+   
+   width = el.width();
+   
+   newPoint = (el.val() - el.attr("min")) / (el.attr("max") - el.attr("min"));
+   
+   offset = -1.3;
+   
+   if (newPoint < 0) { newPlace = 0; }
+   else if (newPoint > 1) { newPlace = width; }
+   else { newPlace = width * newPoint + offset; offset -= newPoint; }
+   
+   el.next("output").text(el.val());
+ }).trigger('change');
+
+
+
 
 
 })
