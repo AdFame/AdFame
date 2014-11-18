@@ -15,7 +15,7 @@ var AppView = require('./views/AppView');
 var el = document.getElementById('famous-container');
 Engine.setOptions({ appMode: false });
 var container = Engine.createContext(el);
-container.setPerspective(100);
+// container.setPerspective(300);
 // Add utility function that grabs ad data
 function initAdFame(data) {
     var appView = new AppView({ data: data });
