@@ -1,11 +1,11 @@
 var data = {
     logo: 'images/Coca-Cola.png',
+    url: 'http://us.coca-cola.com/home/',
     origin: {x: .5, y: 0, z: 0},
     initialPosition: {x: .5, y: 0, z: 0},
     initialVelocity: {x: 0, y: 0, z: 0},
     initialRotation: {x: 3*Math.PI/2, y: 0, z: 0},
     opacity: 1,
-    url: 'www.google.com',
     enter: {
         type: 'rotateInOut',
         position: {x: 0, y: 100, z: 0},
