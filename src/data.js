@@ -16,7 +16,7 @@
         restitution: 0,
         opacity: 1,
         duration: 1000,
-        curve: null,
+        curve: null
     },
     exit: {
         type: 'slideInOut',
@@ -28,7 +28,7 @@
         restitution: 0,
         opacity: 1,
         duration: 1000,
-        curve: null,
+        curve: null
     }
 }
 
