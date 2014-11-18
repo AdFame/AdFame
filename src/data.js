@@ -32,17 +32,12 @@
     }
 }
 
-var hash = {
-    rotateInOut:[]
-    slideInOut:
-    springInOUt:
-    slideInOut:
-}
+var module;
 
 
 $(function(){
    
-
+  
   $('#export').on('click', function(){
 
     var selected = $('input[type="radio"]:checked').val()
