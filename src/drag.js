@@ -12,8 +12,7 @@ var Transitionable = require('famous/transitions/Transitionable');
 // Register sync inputs
 GenericSync.register({
     'mouse': MouseSync,
-    'touch': TouchSync,
-    'scroll': ScrollSync
+    'touch': TouchSync
 })
 
 // Create a transitionable for position
@@ -22,8 +21,7 @@ var position = new Transitionable([0, 0]);
 // Set sync variable for generic sync methods
 var sync = new GenericSync({
     'mouse': {},
-    'touch': {},
-    'scroll': {scale : .5}
+    'touch': {}
 });
 
 //create the like/dislike surface
