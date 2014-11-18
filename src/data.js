@@ -32,7 +32,7 @@
     }
 }
 
-var module;
+var module = {};
 
 
 $(function(){
@@ -48,7 +48,7 @@ $(function(){
     data.url = $('#adLink').val();
     data.origin.x = $('#originX').val();
     data.origin.y = $('#originY').val();
-    data.orgin.z = $('#originZ').val();
+    data.origin.z = $('#originZ').val();
 
     data.initialPosition.x = $('#initPosX').val();
     data.initialPosition.y = $('#initPosY').val();
@@ -86,7 +86,7 @@ $(function(){
     data.enter.duration = $("#"+selected+"Duration").val()
     data.enter.curve = $("#"+selected+"Curve").val()
 
-
+    console.log(data);
   });
 
 
