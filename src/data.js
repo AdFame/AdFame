@@ -37,6 +37,7 @@ var module = {};
 
 $(function(){
     
+    //hide all transition sections except selected item 
   $('#selectTrans').on('click', function(){
     var selected = $('input[type="radio"]:checked').val()
     Array.prototype.forEach.call($('#transitions').children(), function(child){
@@ -45,6 +46,17 @@ $(function(){
     $('#'+selected).show();
   }).trigger('click');
    
+  //save data (db or localfile) 
+  var saveData =function(data){ 
+    $.ajax({
+      type: "POST",
+      url: "/save",
+      data: data
+    })
+    .done(function( msg ) {
+      alert( "Data Saved: " + msg );
+    });
+  }
   
   $('#export').on('click', function(){
     var selected = $('input[type="radio"]:checked').val()
@@ -91,7 +103,9 @@ $(function(){
     data.enter.opacity = $("#"+selected+"Opacity").val()
     data.enter.duration = $("#"+selected+"Duration").val()
     data.enter.curve = $("#"+selected+"Curve").val()
-
+    
+    saveData(data)
+    
   });
 
 var el, newPoint, newPlace, offset;
@@ -112,10 +126,6 @@ $("input[type='range']").change(function() {
    
    el.next("output").text(el.val());
  }).trigger('change');
-
-
-
-
 
 })
 
