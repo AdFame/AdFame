@@ -50,11 +50,22 @@ $(function(){
   var saveData =function(data){ 
     $.ajax({
       type: "POST",
-      url: "/save",
+      url: "/post",
       data: data
     })
     .done(function( msg ) {
-      alert( "Data Saved: " + msg );
+      console.log( "Data Saved: " + msg );
+    });
+  }
+
+  var getData = function(){
+    $.ajax({
+      type: "GET",
+      url: "/get",
+      data: data
+    })
+    .done(function( data ) {
+      console.log(  data );  
     });
   }
   
