@@ -1,12 +1,74 @@
 'use strict';
 var Hapi = require('hapi');
-
+var joi = require('joi');
 var port = Number(process.argv[2]) || 1337;
 var server = Hapi.createServer('0.0.0.0', port);
+var dbOpts = {
+  "url"       : "mongodb://localhost:27017/AdFame",
+  "options"   : {
+    "db"    : {
+      "native_parser" : false
+    }
+  }
+};
 
 server.pack.register(require('./plugin'), function (err) {
   if (err) { console.error('Failes to load a plugin:', err); }
 });
+server.pack.register({
+  plugin:require('hapi-mongodb'),
+  options: dbOpts 
+  
+},
+function(err){
+  if(err){
+    console.err(err);
+    throw err;
+  }
+ 
+});
+
+
+server.route({
+  method: 'GET',
+  path: '/data',
+  handler: function (request, reply) {
+    var db = request.server.plugins['hapi-mongodb'].db;
+    db.collection('data').find().toArray(function (err, doc){
+      reply(doc);
+    });
+  }
+});
+ 
+
+server.route({
+  method: 'POST',
+  path: '/data',
+  config: {
+   
+    handler: function (request, reply) {
+      var newTodo = {
+        todo: request.payload.todo,
+        note: request.payload.note
+      };
+      var db = request.server.plugins['hapi-mongodb'].db;
+      db.collection('data').insert(newTodo, {w:1}, function (err, doc){
+          if (err){
+            return reply(Hapi.error.internal('Internal MongoDB error', err));
+          }else{
+            reply(doc);
+          }
+      });
+    },
+    validate: {
+      payload: {
+        todo: joi.string().required(),
+        note: joi.string().required()
+      }
+    }
+  }
+});
+ 
 
 server.start();
 console.log('server started on port', port);
