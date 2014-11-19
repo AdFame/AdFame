@@ -38,6 +38,8 @@
     "famous-polyfills": "^0.3.0",
     "famousify": "^0.1.5",
     "hapi": "^7.1.1",
+    "hapi-mongodb": "^2.2.0",
+    "joi": "^4.9.0",
     "uglify-js": "^2.4.15",
     "watchify": "^2.0.0"
   }

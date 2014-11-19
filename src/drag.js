@@ -95,6 +95,8 @@ function drag(surface, link) {
     })
     // on touch drag right like, left dislike
     surface.on('touchend', function(){
+        var currentPosition = position.get();
+        console.log(currentPosition)
      //resets the opacity of the like and dislike to be hidden
         opacityYes.setOpacity(0);
         opacityNo.setOpacity(0);
