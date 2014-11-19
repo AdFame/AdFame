@@ -58,6 +58,7 @@ var mainModifier = new Modifier();
 ******************************************************************/
 scrollEventsListener.on('targetStartReached', function(){
     // Call adGenerator enter/exit methods when target is reached
+    mainModifier.halt();
     if(!transitionCalled) {
         adGenerator.enter(mainModifier);
         transitionCalled = !transitionCalled;
@@ -72,6 +73,7 @@ scrollEventsListener.on('targetStartReached', function(){
 ******************************************************************/
 scrollEventsListener.on('targetEndReached', function(){  
     // Call adGenerator enter/exit methods when target is reached
+    mainModifier.halt();
     if(transitionCalled) {
         adGenerator.exit(mainModifier);
         transitionCalled = !transitionCalled;
