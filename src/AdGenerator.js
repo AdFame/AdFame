@@ -2,16 +2,19 @@
 var View = require('famous/core/View');
 var Surface = require('famous/core/Surface');
 var Transform = require('famous/core/Transform');
+var Transitionable = require('famous/transitions/Transitionable');
 var Modifier   = require('famous/core/Modifier');
 var ImageSurface = require('famous/surfaces/ImageSurface');
 var Easing = require('famous/transitions/Easing');
 
 var StateModifier = require('famous/modifiers/StateModifier');
-var WallTransition = require('famous/transitions/WallTransition');
 var GridLayout = require('famous/views/GridLayout');
-var Transitionable = require('famous/transitions/Transitionable');
 var Transform = require('famous/core/Transform');
+
+var Transitionable = require('famous/transitions/Transitionable');
+var WallTransition = require('famous/transitions/WallTransition');
 var SpringTransition = require('famous/transitions/SpringTransition');
+var SnapTransition = require('famous/transitions/SnapTransition');
 
 // Importanting data form data.js dummy file
 var data = require('./data.js')
@@ -21,6 +24,39 @@ var transitionRegistry = {
     'slideInOut': slideInOut,
     'springInOut': springInOut,
     'wallInOut': wallInOut
+}
+
+var easingRegistry = {
+    'inQuad': Easing.inQuad,
+    'outQuad': Easing.outQuad,
+    'inOutQuad': Easing.inOutQuad,
+    'inCubic': Easing.inCubic,
+    'outCubic': Easing.outCubic,
+    'inOutCubic': Easing.inOutCubic,
+    'inQuart': Easing.inQuart,
+    'outQuart': Easing.outQuart,
+    'inOutQuart': Easing.inOutQuart, 
+    'inQuint': Easing.inQuint,
+    'outQuint': Easing.outQuint,
+    'inOutQuint': Easing.inOutQuint,
+    'inSine': Easing.inSine,
+    'outSine': Easing.outSine,
+    'inOutSine': Easing.inOutSine,
+    'inExpo': Easing.inExpo,
+    'outExpo': Easing.outExpo,
+    'inOutExpo': Easing.inOutExpo,
+    'inCirc': Easing.inCirc,
+    'outCirc': Easing.outCirc,
+    'inOutCirc': Easing.inOutCirc,
+    'inElastic': Easing.inElastic,
+    'outElastic': Easing.outElastic,
+    'inOutElastic': Easing.inOutElastic,
+    'inBack': Easing.inBack,
+    'outBack': Easing.outBack,
+    'inOutBack': Easing.inOutBack,
+    'inBounce': Easing.inBounce,
+    'outBounce': Easing.outBounce,
+    'inOutBounce': Easing.inOutBounce
 }
 
 /* GENERATORS */
@@ -80,7 +116,7 @@ function rotateInOut(dataInput) {
     return function(modifier) {
         modifier.setTransform(
             Transform.rotate(dataInput.rotation.x, dataInput.rotation.y, dataInput.rotation.z),
-            {duration: dataInput.duration, curve: dataInput.curve}
+            {duration: dataInput.duration, curve: easingRegistry[dataInput.curve]}
         );
     }
 }
@@ -89,22 +125,29 @@ function slideInOut(dataInput) {
     return function(modifier) {
         modifier.setTransform(
             Transform.translate(dataInput.position.x, dataInput.position.y, dataInput.position.z),
-            {duration: dataInput.duration, curve: dataInput.curve}
-        )
+            {duration: dataInput.duration, curve: easingRegistry[dataInput.curve]}
+        );
     }
 }
 
 function springInOut(dataInput) {
     return function(modifier) {
-        Transitionable.registerMethod('spring', SpringTransition);
+        Transitionable.registerMethod('spring', SnapTransition);
+        modifier = new Transitionable([data.initialPosition.x, data.initialPosition.y, data.initialPosition.z]);
 
         var springProperties = {
             type: 'spring',
             period: dataInput.period,
             dampingRatio: dataInput.dampingRatio,
         }
-
-        modifier.setTransform(Transform.translate(0,0,0), springProperties)
+        modifier.set(
+            [dataInput.position.x, dataInput.position.y, dataInput.position.z],
+            {
+                method: 'spring',
+                dampingRatio: dataInput.dampingRatio,
+                period: dataInput.period
+            }
+        );
     }
 }
 
@@ -120,7 +163,10 @@ function wallInOut(dataInput) {
             restitution : dataInput.restitution
         };
 
-        modifier.setTransform(Transform.translate(0,0,0), wallProperties);
+        modifier.setTransform(
+            Transform.translate(dataInput.position.x, dataInput.position.y, dataInput.position.z),
+            wallProperties
+        );
     }
 }
 module.exports = AdGenerator;

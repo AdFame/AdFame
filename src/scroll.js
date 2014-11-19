@@ -2,71 +2,72 @@ var EventHandler = require('famous/core/EventHandler');
 var Transform = require('famous/core/Transform');
 var windowScrollEvents = {}
 
-//set up event handlers ** short names more readable in conditionals below **
+// Set up event handlers ** short names more readable in conditionals below **
 var scrollEvents = new EventHandler();
 
-//set handlers to main exported object
+// Set handlers to main exported object
 windowScrollEvents.scrollEvents = scrollEvents;
 
-//switches so event handlers are only called once on scroll
+// Switches so event handlers are only called once on scroll
 windowScrollEvents.called = false;
 windowScrollEvents.hitEnd = false;
 
-//target elements and duration in pixels;
-var elementIdStart = 'hello';
-var elementIdEnd = 'end';
-var padding = 100;
+// Target elements and duration in pixels;
+var elementIdStart = 'startAdFame';
+var elementIdEnd = 'endAdFame';
+// var padding = 100;
 //var duration = 1000;
 
 console.log('this is working')
 
-//native scroll main function
+// Native scroll main function
 window.onscroll = function (){
+    // Position variables
+    var targetPosition = document.getElementById(elementIdStart).offsetTop;
+    var targetEndPosition = document.getElementById(elementIdEnd).offsetTop; 
+    var windowTopPosition = window.pageYOffset;
 
-//position variables
-var targetPosition = document.getElementById(elementIdStart).offsetTop;
-var targetEndPosition = document.getElementById(elementIdEnd).offsetTop; 
-var windowTopPosition = window.pageYOffset;
+    // Check to see if you reach enter element scrolling down
+    if(!windowScrollEvents.called && (windowTopPosition) > targetPosition) {
+        scrollEvents.emit('targetStartReached');
+        windowScrollEvents.called = true;
+    }
 
-//emits window position  
- scrollEvents.emit('positionYChange', {position: windowTopPosition, called:windowScrollEvents.called});
- 
- //check to see if you are at the target element
- if(!windowScrollEvents.called && (windowTopPosition + padding) > targetPosition){
-  windowScrollEvents.called = true;
-  
-  //emit event when target position is reached only 1x
-  scrollEvents.emit('targetreached', {targetPosition:targetPosition, padding:padding });
+    // Check to see if you reach enter element scrolling up
+    if (windowScrollEvents.called && (windowTopPosition) < targetPosition) {
+        scrollEvents.emit('targetStartReached');
+        windowScrollEvents.called = false;
+    }
 
- } 
+    // Check to see if you reach end element scrolling down
+    if(!windowScrollEvents.hitEnd && (windowTopPosition > targetEndPosition)) {
+        scrollEvents.emit('targetEndReached');
+        windowScrollEvents.hitEnd = true;
+     }
 
- //if you are not yet at the target element, windowScrollEvents.called is false
- if((windowTopPosition + padding) < targetPosition){
-  
-  windowScrollEvents.called = false;
-  windowScrollEvents.hitEnd = false;
-  
-  //emit event when target not reached 
-  scrollEvents.emit('targetnotreached');
-  
- }
+     // Check to see if you reach end element scrolling up
+     if(windowScrollEvents.hitEnd && (windowTopPosition < targetEndPosition)) {
+         scrollEvents.emit('targetEndReached');
+         windowScrollEvents.hitEnd = false;
+      }
 
- //if you reach the 'targetEndPosition' element alert and only call once
- if(!windowScrollEvents.hitEnd && (windowTopPosition > targetEndPosition)) {
-  windowScrollEvents.hitEnd = true;
-  
- //emit event when target end is reached 
-  scrollEvents.emit('targetendreached');
+     
+    // Emits window position
+    // scrollEvents.emit('positionYChange', {position: windowTopPosition, called: windowScrollEvents.called});
 
- }
+    // If you are not yet at the target element, windowScrollEvents.called is false
+    // if((windowTopPosition + padding) < targetPosition){
+    //     windowScrollEvents.called = false;
+    //     windowScrollEvents.hitEnd = false;
+      
+    //     //emit event when target not reached 
+    //     scrollEvents.emit('targetNotReached');
+    // }
 
- //if you reach X duration pixels below target element alert abd only call once
- // if(!windowScrollEvents.hitEnd && windowTopPosition > (targetPosition+duration)){
- //  windowScrollEvents.hitEnd = true;
- // }
-
-
+    // If you reach X duration pixels below target element alert abd only call once
+    // if(!windowScrollEvents.hitEnd && windowTopPosition > (targetPosition+duration)){
+    //     windowScrollEvents.hitEnd = true;
+    // }
 }
-
 
 module.exports = windowScrollEvents

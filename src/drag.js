@@ -46,6 +46,7 @@ var opacityNo = new Modifier({
     opacity: 0,
     align:[.3, 0]
 })
+
 function drag(surface, link) {
     // Links sync to our surface parameter
     surface.pipe(sync);
