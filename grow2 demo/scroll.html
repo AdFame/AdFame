@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <title>famo.us App</title>
+        <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=no" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <link rel="stylesheet" type="text/css" href="../node_modules/famous/src/core/famous.css" />
+        <link rel="stylesheet" type="text/css" href="../node_modules/famous/examples/assets/css/app.css" />
+        <link rel="stylesheet" type="text/css" href="../node_modules/famous/examples/assets/css/famous_styles.css" />
+        <script type="text/javascript" src="../node_modules/famous/examples/assets/lib/functionPrototypeBind.js"></script>
+        <script type="text/javascript" src="../node_modules/famous/examples/assets/lib/classList.js"></script>
+        <script type="text/javascript" src="../node_modules/famous/examples/assets/lib/requestAnimationFrame.js"></script>
+        <script type="text/javascript" src="../node_modules/famous/examples/assets/lib/require.js"></script>
+        <script type="text/javascript">
+            require.config({
+                paths: {
+                    famous: '../node_modules/famous/src'
+                }
+            });
+            require(['scroll']);
+        </script>
+    </head>
+    <body style="background-color:black"></body>
+</html>
