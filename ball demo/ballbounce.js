@@ -1,51 +1,5 @@
-/**
- * Copyright (c) 2014 Famous Industries, Inc.
- * 
- * Permission is hereby granted, free of charge, to any person obtaining a 
- * copy of this software and associated documentation files (the "Software"), 
- * to deal in the Software without restriction, including without limitation 
- * the rights to use, copy, modify, merge, publish, distribute, sublicense, 
- * and/or sell copies of the Software, and to permit persons to whom the 
- * Software is furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in 
- * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING 
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS 
- * IN THE SOFTWARE.
- *
- * @license MIT
- */
-
-
-/**
- * ContainerSurface
- * ----------------
- * ContainerSurface is an object designed to contain surfaces and 
- * set properties to be applied to all of them at once.
- * A container surface will enforce these properties on the 
- * surfaces it contains:
- * 
- * - size (clips contained surfaces to its own width and height)
- * 
- * - origin
- * 
- * - its own opacity and transform, which will be automatically 
- *   applied to  all Surfaces contained directly and indirectly.
- *
- * In this example we have a ContainerSurface that contains a Scrollview.
- * Because the ContainerSurface creates its own context the
- * Scrollview will behave according to the size of the ContainerSurface
- * it exists within.  The ContainerSurface having the an overflow of
- * 'hidden' means that the scrollview overflow will be hidden.
- */
 define(function(require, exports, module) {
-  var Engine          = require('famous/core/Engine');
+var Engine          = require('famous/core/Engine');
 var Surface         = require('famous/core/Surface');
 var EventHandler    = require('famous/core/EventHandler');
 var View            = require('famous/core/View');
@@ -141,6 +95,9 @@ var ballState = new Modifier({origin:[.5,0.5], align:[0.5,-.1], transform: funct
 
 });
 
+
+
+
 physicsEngine.addBody(circle);
 
 var called = false;
@@ -152,7 +109,7 @@ window.onscroll = function(){
    banner.setProperties({backgroundColor:colorScheme});
   if(window.pageYOffset > 0 && !called){
     called = true;
-    circle.setVelocity([Math.random(),Math.random(),Math.random()]);
+    circle.setVelocity([Math.random(),Math.random(),0]);
  
   } 
 
@@ -182,12 +139,13 @@ var spring = {
 var bannerInit = new StateModifier({
   align:[0.5,1],
   origin:[0.5,0],
-  opacity: .5
+  opacity: .5,
+  transform: Transform.translate(0,window.innerHeight + 100,0)
 });
 
 banner.on('click', function(){
   bannerInit.setTransform(Transform.rotate(0, .5, 0), spring, function(){
-    bannerInit.setTransform(Transform.rotatae(0,0,0),spring)
+    bannerInit.setTransform(Transform.rotate(0,0,0),spring)
   });
 });
 
@@ -199,7 +157,11 @@ shine.on("click",function(){
   bottomWall.setOptions({restitution:0});
   bottomWall.on('collision', function(){
     circle.setVelocity[0,0,0]
-    bannerInit.setTransform(Transform.translate(0,-90, 0), spring);
+    bannerInit.setTransform(Transform.translate(0,window.innerHeight - 100, 0), spring, function(){
+      // document.getElementById('famous-container').style.height = '200px';
+      // bannerInit.setAlign([0.5,0.9,0])
+      // document.getElementById('famous-container').style.bottom = 10 + "px";
+    });
     //topWall({normal})
   });
 });
@@ -208,13 +170,17 @@ shine.on("click",function(){
 
 context.add(bannerInit).add(banner);
 
-var node = context.add(ballState)
+var initStateBall = new StateModifier({
+  transform: Transform.translate(0,-100,0)
+})
+
+var node = context.add(initStateBall).add(ballState)
 node.add(opacity).add(shine)
 node.add(opacity2).add(shine2)
 node.add(opacity3).add(ball)
 
-var topWall     = new Wall({normal : [0,1,0],  distance: 1, restitution : 0.4});
-var bottomWall  = new Wall({normal : [0,-.9,0], distance: window.innerHeight, restitution : 0.4});
+var topWall     = new Wall({normal : [0,1,0],  distance: -10, restitution : 0.4});
+var bottomWall  = new Wall({normal : [0,-.9,0], distance: window.innerHeight + 40, restitution : 0.4});
 var leftWall    = new Wall({normal : [1,0,0],  distance: window.innerWidth*.5, restitution : 0.4});
 var rightWall   = new Wall({normal : [-1,0,0], distance: window.innerWidth*.5, restitution : 0.4});
 
