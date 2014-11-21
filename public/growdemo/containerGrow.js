@@ -21,18 +21,21 @@ define(function(require, exports, module) {
     
     var tv = new Surface({
         size: [65,65],
-        content: '<img src="rsz_old-tv.png" />'
+        content: '<img src="./growdemo/rsz_old-tv.png" />'
     
     });
     
     var knob = new Surface({
       size:[15,15],
-      content: '<img src="./knob.png" />'
+      content: '<img src="./growdemo/knob.png" />',
+      properties: {
+        textAign: 'center'
+      }
     })
 
     var tvScreen = new Surface({
         size:[58,42],
-        content: '<iframe src="./scroll.html" style="height:42px; width:58px"></iframe>'
+        content: '<iframe src="./growdemo/scroll.html" style="height:42px; width:58px"></iframe>'
     });
 
     var rotater = new StateModifier({
@@ -40,20 +43,22 @@ define(function(require, exports, module) {
     });
 
     var aligner = new StateModifier({
-      transform: Transform.translate(100, 50, 0)
+      transform: Transform.translate(-100, -100, 0)
     });
+    
 
+    
     var knobpos = new StateModifier({
       origin: [0.5,0.5],
-      align: [0.12,0.1],
+      align: [0.14,0.7],
       transform: Transform.translate(0,0,110)
     })
     
-    // var knobrotate = new StateModifier({
-    //   origin: [0.5,0.5],
-    //   align:[0.5,0.5],
-    //   transform: Transform.translate(0,0,110)
-    // })
+    var knobrotate = new StateModifier({
+      origin: [0.5,0.5],
+      transform: Transform.translate(0,0,110)
+    })
+    
 
 
     var mainMod = new StateModifier({
@@ -71,7 +76,7 @@ define(function(require, exports, module) {
 
     //******************render tree****************//
     var node = context.add(aligner).add(rotater).add(mainMod)
-           node.add(knobpos).add(knob)
+           node.add(knobrotate).add(knobpos).add(knob)
            node.add(modScreen).add(tvScreen)
            node.add(tv);
     
@@ -94,12 +99,21 @@ define(function(require, exports, module) {
       dampingRatio: 0.4
     };
 
-
+    var wall = {
+      method: 'wall',
+      period: 1000,
+      dampingRatio: 0.4
+    };
+     
+     var timeNum = function(){
+       return +Date.now().toString().slice(-2)
+     }
 
      setInterval(function(){
-         rotater.setTransform(Transform.rotate(0,0,Math.random()/10),spring)
-         knobpos.setTransform(Transform.rotate(0,0,Math.random()*Math.random()))
-     }, 1500)
+         //rotater.setTransform(Transform.rotate(0,0,Math.random()/10),spring)
+         knobpos.setTransform(Transform.rotate(0,0,timeNum()))
+     }, 500)
+    
 
     // var bgmodifier = new StateModifier({
     //   origin:[0,0],
@@ -136,7 +150,7 @@ define(function(require, exports, module) {
 
  var targetPosition = document.getElementById('famous-container').offsetTop;
 
-
+  
   //start expading 100px from bottom of page
   console.log(window.innerHeight)
   var padding = window.innerHeight - 100;
@@ -144,10 +158,27 @@ define(function(require, exports, module) {
   var containerHeight = parseFloat(document.getElementById('famous-container').style.height);
   var getContainerHeight = function(){ return parseFloat(document.getElementById('famous-container').style.height); }
   var distanceTravelled = function(){ return window.pageYOffset + padding - targetPosition }
-
+  var transCalled = false;
+  var transOutCalled = false
    window.onscroll = function(){
+    
+    if(getContainerHeight() > 10 && !transCalled) {
+      aligner.halt();
+      aligner.setTransform(Transform.translate(70,100,0), spring);
+      transCalled = true;
+       transOutCalled = false;
+    }
+    
+    if(getContainerHeight() < 85 && !transOutCalled) {
+      aligner.halt();
+      aligner.setTransform(Transform.translate(-100,-100,0), spring);
+      transCalled = false;
+      transOutCalled = true;
+    }
+
     // bgmodifier.setTransform(Transform.translate(0,distanceTravelled()/4,-1)) 
     // bgmodifier2.setTransform(Transform.translate(0,-distanceTravelled()/4,-2)) 
+    
         //if you have passed the target point(+ padding) and the container height and distance travelled is less than the max
     if(window.pageYOffset + padding > targetPosition && getContainerHeight() + distanceTravelled() < maxHeight) { 
      
