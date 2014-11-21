@@ -26,7 +26,7 @@ define(function(require, exports, module) {
  var distanceUp = targetPosition - startPositionDiv;
 
   var logo = new Surface({
-    content: '<img src="./pacifico.jpg">',
+    content: '<img src="./grow2 demo/pacifico.jpg">',
     origin: [0,0],
     align: [0.1,0]
   });

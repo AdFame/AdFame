@@ -1,8 +1,10 @@
 'use strict';
 var Hapi = require('hapi');
+var Path = require('path');
 var joi = require('joi');
 var port = Number(process.argv[2]) || 1337;
-var server = Hapi.createServer('0.0.0.0', port);
+// var server = Hapi.createServer('0.0.0.0', port);
+var server = new Hapi.Server('0.0.0.0', port, { files: { relativeTo: Path.join(__dirname, 'public') } });
 var dbOpts = {
   "url"       : "mongodb://localhost:27017/AdFame",
   "options"   : {
@@ -27,6 +29,30 @@ function(err){
   }
  
 });
+
+server.route({
+    method: 'GET',
+    path: '/grow2',
+    handler: function (request, reply) {
+        reply.file('./grow2 demo/grow2.html');
+    }
+});
+server.route({
+    method: 'GET',
+    path: '/grow',
+    handler: function (request, reply) {
+        reply.file('./growdemo/containerGrow.html');
+    }
+});
+
+server.route({
+    method: 'GET',
+    path: '/ball',
+    handler: function (request, reply) {
+        reply.file('./ball demo/ballbounce.html');
+    }
+});
+
 
 
 server.route({
