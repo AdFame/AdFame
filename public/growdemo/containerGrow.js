@@ -21,13 +21,13 @@ define(function(require, exports, module) {
     
     var tv = new Surface({
         size: [65,65],
-        content: '<img src="rsz_old-tv.png" />'
+        content: '<img src="./growdemo/rsz_old-tv.png" />'
     
     });
     
     var knob = new Surface({
       size:[15,15],
-      content: '<img src="./knob.png" />',
+      content: '<img src="./growdemo/knob.png" />',
       properties: {
         textAign: 'center'
       }
@@ -35,7 +35,7 @@ define(function(require, exports, module) {
 
     var tvScreen = new Surface({
         size:[58,42],
-        content: '<iframe src="./scroll.html" style="height:42px; width:58px"></iframe>'
+        content: '<iframe src="./growdemo/scroll.html" style="height:42px; width:58px"></iframe>'
     });
 
     var rotater = new StateModifier({
