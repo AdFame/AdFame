@@ -11,14 +11,15 @@ var StateModifier = require('famous/modifiers/StateModifier');
 var GridLayout = require('famous/views/GridLayout');
 var Transform = require('famous/core/Transform');
 
-var Transitionable = require('famous/transitions/Transitionable');
+var TransitionableTransform = require('famous/transitions/TransitionableTransform')
 var WallTransition = require('famous/transitions/WallTransition');
 var SpringTransition = require('famous/transitions/SpringTransition');
 var SnapTransition = require('famous/transitions/SnapTransition');
 
 // Importanting data form data.js dummy file
-var data = require('./data.js')
+var data = require('./data');
 
+// Registry of transitions
 var transitionRegistry = {
     'rotateInOut': rotateInOut,
     'slideInOut': slideInOut,
@@ -26,6 +27,7 @@ var transitionRegistry = {
     'wallInOut': wallInOut
 }
 
+// Registry of easings
 var easingRegistry = {
     'inQuad': Easing.inQuad,
     'outQuad': Easing.outQuad,
@@ -59,6 +61,14 @@ var easingRegistry = {
     'inOutBounce': Easing.inOutBounce
 }
 
+// Rester spring and wall transitions
+Transitionable.registerMethod('spring', SnapTransition);
+Transitionable.registerMethod('wall', WallTransition);
+
+// Create new transitionable transform and set initial rotation
+var transformer = new TransitionableTransform();
+transformer.setRotate([data.initialRotation.x, data.initialRotation.y, data.initialRotation.z]);
+
 /* GENERATORS */
 
 // Constructor function for our AppView class
@@ -68,7 +78,13 @@ function AdGenerator() {
     var enter = enterTransition();
     var exit = exitTransition();
 
-    return {logo: logo, modifier: modifier, enter: enter, exit: exit};
+    return {
+        logo: logo, 
+        modifier: modifier, 
+        enter: enter, 
+        exit: exit,
+        transformer: transformer
+    };
 }
 
 // Creates a surface using the image
@@ -93,7 +109,7 @@ function getModifier() {
         size: [undefined, undefined],
         origin: [data.origin.x, data.origin.y, data.origin.z],
         align:[data.initialPosition.x , data.initialPosition.y, data.initialPosition.z],
-        transform: Transform.rotate(data.initialRotation.x, data.initialRotation.y, data.initialRotation.z)
+        transform: transformer
     });
 
     return modifier;
@@ -113,34 +129,33 @@ function exitTransition() {
 
 /* TRANSITIONS */
 function rotateInOut(dataInput) {
-    return function(modifier) {
-        modifier.setTransform(
-            Transform.rotate(dataInput.rotation.x, dataInput.rotation.y, dataInput.rotation.z),
+    return function() {
+        transformer.setRotate(
+            [dataInput.rotation.x, dataInput.rotation.y, dataInput.rotation.z],
             {duration: dataInput.duration, curve: easingRegistry[dataInput.curve]}
         );
     }
 }
 
 function slideInOut(dataInput) {
-    return function(modifier) {
-        modifier.setTransform(
-            Transform.translate(dataInput.position.x, dataInput.position.y, dataInput.position.z),
+    return function() {
+        transformer.setTranslate(
+            [dataInput.position.x, dataInput.position.y, dataInput.position.z],
             {duration: dataInput.duration, curve: easingRegistry[dataInput.curve]}
         );
     }
 }
 
 function springInOut(dataInput) {
-    return function(modifier) {
-        Transitionable.registerMethod('spring', SnapTransition);
-        modifier = new Transitionable([data.initialPosition.x, data.initialPosition.y, data.initialPosition.z]);
+    return function() {
 
         var springProperties = {
             type: 'spring',
             period: dataInput.period,
             dampingRatio: dataInput.dampingRatio,
         }
-        modifier.set(
+
+        transformer.setTranslate(
             [dataInput.position.x, dataInput.position.y, dataInput.position.z],
             {
                 method: 'spring',
@@ -152,19 +167,18 @@ function springInOut(dataInput) {
 }
 
 function wallInOut(dataInput) {
-    return function(modifier) {
-        Transitionable.registerMethod('wall', WallTransition);
+    return function() {
         
         var wallProperties = {
-            type: 'wall',
+            method: 'wall',
             period: dataInput.period,
             dampingRatio : dataInput.dampingRatio,
-            velocity: dataInput.velocity,
-            restitution : dataInput.restitution
+            // velocity: dataInput.velocity,
+            // restitution : dataInput.restitution
         };
 
-        modifier.setTransform(
-            Transform.translate(dataInput.position.x, dataInput.position.y, dataInput.position.z),
+        transformer.setTranslate(
+            [dataInput.position.x, dataInput.position.y, dataInput.position.z],
             wallProperties
         );
     }
