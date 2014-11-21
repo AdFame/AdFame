@@ -26,25 +26,25 @@ var sync = new GenericSync({
 //create the like/dislike surface
 var like = new ImageSurface({
     size: [70, 70],
-    align: [1,0],
+    align: [0,0],
     content: "images/yess.png",
     classes: ['backfaceVisibility', "bitch"],
 });
 
 var notLike = new ImageSurface({
     size: [70, 70],
-    align: [1,0],
+    align: [0,0],
     content: "images/noo.png",
     classes: ['backfaceVisibility', "bitch"],
 });
 //Sets the initial opacity of the like and dislike button to be hidden
 var opacityYes = new Modifier({
     opacity: 0,
-    align: [-.07, 0]
+    align: [-.15, 0]
 })
 var opacityNo = new Modifier({
     opacity: 0,
-    align:[.3, 0]
+    align:[.702, 0]
 })
 
 function drag(surface, link) {
