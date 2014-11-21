@@ -40,11 +40,11 @@ var notLike = new ImageSurface({
 //Sets the initial opacity of the like and dislike button to be hidden
 var opacityYes = new Modifier({
     opacity: 0,
-    align: [-.15, 0]
+    align: [-.17, 0]
 })
 var opacityNo = new Modifier({
     opacity: 0,
-    align:[.702, 0]
+    align:[.745, 0]
 })
 
 function drag(surface, link) {
