@@ -2,7 +2,7 @@
 var Hapi = require('hapi');
 var Path = require('path');
 var joi = require('joi');
-var port = Number(process.argv[2]) || 1337;
+var port = Number(process.argv[2]) || 3000;
 // var server = Hapi.createServer('0.0.0.0', port);
 var server = new Hapi.Server('0.0.0.0', port, { files: { relativeTo: Path.join(__dirname, 'public') } });
 var dbOpts = {
@@ -73,12 +73,14 @@ server.route({
   config: {
    
     handler: function (request, reply) {
-      var ad = {
+
+      var Ad = {
         name: request.payload.name,
         data: request.payload.data
       };
       var db = request.server.plugins['hapi-mongodb'].db;
-      db.collection('data').insert(ad, {w:1}, function (err, doc){
+
+      db.collection('data').insert(Ad, {w:1}, function (err, doc){
           if (err){
             return reply(Hapi.error.internal('Internal MongoDB error', err));
           }else{
