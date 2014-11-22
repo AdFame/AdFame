@@ -3,8 +3,9 @@ var Hapi = require('hapi');
 var Path = require('path');
 var joi = require('joi');
 var port = Number(process.argv[2]) || 3000;
-// var server = Hapi.createServer('0.0.0.0', port);
+//create a hapi server
 var server = new Hapi.Server('0.0.0.0', port, { files: { relativeTo: Path.join(__dirname, 'public') } });
+//set the database options for the mongo db.
 var dbOpts = {
   "url"       : "mongodb://localhost:27017/AdFame",
   "options"   : {
@@ -13,10 +14,11 @@ var dbOpts = {
     }
   }
 };
-
+//requires the node modules for the server
 server.pack.register(require('./plugin'), function (err) {
   if (err) { console.error('Failes to load a plugin:', err); }
 });
+//utilize the additional hapi-mongodb module
 server.pack.register({
   plugin:require('hapi-mongodb'),
   options: dbOpts 
@@ -30,6 +32,7 @@ function(err){
  
 });
 
+//create a route for demo 1
 server.route({
     method: 'GET',
     path: '/grow2',
@@ -37,6 +40,7 @@ server.route({
         reply.file('./grow2 demo/grow2.html');
     }
 });
+//create an additional route for demo 2
 server.route({
     method: 'GET',
     path: '/grow',
@@ -45,6 +49,7 @@ server.route({
     }
 });
 
+//route for demo 3
 server.route({
     method: 'GET',
     path: '/ball',
@@ -53,11 +58,20 @@ server.route({
     }
 });
 
+//route for the user input page
+server.route({
+    method: 'GET',
+    path: '/user',
+    handler: function (request, reply) {
+        reply.file('./userinput/inputfield.html');
+    }
+});
 
 
+//route for get requests of the database documents
 server.route({
   method: 'GET',
-  path: '/data',
+  path: '/user/data',
   handler: function (request, reply) {
     var db = request.server.plugins['hapi-mongodb'].db;
     db.collection('data').find().toArray(function (err, doc){
@@ -66,10 +80,10 @@ server.route({
   }
 });
  
-
+// route for post requests to the database with the data objects
 server.route({
   method: 'POST',
-  path: '/data',
+  path: '/user/data',
   config: {
    
     handler: function (request, reply) {
@@ -88,15 +102,14 @@ server.route({
           }
       });
     },
+    //validation to require that the objects sent have these properties in order for them to be stored
     validate: {
       payload: {
         name: joi.string().required(),
-        data: joi.object().required()
+        data: joi.required()
       }
     }
   }
 });
- 
-
 server.start();
 console.log('server started on port', port);
