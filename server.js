@@ -73,12 +73,12 @@ server.route({
   config: {
    
     handler: function (request, reply) {
-      var newTodo = {
-        todo: request.payload.todo,
-        note: request.payload.note
+      var ad = {
+        name: request.payload.name,
+        data: request.payload.data
       };
       var db = request.server.plugins['hapi-mongodb'].db;
-      db.collection('data').insert(newTodo, {w:1}, function (err, doc){
+      db.collection('data').insert(ad, {w:1}, function (err, doc){
           if (err){
             return reply(Hapi.error.internal('Internal MongoDB error', err));
           }else{
@@ -88,8 +88,8 @@ server.route({
     },
     validate: {
       payload: {
-        todo: joi.string().required(),
-        note: joi.string().required()
+        name: joi.string().required(),
+        data: joi.object().required()
       }
     }
   }
