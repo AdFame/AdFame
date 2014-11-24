@@ -79,6 +79,21 @@ server.route({
     });
   }
 });
+
+//route for each campaign
+server.route({
+method: 'GET',
+path: '/user/{id}',
+handler: function (request, reply) {
+var db = request.server.plugins['hapi-mongodb'].db;
+var campaign = request.server.plugins['hapi-mongodb'].ObjectID;
+ 
+db.collection('data').findOne({  "_id" : new ObjectID(request.params.id) }, function(err, result) {
+if (err) return reply(Hapi.error.internal('Internal MongoDB error', err));
+reply(result);
+});
+}
+});
  
 // route for post requests to the database with the data objects
 server.route({
