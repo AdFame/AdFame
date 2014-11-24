@@ -2,6 +2,7 @@
 var Hapi = require('hapi');
 var Path = require('path');
 var joi = require('joi');
+var fs = require('fs');
 var port = Number(process.argv[2]) || 3000;
 //create a hapi server
 var server = new Hapi.Server('0.0.0.0', port, { files: { relativeTo: Path.join(__dirname, 'public') } });
