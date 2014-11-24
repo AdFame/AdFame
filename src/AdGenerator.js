@@ -17,7 +17,32 @@ var SpringTransition = require('famous/transitions/SpringTransition');
 var SnapTransition = require('famous/transitions/SnapTransition');
 
 // Importanting data form data.js dummy file
-var data = require('./data');
+// var Data = require('./data');
+
+// var saveData = function(data){ 
+//     $.ajax({
+//         type: "POST",
+//         url: "/data",
+//         async: false,
+//         data: data
+//     }).done(function(data) {
+//         console.log("Data Saved:", data);
+//     });
+// }
+
+// saveData('Peter', Data);
+
+var data = $.ajax({
+    type: "GET",
+    url: "/user/data",
+    async: false,
+    data: data
+}).done(function(data) {
+    console.log('data:', data);
+})
+
+data = data.responseJSON;
+data = data[3].data;
 
 // Registry of transitions
 var transitionRegistry = {
@@ -107,8 +132,8 @@ function getLogo() {
 function getModifier() {
     var modifier = new Modifier({
         size: [undefined, undefined],
-        origin: [data.origin.x, data.origin.y, data.origin.z],
-        align:[data.initialPosition.x , data.initialPosition.y, data.initialPosition.z],
+        origin: [+data.origin.x, +data.origin.y, +data.origin.z],
+        align:[+data.initialPosition.x , +data.initialPosition.y, +data.initialPosition.z],
         transform: transformer
     });
 
@@ -130,38 +155,43 @@ function exitTransition() {
 /* TRANSITIONS */
 function rotateInOut(dataInput) {
     return function() {
+        var rotationProperties = {
+            duration: +dataInput.duration,
+            curve: +easingRegistry[dataInput.curve]
+        }
+
         transformer.setRotate(
-            [dataInput.rotation.x, dataInput.rotation.y, dataInput.rotation.z],
-            {duration: dataInput.duration, curve: easingRegistry[dataInput.curve]}
+            [+dataInput.rotation.x, +dataInput.rotation.y, +dataInput.rotation.z],
+            rotationProperties
         );
     }
 }
 
 function slideInOut(dataInput) {
     return function() {
+        var slideProperties = {
+            duration: +dataInput.duration,
+            curve: +easingRegistry[dataInput.curve]
+        }
+
         transformer.setTranslate(
-            [dataInput.position.x, dataInput.position.y, dataInput.position.z],
-            {duration: dataInput.duration, curve: easingRegistry[dataInput.curve]}
+            [+dataInput.position.x, +dataInput.position.y, +dataInput.position.z],
+            slideProperties
         );
     }
 }
 
 function springInOut(dataInput) {
     return function() {
-
         var springProperties = {
             type: 'spring',
-            period: dataInput.period,
-            dampingRatio: dataInput.dampingRatio,
+            period: +dataInput.period,
+            dampingRatio: +dataInput.dampingRatio,
         }
 
         transformer.setTranslate(
-            [dataInput.position.x, dataInput.position.y, dataInput.position.z],
-            {
-                method: 'spring',
-                dampingRatio: dataInput.dampingRatio,
-                period: dataInput.period
-            }
+            [+dataInput.position.x, +dataInput.position.y, +dataInput.position.z],
+            springProperties
         );
     }
 }
@@ -171,14 +201,14 @@ function wallInOut(dataInput) {
         
         var wallProperties = {
             method: 'wall',
-            period: dataInput.period,
-            dampingRatio : dataInput.dampingRatio,
-            // velocity: dataInput.velocity,
-            // restitution : dataInput.restitution
+            period: +dataInput.period,
+            dampingRatio : +dataInput.dampingRatio,
+            // velocity: +dataInput.velocity,
+            // restitution : +dataInput.restitution
         };
 
         transformer.setTranslate(
-            [dataInput.position.x, dataInput.position.y, dataInput.position.z],
+            [+dataInput.position.x, +dataInput.position.y, +dataInput.position.z],
             wallProperties
         );
     }
