@@ -5,6 +5,7 @@
 		logo: 'images/Coca-Cola.png',
 		url: 'http://us.coca-cola.com/home/',
 		origin: {x: .5, y: 0, z: 0},
+    campaign: 'undefined',
 		initialPosition: {x: 0, y: 0, z: 0},
 		initialVelocity: {x: 0, y: 0, z: 0},
 		initialRotation: {x: 0, y: 0, z: 0},
@@ -48,6 +49,9 @@
       $('#'+selected).show();
     }).trigger('click');
      
+
+    //NEED TO CHECK IF IT EXISTS IN DB FIRST
+     
     //save data (db or localfile) 
     var saveData =function(data){ 
       $.ajax({
@@ -76,6 +80,7 @@
       var selected = $('input[type="radio"]:checked').val()
       var $info = $("#" + selected)
       //sets the data parameters to the selected in the input fields
+      sentData.data.campaign = $('#campaign').val();
       sentData.data.logo = sentData.data.logo ||$('#logoUrl');
       sentData.data.url = $('#adLink').val();
       sentData.data.origin.x = $('#originX').val();
