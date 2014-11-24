@@ -81,19 +81,21 @@ server.route({
 });
 
 //route for each campaign
+
 server.route({
-method: 'GET',
-path: '/user/{id}',
-handler: function (request, reply) {
-var db = request.server.plugins['hapi-mongodb'].db;
-var campaign = request.server.plugins['hapi-mongodb'].ObjectID;
- 
-db.collection('data').findOne({  "_id" : new ObjectID(request.params.id) }, function(err, result) {
-if (err) return reply(Hapi.error.internal('Internal MongoDB error', err));
-reply(result);
+  method: 'GET',
+  path: '/user/{name}',
+  handler: function (request, reply) {
+    var db = request.server.plugins['hapi-mongodb'].db;
+    var myRegExp= new RegExp("[^/]+(?=/$|$)");
+    var campaign= myRegExp.exec(request.url.path);
+    var name = campaign[0].toString();
+    db.collection('data').find({"name":name}).toArray(function (err, doc){
+      reply(doc);
+    });
+  }
 });
-}
-});
+
  
 // route for post requests to the database with the data objects
 server.route({

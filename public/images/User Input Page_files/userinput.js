@@ -80,7 +80,7 @@
       var selected = $('input[type="radio"]:checked').val()
       var $info = $("#" + selected)
       //sets the data parameters to the selected in the input fields
-      sentData.name = $('#campaign').val()|| "Ale";
+      sentData.name = $('#campaign').val();
       sentData.data.logo = sentData.data.logo ||$('#logoUrl');
       sentData.data.url = $('#adLink').val();
       sentData.data.origin.x = $('#originX').val();
