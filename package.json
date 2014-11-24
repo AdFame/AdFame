@@ -14,6 +14,7 @@
   },
   "scripts": {
     "start": "npm run build && node server.js",
+    "start-ball": "browserify public/balldemo/ballbounce.js | uglifyjs > public/balldemo/AdFame2.js",
     "start-dev": "npm run watch & node server.js",
     "test": "npm run lint -s && npm run build",
     "build": "browserify src/index.js | uglifyjs > public/bundle.js",

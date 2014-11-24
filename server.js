@@ -54,7 +54,7 @@ server.route({
     method: 'GET',
     path: '/ball',
     handler: function (request, reply) {
-        reply.file('./ball demo/ballbounce.html');
+        reply.file('./balldemo/ballbounce.html');
     }
 });
 
