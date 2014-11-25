@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+
+    <title>AdFame App</title>
+    <meta content=
+    "width=device-width, maximum-scale=1, initial-scale=1, user-scalable=no"
+    name="viewport">
+    <meta content="yes" name="mobile-web-app-capable">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <link href="../../node_modules/famous/src/core/famous.css" rel="stylesheet" type="text/css">
+    <link href="../styles/app.css" rel="stylesheet" type="text/css">
+    <script src="../../node_modules/famous/examples/assets/lib/functionPrototypeBind.js" type=
+    "text/javascript"></script>
+    <script src="../../node_modules/famous/examples/assets/lib/classList.js" type="text/javascript"></script>
+    <script src="../../node_modules/famous/examples/assets/lib/requestAnimationFrame.js" type=
+    "text/javascript"></script>
+    <script src="../../node_modules/famous/examples/assets/lib/require.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        require.config({
+                paths: {
+                    famous: '../../node_modules/famous/src'
+                }
+            });
+            require(['./shutter.js']);
+    
+    window.addEventListener("message", receiveMessage, false);
+
+    function receiveMessage(event){
+      if(event.data === 'clicker'){
+        clicker.setSize([60,60], spring)
+        //.setTransform(Transform.rotate(0,0,Math.PI/4))
+
+      } else {
+
+        var win = document.getElementById('fe').contentWindow
+        win.postMessage(event.data, '*')
+       
+      }
+    }
+
+    </script>
+</head>
+<body>
+<div id="contain">
+    <div id="famous-container" style='display:block; overflow:hidden; height: 500px; width:100%; background-color:rgba(0, 0, 0, 0)'></div>
+        </div>
+</body>
+</html>
