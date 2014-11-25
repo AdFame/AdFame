@@ -41,6 +41,7 @@
     "hapi": "^7.1.1",
     "hapi-mongodb": "^2.2.0",
     "joi": "^4.9.0",
+    "multiparty": "^4.0.0",
     "uglify-js": "^2.4.15",
     "watchify": "^2.0.0"
   }
