@@ -15,7 +15,7 @@
     <h1>User Input Page</h1>
     <p>
       <p>Campaign: <input id="campaign" type="text"></input></p>
-      <form id="type" name="type">
+      <form id="type" name="type" enctype="multipart/form-data">
       Upload logo<br>
         <input id="logoUrl" type="file" onchange="previewFile()"><br>
         <img src="" height="100" alt="Image preview...">
@@ -26,6 +26,7 @@
              var reader  = new FileReader();
              reader.onloadend = function () {
                  preview.src = reader.result;
+                 window.antipattern = preview.src;
              }
              if (file) {
                  reader.readAsDataURL(file); //reads the data as a URL

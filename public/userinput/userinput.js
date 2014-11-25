@@ -2,7 +2,7 @@
   $(function(){
       //Sets a default data set
   var data = {
-		logo: 'images/Coca-Cola.png',
+		logo: {data: 'images/Coca-Cola.png', contentType:'image/png'},
 		url: 'http://us.coca-cola.com/home/',
 		origin: {x: .5, y: 0, z: 0},
 		initialPosition: {x: 0, y: 0, z: 0},
@@ -34,6 +34,7 @@
 	    curve: null
 		}
 	}
+
   // creates an object with the name of the company and the data selected to store in the database
   var sentData={
     name:"Ale",
@@ -47,6 +48,7 @@
       });
       $('#'+selected).show();
     }).trigger('click');
+
      
 
     //NEED TO CHECK IF IT EXISTS IN DB FIRST
@@ -57,6 +59,7 @@
         type: "POST",
         url: "/user/data",
         data: sentData,
+        // contentType: "multipart/form-data; charset=UTF-8",
         dataType: "application/json"
       })
       .done(function( msg ) {
@@ -80,8 +83,8 @@
       var $info = $("#" + selected)
       //sets the data parameters to the selected in the input fields
       sentData.name = $('#campaign').val()|| "Ale";
-      sentData.data.logo = $('#logoUrl')|| sentData.data.logo;
-      console.log(sentData.data.logo)
+      sentData.data.logo.data = window.antipattern|| sentData.data.logo.data;
+      console.log(sentData.data.logo.data)
       sentData.data.url = $('#adLink').val();
       sentData.data.origin.x = $('#originX').val();
       sentData.data.origin.y = $('#originY').val();
@@ -122,7 +125,6 @@
       sentData.data.enter.opacity = $("#"+selected+"Opacity").val()
       sentData.data.enter.duration = $("#"+selected+"Duration").val()
       sentData.data.enter.curve = $("#"+selected+"Curve option:selected").val()
-      console.log(sentData)
       saveData(sentData)
     });
 

@@ -2,6 +2,7 @@
 var Hapi = require('hapi');
 var Path = require('path');
 var joi = require('joi');
+var multiparty= require('multiparty');
 var fs = require('fs');
 var port = Number(process.argv[2]) || 3000;
 //create a hapi server
@@ -80,6 +81,21 @@ server.route({
     });
   }
 });
+//antipattern
+
+server.route({
+  method: 'GET',
+  path: '/userimage',
+  handler: function (request, reply) {
+    var db = request.server.plugins['hapi-mongodb'].db;
+    var myRegExp= new RegExp("[^/]+(?=/$|$)");
+    var campaign= myRegExp.exec(request.url.path);
+    var name = campaign[0].toString();
+    db.collection('data').find({"name":name}).toArray(function (err, doc){
+      reply(doc);
+    });
+  }
+});
 
 //route for each campaign
 
@@ -105,12 +121,32 @@ server.route({
   config: {
    
     handler: function (request, reply) {
+      // console.log('got here', request.payload)
+      // var form = new multiparty.Form();
+      // console.log('got here', form)
+
+      // form.parse(request.payload, function(err, fields, files) {
+      //   console.log(fields, "Files")
+              // fs.readFile(files.upload[0].path,function(err,data){
+              //   var newpath = __dirname + "/"+files.upload[0].originalFilename;
+              //   fs.writeFile(newpath,data,function(err){
+              //       if(err) console.log(err);
+              //       else console.log(files)
+              //   })
+              // })
+              //   console.log(files)
+
+            // });
 
       var Ad = {
         name: request.payload.name,
         data: request.payload.data
       };
+      console.log(Ad.data.logo.data)
+      // Ad.data.logo.data = fs.readFileSync(Ad.data.logo.data);
+      console.log(Ad.data.logo.data)
       var db = request.server.plugins['hapi-mongodb'].db;
+
 
       db.collection('data').insert(Ad, {w:1}, function (err, doc){
           if (err){
@@ -124,7 +160,10 @@ server.route({
     validate: {
       payload: {
         name: joi.string().required(),
-        data: joi.required()
+        data: joi.required(),
+        maxBytes:209715200,
+        output:'stream',
+        parse: false
       }
     }
   }
