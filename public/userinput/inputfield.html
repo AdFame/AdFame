@@ -13,11 +13,29 @@
   <div id='wrap'>
     <h1>AdFame</h1>
 
-    <form id='type' name='type'>
-      <p>Ad Campaign <input id='campaign' type='text' style='width: 262px'></input></p>
+    <p>Ad Campaign <input id='campaign' type='text' style='width: 262px'></input></p>
 
+    <form id='type' name='type' enctype='multipart/form-data'>
       <p>Logo URL
-      <input id='logoUrl' type='text' style='width: 262px; margin-bottom: 2px'><br>
+      <input id='logoUrl' type='file' onchange='previewFile()' style='width: 262px; margin-bottom: 2px'><br>
+      <img src='' height='100' alt='Image preview...'>
+          <script>
+           function previewFile(){
+               var preview = document.querySelector('img'); //selects the query named img
+               var file    = document.querySelector('input[type=file]').files[0]; //sames as here
+               var reader  = new FileReader();
+               reader.onloadend = function () {
+                   preview.src = reader.result;
+                   window.antipattern = preview.src;
+               }
+               if (file) {
+                   reader.readAsDataURL(file); //reads the data as a URL
+               } else {
+                   preview.src = "";
+               }
+          }
+          previewFile();  //calls the function named previewFile()
+        </script>
       <button>Upload logo</button><br>
       <span id='tiny'>logo must be 65px x 200px**</span><br>
       </p>
@@ -35,11 +53,6 @@
         <option name='transitions' value='springInOut'>Spring Transition</option>
         <option name='transitions' value='wallInOut'>Wall Transition</option>
       </select>
-
-<!--       <input name='transitions' type='radio' value='slideInOut'>Slide Transition<br>
-      <input checked name='transitions' type='radio' value='rotateInOut'>Rotate Transition<br>
-      <input name='transitions' type='radio' value='springInOut'>Spring Transition<br>
-      <input name='transitions' type='radio' value='wallInOut'>Wall Transition -->
     </p>
 
     <div id='positions'>  
