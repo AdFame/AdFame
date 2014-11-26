@@ -17,32 +17,21 @@ var SpringTransition = require('famous/transitions/SpringTransition');
 var SnapTransition = require('famous/transitions/SnapTransition');
 
 // Importanting data form data.js dummy file
-// var Data = require('./data');
+// var data = require('../public/userinput/userinput');
+var data = require('./data');
+// console.log(data);
 
-// var saveData = function(data){ 
-//     $.ajax({
-//         type: "POST",
-//         url: "/data",
-//         async: false,
-//         data: data
-//     }).done(function(data) {
-//         console.log("Data Saved:", data);
-//     });
-// }
+// var data = $.ajax({
+//     type: 'GET',
+//     url: '/user/data',
+//     async: false,
+//     data: data
+// }).done(function(data) {
+//     console.log('data:', data);
+// })
 
-// saveData('Peter', Data);
-
-var data = $.ajax({
-    type: "GET",
-    url: "/user/data",
-    async: false,
-    data: data
-}).done(function(data) {
-    console.log('data:', data);
-})
-
-data = data.responseJSON;
-data = data[3].data;
+// data = data.responseJSON;
+// data = data[3].data;
 
 // Registry of transitions
 var transitionRegistry = {
@@ -116,7 +105,7 @@ function AdGenerator() {
 // provided by the client
 function getLogo() {
     var logo = new ImageSurface({
-      size: [300, 100],
+      size: [240, 80],
       content: data.logo,
       properties: {
         textAlign: 'center',
@@ -203,8 +192,6 @@ function wallInOut(dataInput) {
             method: 'wall',
             period: +dataInput.period,
             dampingRatio : +dataInput.dampingRatio,
-            // velocity: +dataInput.velocity,
-            // restitution : +dataInput.restitution
         };
 
         transformer.setTranslate(

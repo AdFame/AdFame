@@ -1,36 +1,65 @@
 body {
-font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-font-size: 14px;
-line-height: 1.42857143;
-color: #333;
-background-color: rgb(238, 238, 238);
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+    background-color: white ;
 }
 
 ul {
-list-style-type:none;
-line-height: 25px;
-padding-left:0px;
+    list-style-type:none;
+    line-height: 25px;
+    padding-left:0px;
 }
 
 #export {
-background-color: rgb(100, 101, 100);
-height: 42px;
-width: 110px;
-border-radius: 10px;
-border-style: none;
+    background-color: rgb(100, 101, 100);
+    height: 40px;
+    width: 270px;
+    border-radius: 2px;
+    border-width: 2px;
+    border-color: white;
+    font-size: 20px;
+    color: white;
 }
 
 button {
-width: 130px;	
-
+    width: 270px;
+    border-radius: 2px;
+    height: 25px;
+    font-size: 14px;
+    color: white;
 }
 
 #tiny {
-font-size:12px;
-color: gray;
-font-style: italic;
+    font-size:12px;
+    color: gray;
+    font-style: italic;
+}
+
+#iframeContainer {
+    left: 320;
+    padding-bottom: 0px;
+    bottom: 0px;
+}
+
+#iphone {
+    background-image: url('../images/iphone.jpg');
+    background-repeat: no-repeat;
+    width: 550px;
+    height: 650px;
 }
 
 #wrap {
- text-align: center;
+    padding-left: 30px;
+    margin: 0px;
+    height: 100%;
+    width: 300px;
+    left: 0px;
+    top: 0px;
+    overflow-y: scroll;
+    position: fixed;
+    background-color: rgb(100, 101, 100);
+    text-align: left;
+    color: white;
 }
