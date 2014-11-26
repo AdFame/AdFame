@@ -17,9 +17,9 @@ var SpringTransition = require('famous/transitions/SpringTransition');
 var SnapTransition = require('famous/transitions/SnapTransition');
 
 // Importanting data form data.js dummy file
-// var data = require('../public/userinput/userinput');
-var data = require('./data');
-// console.log(data);
+// var data = require('../public/userinput/userinput.js');
+var data = require('./data.js');
+console.log(data);
 
 // var data = $.ajax({
 //     type: 'GET',
