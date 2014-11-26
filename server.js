@@ -2,6 +2,8 @@
 var Hapi = require('hapi');
 var Path = require('path');
 var joi = require('joi');
+var multiparty= require('multiparty');
+var fs = require('fs');
 var port = Number(process.argv[2]) || 3000;
 //create a hapi server
 var server = new Hapi.Server('0.0.0.0', port, { files: { relativeTo: Path.join(__dirname, 'public') } });
@@ -79,6 +81,37 @@ server.route({
     });
   }
 });
+//antipattern
+
+server.route({
+  method: 'GET',
+  path: '/userimage',
+  handler: function (request, reply) {
+    var db = request.server.plugins['hapi-mongodb'].db;
+    var myRegExp= new RegExp("[^/]+(?=/$|$)");
+    var campaign= myRegExp.exec(request.url.path);
+    var name = campaign[0].toString();
+    db.collection('data').find({"name":name}).toArray(function (err, doc){
+      reply(doc);
+    });
+  }
+});
+
+//route for each campaign
+
+server.route({
+  method: 'GET',
+  path: '/user/{name}',
+  handler: function (request, reply) {
+    var db = request.server.plugins['hapi-mongodb'].db;
+    var myRegExp= new RegExp("[^/]+(?=/$|$)");
+    var campaign= myRegExp.exec(request.url.path);
+    var name = campaign[0].toString();
+    db.collection('data').find({"name":name}).toArray(function (err, doc){
+      reply(doc);
+    });
+  }
+});
  
 // route for post requests to the database with the data objects
 server.route({
@@ -87,12 +120,12 @@ server.route({
   config: {
    
     handler: function (request, reply) {
-
       var Ad = {
         name: request.payload.name,
         data: request.payload.data
       };
       var db = request.server.plugins['hapi-mongodb'].db;
+
 
       db.collection('data').insert(Ad, {w:1}, function (err, doc){
           if (err){
@@ -106,10 +139,46 @@ server.route({
     validate: {
       payload: {
         name: joi.string().required(),
-        data: joi.required()
+        data: joi.required(),
+        maxBytes:209715200,
+        output:'stream',
+        parse: false
       }
     }
   }
 });
+server.route({
+  method: 'POST',
+  path: '/analytics',
+  config: {
+   
+    handler: function (request, reply) {
+      var Ad = {
+        name: request.payload.name,
+        result:request.payload.result,
+        time:request.payload.time
+      };
+      var db = request.server.plugins['hapi-mongodb'].db;
+
+
+      db.collection('analytics').insert(Ad, {w:1}, function (err, doc){
+          if (err){
+            return reply(Hapi.error.internal('Internal MongoDB error', err));
+          }else{
+            reply(doc);
+          }
+      });
+    },
+    //validation to require that the objects sent have these properties in order for them to be stored
+    validate: {
+      payload: {
+        name: joi.string().required(),
+        result: joi.required(),
+        time:joi.number().required()
+      }
+    }
+  }
+});
+
 server.start();
 console.log('server started on port', port);

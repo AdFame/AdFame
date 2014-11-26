@@ -1,13 +1,14 @@
-define(function(require, exports, module) {
+
+require('famous-polyfills');
+
 var Engine          = require('famous/core/Engine');
+
 var Surface         = require('famous/core/Surface');
 var EventHandler    = require('famous/core/EventHandler');
 var View            = require('famous/core/View');
 var Transform       = require('famous/core/Transform');
-
 var StateModifier   = require('famous/modifiers/StateModifier');
 var Modifier   = require('famous/core/Modifier');
-
 var PhysicsEngine   = require('famous/physics/PhysicsEngine');
 var Body            = require('famous/physics/bodies/Body');
 var Circle          = require('famous/physics/bodies/Circle');
@@ -17,14 +18,6 @@ var Transitionable = require('famous/transitions/Transitionable');
 var SpringTransition = require('famous/transitions/SpringTransition');
 Transitionable.registerMethod('spring', SpringTransition);
 
-//var WallTransition = require('famous/transitions/WallTransition');
-//var Draggable = require('famous/modifiers/Draggable');
-//var draggable = new Draggable({
-    //    xRange: [0, window.innerWidth],
-  //      yRange: [0, window.innerHeight]
-    //});
-
-//Transitionable.registerMethod('wall', WallTransition);
 
 var el = document.getElementById('famous-container');
 Engine.setOptions({ appMode: false });
@@ -192,5 +185,5 @@ physicsEngine.attach( topWall,   [circle]);
 physicsEngine.attach( bottomWall,[circle]);
 
 
-});
+
 

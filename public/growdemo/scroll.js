@@ -1,11 +1,11 @@
 
 define(function(require, exports, module) {
-    var Engine     = require("famous/core/Engine");
-    var Surface    = require("famous/core/Surface");
-    var Scrollview = require("famous/views/Scrollview");
-    var StateModifier = require("famous/modifiers/StateModifier")
+    var Engine     = require("../famous/core/Engine");
+    var Surface    = require("../famous/core/Surface");
+    var Scrollview = require("../famous/views/Scrollview");
+    var StateModifier = require("../famous/modifiers/StateModifier")
     var mainContext = Engine.createContext();
-    var RenderNode = require("famous/core/RenderNode")
+    var RenderNode = require("../famous/core/RenderNode")
     var scrollview = new Scrollview();
     var surfaces = [];
 

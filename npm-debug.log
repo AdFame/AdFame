@@ -1,33 +1,30 @@
 0 info it worked if it ends with ok
-1 verbose cli [ 'node', '/usr/local/bin/npm', 'run', 'start-dev' ]
-2 info using npm@2.1.6
-3 info using node@v0.10.33
-4 verbose run-script [ 'prestart-dev', 'start-dev', 'poststart-dev' ]
-5 info prestart-dev browserify-seed@0.3.2
-6 info start-dev browserify-seed@0.3.2
-7 verbose unsafe-perm in lifecycle true
-8 info browserify-seed@0.3.2 Failed to exec start-dev script
-9 verbose stack Error: browserify-seed@0.3.2 start-dev: `npm run watch & node server.js`
-9 verbose stack Exit status 8
-9 verbose stack     at ChildProcess.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/lifecycle.js:212:16)
-9 verbose stack     at ChildProcess.emit (events.js:98:17)
-9 verbose stack     at maybeClose (child_process.js:756:16)
-9 verbose stack     at Process.ChildProcess._handle.onexit (child_process.js:823:5)
-10 verbose pkgid browserify-seed@0.3.2
-11 verbose cwd /Users/alejandrozuccolillo/Desktop/AdFame
-12 error Darwin 14.0.0
-13 error argv "node" "/usr/local/bin/npm" "run" "start-dev"
-14 error node v0.10.33
-15 error npm  v2.1.6
-16 error code ELIFECYCLE
-17 error browserify-seed@0.3.2 start-dev: `npm run watch & node server.js`
-17 error Exit status 8
-18 error Failed at the browserify-seed@0.3.2 start-dev script.
-18 error This is most likely a problem with the browserify-seed package,
-18 error not with npm itself.
-18 error Tell the author that this fails on your system:
-18 error     npm run watch & node server.js
-18 error You can get their info via:
-18 error     npm owner ls browserify-seed
-18 error There is likely additional logging output above.
-19 verbose exit [ 1, true ]
+1 verbose cli [ 'c:\\Program Files (x86)\\nodejs\\\\node.exe',
+1 verbose cli   'c:\\Program Files (x86)\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'run',
+1 verbose cli   'watcher' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.32
+4 verbose node symlink c:\Program Files (x86)\nodejs\\node.exe
+5 verbose run-script [ 'prewatcher', 'watcher', 'postwatcher' ]
+6 info prewatcher browserify-seed@0.3.2
+7 info watcher browserify-seed@0.3.2
+8 verbose unsafe-perm in lifecycle true
+9 info browserify-seed@0.3.2 Failed to exec watcher script
+10 error browserify-seed@0.3.2 watcher: `watchify balldemo/ballbounce.js -o balldemo/AdFame2.js --debug --verbose`
+10 error Exit status 8
+11 error Failed at the browserify-seed@0.3.2 watcher script.
+11 error This is most likely a problem with the browserify-seed package,
+11 error not with npm itself.
+11 error Tell the author that this fails on your system:
+11 error     watchify balldemo/ballbounce.js -o balldemo/AdFame2.js --debug --verbose
+11 error You can get their info via:
+11 error     npm owner ls browserify-seed
+11 error There is likely additional logging output above.
+12 error System Windows_NT 6.2.9200
+13 error command "c:\\Program Files (x86)\\nodejs\\\\node.exe" "c:\\Program Files (x86)\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "run" "watcher"
+14 error cwd c:\Users\Morgan\desktop\newproject\adfame
+15 error node -v v0.10.32
+16 error npm -v 1.4.28
+17 error code ELIFECYCLE
+18 verbose exit [ 1, true ]
