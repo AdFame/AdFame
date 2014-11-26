@@ -60,6 +60,17 @@ server.route({
     }
 });
 
+//route for the window demo page
+server.route({
+    method: 'GET',
+    path: '/window',
+    handler: function (request, reply) {
+        reply.file('./window demo/windowpane.html');
+    }
+});
+
+
+
 //route for the user input page
 server.route({
     method: 'GET',
