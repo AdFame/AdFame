@@ -1,296 +1,266 @@
 <!DOCTYPE html>
 
-<html lang="en">
-<!-- ng-app="userInput" -->
+<html lang='en'>
+<!-- ng-app='userInput' -->
 
 <head>
-  <meta charset="UTF-8">
-
-  <title>User Input Page</title>
-  <link rel="stylesheet" href="./userinput/style.css">
+  <meta charset='UTF-8'>
+  <title>AdFame</title>
+  <link rel='stylesheet' href='./userinput/style.css'>
 </head>
 
 <body>
-  <div id="wrap">
-    <h1>User Input Page</h1>
-    <p>
-      <p>Campaign: <input id="campaign" type="text"></input></p>
-      <form id="type" name="type">
-      <button>Upload logo</button><br>
-        <input id="logoUrl" type="text"><br>
-        <span id='tiny'>logo must be 65px x 200px**</span><br>
-        <br/>
-       Ad link<br >
-       <input id="adLink" type="text">
-      </form>
-    </p>
-    <p>
-    <h2>Transition Type</h2>
-    <div id="selectTrans">
-      <input checked name="transitions" type="radio" value="rotateInOut">rotateInOut<br>
-      <input name="transitions" type="radio" value="springInOut">springInOut<br>
-      <input name="transitions" type="radio" value="slideInOut">slideInOut<br>
-      <input name="transitions" type="radio" value="wallInOut">wallInOut
-    </div>
-    <div id="positions">
-      <h2>Positions</h2>
+  <div id='wrap'>
+    <h1>AdFame</h1>
 
+    <form id='type' name='type'>
+      <p>Ad Campaign <input id='campaign' type='text' style='width: 262px'></input></p>
+
+      <p>Logo URL
+      <input id='logoUrl' type='text' style='width: 262px; margin-bottom: 2px'><br>
+      <button>Upload logo</button><br>
+      <span id='tiny'>logo must be 65px x 200px**</span><br>
+      </p>
+
+      <p>Ad Link
+      <input id='adLink' type='text' style='width: 262px'>
+      </p>
+    </form>
+
+<p>
+    <p>Transition Type
+      <select id='selectTrans' style='width: 265px'>
+        <option name='transitions' value='rotateInOut'>Rotate Transition</option>
+        <option name='transitions' value='slideInOut'>Slide Transition</option>
+        <option name='transitions' value='springInOut'>Spring Transition</option>
+        <option name='transitions' value='wallInOut'>Wall Transition</option>
+      </select>
+
+<!--       <input name='transitions' type='radio' value='slideInOut'>Slide Transition<br>
+      <input checked name='transitions' type='radio' value='rotateInOut'>Rotate Transition<br>
+      <input name='transitions' type='radio' value='springInOut'>Spring Transition<br>
+      <input name='transitions' type='radio' value='wallInOut'>Wall Transition -->
+    </p>
+
+    <div id='positions'>  
+      <h2>Initial State</h2>
       <ul>
         <li><button>Origin</button>
-          <ul style="display: none">
-            <li> X:<input id="originX" type="range"><output></output></li>
-            <li>Y:<input id="originY" size="4" type="range"><output></output></li>
-            <li>Z:<input id="originZ" size="4" type="range"><output></output></li>
+          <ul style='display: none'>
+            <li> X:<input id='originX' type='range'><output></output></li>
+            <li>Y:<input id='originY' size='4' type='range'><output></output></li>
+            <li>Z:<input id='originZ' size='4' type='range'><output></output></li>
           </ul>
         </li>
         <li><button>Initial Position</button>
-          <ul style="display: none">
-            <li>X:<input id="initPosX" size="4" type="range"><output></output></li>
-            <li>Y:<input id="initPosY" size="4" type="range"><output></output></li>
-            <li>Z:<input id="initPosZ" size="4" type="range"><output></output></li>
-          </ul>
-        </li>
-        <li><button>Initial Velocity</button>
-          <ul id="hello" style="display: none">
-            <li>X:<input id="initVelX" size="4" type="range"><output></output></li>
-            <li>Y:<input id="initVelY" size="4" type="range"><output></output></li>
-            <li>Z:<input id="initVelZ" size="4" type="range"><output></output></li>
+          <ul style='display: none'>
+            <li>X:<input id='initPosX' size='4' type='range'><output></output></li>
+            <li>Y:<input id='initPosY' size='4' type='range'><output></output></li>
+            <li>Z:<input id='initPosZ' size='4' type='range'><output></output></li>
           </ul>
         </li>
         <li><button>Initial Rotation</button> 
-          <ul style="display: none">
-            <li>X:<input id="initRotX" size="4" type="range"><output></output></li>
-            <li>Y:<input id="initRotY" size="4" type="range"><output></output></li>
-            <li>Z:<input id="initRotZ" size="4" type="range"><output></output></li>
+          <ul style='display: none'>
+            <li>X:<input id='initRotX' size='4' type='range'><output></output></li>
+            <li>Y:<input id='initRotY' size='4' type='range'><output></output></li>
+            <li>Z:<input id='initRotZ' size='4' type='range'><output></output></li>
           </ul>
         </li>
         <li><button>Opacity</button>
-          <ul style="display: none">
-            <li><input id="opacity" max="1.0" min="0" step=".01" type="range"><output></output></li>
+          <ul style='display: none'>
+            <li><input id='opacity' max='1.0' min='0' step='.01' type='range'><output></output></li>
           </ul>
         </li>
       </ul>
     </div>
   </p>
   <p>  
-    <div id="transitions">
-      <div class="main" id="rotateInOut">
-        <h2>rotateInOut</h2>
-
+    <div id='transitions'>
+      
+      <div class='main' id='rotateInOut'>  
+        <h2>Rotate Transition</h2>
         <ul>
-          <li><button>Position</button> 
-            <ul style="display: none">
-              <li>X:<input id="rotateInOutPosX" size="4" type="range"><output></output></li>
-              <li>Y:<input id="rotateInOutPosY" size="4" type="range"><output></output></li>
-              <li>Z:<input id="rotateInOutPosZ" size="4" type="range"><output></output></li>
-            </ul>
-          </li>
-          <li><button>Velocity</button>
-            <ul style="display: none"> 
-              <li>X:<input id="rotateInOutVelX" size="4" type="range"><output></output></li>
-              <li>Y:<input id="rotateInOutVelY" size="4" type="range"><output></output></li>
-              <li>Z:<input id="rotateInOutVelZ" size="4" type="range"><output></output></li>
-            </ul>
-          </li>
           <li><button>Rotation</button>
-            <ul style="display: none">
-              <li>X:<input id="rotateInOutRotX" size="4" type="range"><output></output></li>
-              <li>Y:<input id="rotateInOutRotY" size="4" type="range"><output></output></li>
-              <li>Z:<input id="rotateInOutRotZ" size="4" type="range"><output></output></li>
+            <ul style='display: none'>
+              <li>X:<input id='rotateInOutRotX' size='4' type='range'><output></output></li>
+              <li>Y:<input id='rotateInOutRotY' size='4' type='range'><output></output></li>
+              <li>Z:<input id='rotateInOutRotZ' size='4' type='range'><output></output></li>
             </ul>
           </li>
-            <li><button>Period</button>
-              <ul style="display: none"> 
-                <li><input id="rotateInOutPeriod" name="slider" type="range"><output></output></li>
-              </ul>
-            </li>
-          <li><button>Dampening Ratio</button>
-            <ul style="display: none">
-              <li><input id="rotateInOutDampeningRatio" max="1.0"min="0" step=".01" type="range"><output></output></li>
-            </ul>
-          </li>
-
-          <li><button>Opacity</button>
-            <ul style="display: none">
-              <li><input id="rotateInOutOpacity" max="1.0" min="0" step=".01" type="range"><output></output></li>
-            </ul>
           <li><button>Duration</button>
-            <ul style="display: none">
-            <li><input id="rotateInOutDuration" max="5000" min="0" step="500" type="range"><output></output></li>
+            <ul style='display: none'>
+              <li><input id='rotateInOutDuration' max='5000' min='0' step='500' type='range'><output></output></li>
             </ul>
+          </li>
           <li><button>Curve</button>
-            <ul style="display: none">
+            <ul style='display: none'>
               <li>
-                <select id='rotateInOutCurve' name="curve">
-                  <option value="inQuad">inQuad</option>
-                  <option value="outQuad">outQuad</option>
-                  <option value="inOutQuad">inOutQuad</option>
-                  <option value="inCubic">inCubic</option>
-                  <option value="outCubic">outCubic</option>
-                  <option value="inOutCubic">inOutCubic</option>
-                  <option value="inQuart">inQuart</option>
-                  <option value="outQuart">outQuart</option>
-                  <option value="inOutQuart">inOutQuart</option>
-                  <option value="inQuint">inQuint</option>
-                  <option value="outQuint">outQuint</option>
-                  <option value="inOutQuint">inOutQuint</option>
+                <select id='rotateInOutCurve' name='curve'>
+                  <option value='inQuad'>inQuad</option>
+                  <option value='outQuad'>outQuad</option>
+                  <option value='inOutQuad'>inOutQuad</option>
+                  <option value='inCubic'>inCubic</option>
+                  <option value='outCubic'>outCubic</option>
+                  <option value='inOutCubic'>inOutCubic</option>
+                  <option value='inQuart'>inQuart</option>
+                  <option value='outQuart'>outQuart</option>
+                  <option value='inOutQuart'>inOutQuart</option>
+                  <option value='inQuint'>inQuint</option>
+                  <option value='outQuint'>outQuint</option>
+                  <option value='inOutQuint'>inOutQuint</option>
                 </select>
               </li>
             </ul>
           </li>
+          <li><button>Opacity</button>
+            <ul style='display: none'>
+              <li><input id='rotateInOutOpacity' max='1.0' min='0' step='.01' type='range'><output></output></li>
+            </ul>
+          </li>
         </ul>
       </div>
 
-      <div class="main" id="springInOut">
+      <div class='main' id='springInOut'>
         <h2>springInOut</h2>
-
         <ul>
           <li><button>Position</button>
-            <ul style="display: none">
-              <li>X:<input id="springInOutPosX" size="4" type="range"></li>
-              <li>Y:<input id="springInOutPosY" size="4" type="range"></li>
-              <li>Z:<input id="springInOutPosZ" size="4" type="range"></li>
-            </ul>  
-          <li><button>Velocity</button>
-            <ul style="display: none">
-              <li>X:<input id="springInOutVelX" size="4" type="range"></li>
-              <li>Y:<input id="springInOutVelY" size="4" type="range"></li>
-              <li>Z:<input id="springInOutVelZ" size="4" type="range"></li>
+            <ul style='display: none'>
+              <li>X:<input id='springInOutPosX' size='4' type='range'></li>
+              <li>Y:<input id='springInOutPosY' size='4' type='range'></li>
+              <li>Z:<input id='springInOutPosZ' size='4' type='range'></li>
             </ul>
-          <li><button>Rotation</button>
-            <ul style="display: none">
-              <li>X:<input id="springInOutRotX" size="4" type="range"></li>
-              <li>Y:<input id="springInOutRotY" size="4" type="range"></li>
-              <li>Z:<input id="springInOutRotZ" size="4" type="range"></li>
-            </ul>
+          </li>
           <li><button>Period</button>
-            <ul style="display: none">
-              <li><input id="springInOutPeriod" type="range"><output></output></li>
-          <li><button>Dampening Ratio</button>
-            <ul style="display: none">
-              <li><input id="springInOutDampeningRatio" type="range"><output></output></li>
+            <ul style='display: none'>
+              <li><input id='springInOutPeriod' type='range'><output></output></li>
             </ul>
+          </li>
+          <li><button>Dampening Ratio</button>
+            <ul style='display: none'>
+              <li><input id='springInOutDampeningRatio' type='range'><output></output></li>
+            </ul>
+          </li>
           <li><button>Opacity</button>
-            <ul style="display: none">
-              <li><input id="springInOutOpacity" type="range"><output></output></li>
+            <ul style='display: none'>
+              <li><input id='springInOutOpacity' type='range'><output></output></li>
             </ul>
           </li>
           <li><button>Duration</button></li>
-            <ul style="display: none">
-              <input id="springInOutDuration" type="range"><output></output></li>
+            <ul style='display: none'>
+              <input id='springInOutDuration' max='5000' min='0' step='500' type='range'><output></output></li>
             </ul>
           </li>
         </ul>
       </div>
 
-      <div class="main" id="slideInOut">
+      <div class='main' id='slideInOut'>
         <h2>slideInOut</h2>
 
         <ul>
           <li><button>position</button> 
-            <ul style="display: none">
-              <li>X:<input id="slideInOutPosX" size="4" type="range"><output></output></li>
-              <li>Y:<input id="slideInOutPosY" size="4" type="range"><output></output></li>
-              <li>Z:<input id="slideInOutPosZ" size="4" type="range"><output></output></li>
-            </ul>
-          <li><button>velocity</button>
-            <ul style="display: none">
-              <li>X:<input id="slideInOutVelX" size="4" type="range"><output></output></li>
-              <li>Y:<input id="slideInOutVelY" size="4" type="range"><output></output></li>
-              <li>Z:<input id="slideInOutVelZ" size="4" type="range"><output></output></li>
+            <ul style='display: none'>
+              <li>X:<input id='slideInOutPosX' size='4' type='range'><output></output></li>
+              <li>Y:<input id='slideInOutPosY' size='4' type='range'><output></output></li>
+              <li>Z:<input id='slideInOutPosZ' size='4' type='range'><output></output></li>
             </ul>
           <li><button>rotation</button>
-            <ul style="display: none">
-              <li>X:<input id="slideInOutRotX" size="4" type="range"><output></output></li>
-              <li>Y:<input id="slideInOutRotY" size="4" type="range"><output></output></li>
-              <li>Z:<input id="slideInOutRotZ" size="4" type="range"><output></output></li>
+            <ul style='display: none'>
+              <li>X:<input id='slideInOutRotX' size='4' type='range'><output></output></li>
+              <li>Y:<input id='slideInOutRotY' size='4' type='range'><output></output></li>
+              <li>Z:<input id='slideInOutRotZ' size='4' type='range'><output></output></li>
             </ul>
           <li><button>period</button>
-            <ul style="display: none">
-              <li><input id="slideInOutPeriod" type="range"><output></output></li>
+            <ul style='display: none'>
+              <li><input id='slideInOutPeriod' type='range'><output></output></li>
             </ul>
           <li><button>dampening ratio</button>
-            <ul style="display: none"> 
-              <li><input id="slideInOutDampeningRatio" max="1.0" min="0" step=".01" type="range"><output></output></li>
+            <ul style='display: none'> 
+              <li><input id='slideInOutDampeningRatio' max='1.0' min='0' step='.01' type='range'><output></output></li>
             </ul>
           <li><button>opacity</button>
-            <ul style="display: none"> 
-              <li><input id="slideInOutOpacity" type="range"><output></output></li>
+            <ul style='display: none'> 
+              <li><input id='slideInOutOpacity' type='range'><output></output></li>
             </ul> 
           <li><button>duration</button>
-            <ul style="display: none">
-              <li><input id="slideInOutDuration" type="range"><output></output></li>
+            <ul style='display: none'>
+              <li><input id='slideInOutDuration' type='range'><output></output></li>
             </ul>
           <li><button>Curve</button>
-            <ul style="display: none"> 
+            <ul style='display: none'> 
                <li>
-                <select id='slideInOutCurve' name="curve">
-                  <option value="inQuad">inQuad</option>
-                  <option value="outQuad">outQuad</option>
-                  <option value="inOutQuad">inOutQuad</option>
-                  <option value="inCubic">inCubic</option>
-                  <option value="outCubic">outCubic</option>
-                  <option value="inOutCubic">inOutCubic</option>
-                  <option value="inQuart">inQuart</option>
-                  <option value="outQuart">outQuart</option>
-                  <option value="inOutQuart">inOutQuart</option>
-                  <option value="inQuint">inQuint</option>
-                  <option value="outQuint">outQuint</option>
-                  <option value="inOutQuint">inOutQuint</option>
+                <select id='slideInOutCurve' name='curve'>
+                  <option value='inQuad'>inQuad</option>
+                  <option value='outQuad'>outQuad</option>
+                  <option value='inOutQuad'>inOutQuad</option>
+                  <option value='inCubic'>inCubic</option>
+                  <option value='outCubic'>outCubic</option>
+                  <option value='inOutCubic'>inOutCubic</option>
+                  <option value='inQuart'>inQuart</option>
+                  <option value='outQuart'>outQuart</option>
+                  <option value='inOutQuart'>inOutQuart</option>
+                  <option value='inQuint'>inQuint</option>
+                  <option value='outQuint'>outQuint</option>
+                  <option value='inOutQuint'>inOutQuint</option>
                 </select>
               </li>
             </ul>
         </ul>
       </div>
 
-      <div class="main" id="wallInOut">
+      <div class='main' id='wallInOut'>
         <h2>wallInOut</h2>
         <ul>
           <li><button>position</button>
-            <ul style="display: none"> 
-              <li>X:<input id="wallInOutPosX" size="4" type="range"></li>
-              <li>Y:<input id="wallInOutPosY" size="4" type="range"></li>
-              <li>Z:<input id="wallInOutPosZ" size="4" type="range"></li>
-            </ul>
-          <li><button>velocity</button> 
-            <ul style="display: none">
-              <li>X:<input id="wallInOutVelX" size="4" type="range"></li>
-              <li>Y:<input id="wallInOutVelY" size="4" type="range"></li>
-              <li>Z:<input id="wallInOutVelZ" size="4" type="range"></li>
+            <ul style='display: none'> 
+              <li>X:<input id='wallInOutPosX' size='4' type='range'></li>
+              <li>Y:<input id='wallInOutPosY' size='4' type='range'></li>
+              <li>Z:<input id='wallInOutPosZ' size='4' type='range'></li>
             </ul>
           <li><button>rotation</button> 
-            <ul style="display: none">
-              <li>X:<input id="wallInOutRotX" size="4" type="range"></li>
-              <li>Y:<input id="wallInOutRotY" size="4" type="range"></li>
-              <li>Z:<input id="wallInOutRotZ" size="4" type="range"></li>
+            <ul style='display: none'>
+              <li>X:<input id='wallInOutRotX' size='4' type='range'></li>
+              <li>Y:<input id='wallInOutRotY' size='4' type='range'></li>
+              <li>Z:<input id='wallInOutRotZ' size='4' type='range'></li>
             </ul>
           <li><button>period</button>
-            <ul style="display: none">
-              <li><input id="wallInOutPeriod" type="range"><output></output></li>
+            <ul style='display: none'>
+              <li><input id='wallInOutPeriod' type='range'><output></output></li>
             </ul>
           <li><button>dampening ratio</button>
-            <ul style="display: none">
-             <li><input id="wallInOutDampeningRatio" max="1.0" min="0" step=".01" type="range"><output></output></li>
+            <ul style='display: none'>
+             <li><input id='wallInOutDampeningRatio' max='1.0' min='0' step='.01' type='range'><output></output></li>
             </ul>
           <li><button>opacity</button>
-            <ul style="display: none">
-              <li><input id="wallInOutOpacity" type="range"><output></output></li>
+            <ul style='display: none'>
+              <li><input id='wallInOutOpacity' type='range'><output></output></li>
             </ul>
           <li><button>duration</button>
-            <ul style="display: none">
-              <li><input id="wallInOutDuration" type="range"><output></output></li>
+            <ul style='display: none'>
+              <li><input id='wallInOutDuration' type='range'><output></output></li>
             </ul>
           <li><button>restitution</button>
-            <ul style="display: none">
-              <li><input id="wallInOutResitution" max="5000" min="0" step="500" type="range"><output></output></li>
+            <ul style='display: none'>
+              <li><input id='wallInOutResitution' max='5000' min='0' step='500' type='range'><output></output></li>
             </ul>
           </li>
         </ul>
       </div>
     </div>
-  </form><button id="export">Export Info</button> 
+  </form><button id='export'>Export Info</button> 
   </p>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
-  <script src="./userinput/userinput.js"></script> 
+  <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script> 
+  <script src='./userinput/userinput.js'></script> 
+  </div>
+
+  <div id='iframeContainer'>
+    <!-- <div id='iphone' style='margin-left:325px'> -->
+      <div id='iphone' style='position: absolute;top: 20px; left:330px;'>
+        <iframe id='Iframe' src='../index.html' style='margin-top: 100px; margin-left:222px; height:433px;width: 252px; background-color: white'></iframe>
+
+        <button id='refresh' style='margin-left: 215px'>REFRESH</button>
+      </div>
+    <!-- </div> -->
+  </div>
+
 </body>
 </html>
