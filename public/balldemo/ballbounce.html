@@ -3,7 +3,7 @@
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="content-type">
 
-    <title>AdFame App</title>
+    <title>Gizmodo - Censoring The Web Isn't The Problem</title>
     <meta content=
     "width=device-width, maximum-scale=1, initial-scale=1, user-scalable=no"
     name="viewport">
@@ -13,7 +13,16 @@
     <link href="../node_modules/famous/src/core/famous.css" rel="stylesheet" type="text/css">
     <link href="./styles/app.css" rel="stylesheet" type="text/css">
     <link href="../node_modules/famous/examples/assets/css/famous_styles.css" rel="stylesheet" type=
-    "text/css">
+    "text/css"><style type="text/css">
+        p {
+            padding-left:20px;
+            padding-right:12px;
+        }
+
+        h3 {
+           padding-left:15px;
+        }
+    </style>
     <script src="../node_modules/famous/examples/assets/lib/functionPrototypeBind.js" type=
     "text/javascript"></script>
     <script src="../node_modules/famous/examples/assets/lib/classList.js" type="text/javascript"></script>
@@ -28,102 +37,112 @@
             });
             require(['./balldemo/ballbounce']);
     </script>
+    <link href="./balldemo/custom.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<!-- <body style="background-image:url(./iphone.jpg); background-repeat:no-repeat;background-color:white;">
- -->    <div id="famous-container" style=
+    <div id="famous-container" style=
     'position: fixed; height:1; width:100%; background-color:rgba(0, 0, 0, 0)'>
     </div>
-
-  <!-- <div style="position:relative;left:227px;top:71px;hieght:250px">   -->
-    <h1>Hello World</h1>
-
-    <p>Behold!! The future of Ads on the line!!eu unum inciderint vel. Ea
-    dictas utroque has, omnium epicuri vis ut. Mea cu quod eros convenire,
-    velit oportere partiendo has no. Veri illud laoreet eos te, an vim malorum
-    oportere explicari.<br>
-    Mea te ridens vituperatoribus. Pro sumo eros oportere cu, summo erant
-    euripidis cu eos. Ad commune luptatum conceptam mea. Quo ferri tempor ne,
-    qui dicant melius cu. Cu cum possim maluisset, ei mel vero numquam. Te
-    reque partiendo pro.<br>
-    Usu ullum dicunt cu, enim unum necessitatibus an vim. Vix mutat partem
-    laoreet eu, at eam iisque aliquam nonumes. Sea possim efficiendi ex, mel eu
-    esse labitur. Mel agam possit diceret ad.<br>
-    Sea ex debet patrioque scribentur, mea an soleat doming prodesset. Accusam
-    detraxit ius ex, wisi facer accumsan vix in. No admodum officiis voluptaria
-    mel, cetero mediocritatem mel et. Te his magna oblique, discere graecis
-    scriptorem nam ex.<br>
-    <a href="http://google.com">CLICK THE BALL</a> Possit dolorem tacimates duo
-    at, et mea aeque delectus insolens, detracto suavitate cu qui. Munere
-    facilisis instructior est ad, ornatus sapientem ullamcorper ad pri. Ne mei
-    quas etiam, ei dicta sonet oporteat sed. Delectus intellegam sit ne, illum
-    definiebas has id, id falli nonumes appellantur est. Sea ad magna
-    scriptorem.<br>
-    Lorem ipsum dolor sit amet, eu unum inciderint vel. Ea dictas utroque has,
-    omnium epicuri vis ut. Mea cu quod eros convenire, velit oportere partiendo
-    has no. Veri illud laoreet eos te, an vim malorum oportere explicari.</p>
-
-    <h1 id="hello">CLICK THE BALL</h1>Pro sumo eros oportere cu, summo erant
-    euripidis cu eos. Ad commune luptatum conceptam mea. Quo ferri tempor ne,
-    qui dicant melius cu. Cu cum possim maluisset, ei mel vero numquam. Te
-    reque partiendo pro.<br>
-    Usu ullum dicunt cu, enim unum necessitatibus an vim. Vix mutat partem
-    laoreet eu, at eam iisque aliquam nonumes. Sea possim efficiendi ex, mel eu
-    esse labitur. Mel agam possit diceret ad.<br>
-    Sea ex debet patrioque scribentur, mea an soleat doming prodesset. Accusam
-    detraxit ius ex, wisi facer accumsan vix in. No admodum officiis voluptaria
-    mel, cetero mediocritatem mel et. Te his magna oblique, discere graecis
-    scriptorem nam ex.<br>
-    Possit dolorem tacimates duo at, et mea aeque delectus insolens, detracto
-    suavitate cu qui. Munere facilisis instructior est ad, ornatus sapientem
-    ullamcorper ad pri. Ne mei quas etiam, ei dicta sonet oporteat sed.
-    Delectus intellegam sit ne, illum definiebas has id, id falli nonumes
-    appellantur est. Sea ad magna scriptorem.<br>
-    Lorem ipsum dolor sit amet, eu unum inciderint vel. Ea dictas utroque has,
-    omnium epicuri vis ut. Mea cu quod eros convenire, velit oportere partiendo
-    has no. Veri illud laoreet eos te, an vim malorum oportere explicari.<br>
-    Mea te ridens vituperatoribus. Pro sumo eros oportere cu, summo erant
-    euripidis cu eos. Ad commune luptatum conceptam mea. Quo ferri tempor ne,
-    qui dicant melius cu. Cu cum possim maluisset, ei mel vero numquam. Te
-    reque partiendo pro.<br>
-    Usu ullum dicunt cu, enim unum necessitatibus an vim. Vix mutat partem
-    laoreet eu, at eam iisque aliquam nonumes. Sea possim efficiendi ex, mel eu
-    esse labitur. Mel agam possit diceret ad.<br>
-    Sea ex debet patrioque scribentur, mea an soleat doming prodesset. Accusam
-    detraxit ius ex, wisi facer accumsan vix in. No admodum officiis voluptaria
-    mel, cetero mediocritatem mel et. Te his magna oblique, discere graecis
-    scriptorem nam ex.<br>
-    Possit dolorem tacimates duo at, et mea aeque delectus insolens, detracto
-    suavitate cu qui. Munere facilisis instructior est ad, ornatus sapientem
-    ullamcorper ad pri. Ne mei quas etiam, ei dicta sonet oporteat sed.
-    Delectus intellegam sit ne, illum definiebas has id, id falli nonumes
-    appellantur est. Sea ad magna scriptorem.<br>
-    Lorem ipsum dolor sit amet, eu unum inciderint vel. Ea dictas utroque has,
-    omnium epicuri vis ut. Mea cu quod eros convenire, velit oportere partiendo
-    has no. Veri illud laoreet eos te, an vim malorum oportere explicari.<br>
-    Mea te ridens vituperatoribus. Pro sumo eros oportere cu, summo erant
-    euripidis cu eos. Ad commune luptatum conceptam mea. Quo ferri tempor ne,
-    qui dicant melius cu. Cu cum possim maluisset, ei mel vero numquam. Te
-    reque partiendo pro.<br>
-    Usu ullum dicunt cu, enim unum necessitatibus an vim. Vix mutat partem
-    laoreet eu, at eam iisque aliquam nonumes. Sea possim efficiendi ex, mel eu
-    esse labitur. Mel agam possit diceret ad. <b id="end">Sea ex debet</b>
-    patrioque scribentur, mea an soleat doming prodesset. Accusam detraxit ius
-    ex, wisi facer accumsan vix in. No admodum officiis voluptaria mel, cetero
-    mediocritatem mel et. Te his magna oblique, discere graecis scriptorem nam
-    ex.<br>
-    Possit dolorem tacimates duo at, et mea aeque delectus insolens, detracto
-    suavitate cu qui. Munere facilisis instructior est ad, ornatus sapientem
-    ullamcorper ad pri. Ne mei quas etiam, ei dicta sonet oporteat sed.
-    Delectus intellegam sit ne, illum definiebas has id, id falli nonumes
-    appellantur est. Sea ad magna scriptorem.
-    <p>
-
-    <p>Possit dolorem tacimates duo at, et mea aeque delectus insolens,
-    detracto suavitate cu qui. Munere facilisis instructior est ad, ornatus
-    sapientem ullamcorper ad pri. Ne mei quas etiam, ei dicta sonet oporteat
-    sed. Delectus intellegam sit ne, illum definiebas has id, id falli nonumes
-    appellantur est. Sea ad magna scriptorem.</p>
+<img src="./balldemo/header.jpg" style="width:100%"/>
+  <P class="first-text" 
+data-textannotation-id="699fae98a35b855e6fa7be54e5e7f9d4"><SPAN>In politics, as 
+with </SPAN><A href="http://icanhas.cheezburger.com/" target="_blank">Internet 
+memes</A><SPAN>, ideas don't spread because they are good—they spread because 
+they are good at spreading. One of the most virulent ideas in Internet 
+regulation in recent years has been the idea that if a social problem manifests 
+on the Web, the best thing that you can do to address that problem is to censor 
+the Web.</SPAN></P>  <div id="famous-container" style=
+    'position: fixed; height:1; width:100%; background-color:rgba(0, 0, 0, 0)'>
+    </div>
+<P data-textannotation-id="44e832391ec917ff0aa7cfb85c92e212">It's an attractive 
+idea because if you don't think too hard, it appears to be a political 
+no-brainer. It allows governments to avoid addressing the underlying social 
+problem—a long and costly process—and instead simply pass the buck to Internet 
+providers, who can quickly make whatever content has raised rankles "go away." 
+Problem solved! Except, of course, that it isn't.</P>
+<P data-textannotation-id="191ca240982b8fd9a5f3cf9c42daa226">Amongst the 
+difficult social problems that Web censorship is often expected to solve are 
+terrorism, child abuse and copyright and trade mark infringement. In recent 
+weeks some further cases of this tactic being vainly employed against such 
+problems have emerged from the United Kingdom, France and Australia.</P>
+<H3 data-textannotation-id="0087369a56f5c85c40d81d5ed058c4fb">UK Court Orders 
+ISPs to Block Websites for Trade Mark Infringement</H3>
+<P data-textannotation-id="f92ca6e0783f6fadd8d39702ee8e597b">In a victory for 
+luxury brands and a loss for Internet users, the British High Court <A href="http://www.bailii.org/ew/cases/EWHC/Ch/2003/3354.html" 
+target="_blank">last month ordered</A> five of the country's largest ISPs to 
+block websites selling fake counterfeit goods. Whilst alarming enough, this was 
+merely a test case, leading the way for <A href="http://www.theguardian.com/technology/2014/oct/20/internet-service-providers-fake-goods-high-court-rules" 
+target="_blank">a reporte</A><A href="http://www.theguardian.com/technology/2014/oct/20/internet-service-providers-fake-goods-high-court-rules" 
+target="_blank">d 290,000</A>websites to be potentially targeted in future legal 
+proceedings.</P>
+<P data-textannotation-id="baffb775781b46a7cdbad94a34bee336">Do we imagine for a 
+moment that, out of a quarter-million websites, none of them are false positives 
+that actually sell non-infringing products? (If websites blocked for <A href="https://www.eff.org/wp/unintended-consequences-under-dmca" 
+target="_blank">copyright infringement</A> or <A href="https://www.eff.org/deeplinks/2014/03/there-are-lots-legit-reasons-research-pornography-new-restrictions-nih-grants-are" 
+target="_blank">pornography</A> are any example, we know the answer.) Do we 
+consider it a wise investment to tie up the justice system in blocking websites 
+that could very easily be moved under a different domain within minutes?</P>
+<P data-textannotation-id="ec5566df8fd6b93a138875799a112d9b">The reason this 
+ruling concerns us is not that we support counterfeiting of manufactured goods. 
+It concerns us because it further normalizes the band-aid solution of content 
+blocking, and deemphasises more permanent and effective solutions that would 
+target those who actually produce the counterfeit or illegal products being 
+promoted on the Web.</P>
+<H3 data-textannotation-id="c2941d2602447cd3eb4358fd8ecd7c7e">Britain and France 
+Call on ISPs to Censor Extremist Content</H3>
+<P data-textannotation-id="46ff0ae5adafd4137f53b137425937df">Not content with 
+enlisting major British ISPs as copyright and trade mark police, they have also 
+recently been called upon to <A href="http://www.theguardian.com/technology/2014/nov/14/isps-filter-extremist-material-internet" 
+target="_blank">block extremist content on the Web</A>, and to provide a button 
+that users can use to report supposed extremist material. Usual suspects <A 
+href="http://online.wsj.com/articles/u-k-seeks-help-from-tech-firms-in-combating-extremists-online-1414010650" 
+target="_blank">Google, Facebook and Twitter</A> have also been roped by the 
+government to carry out blocking of their own. Yet to date no details have been 
+released about how these extrajudicial blocking procedures would work, or under 
+what safeguards of transparency and accountability, if any, they would 
+operate.</P>
+<P data-textannotation-id="e5f2f1e184591a241742b1b6a7da1cbb">This fixation on 
+solving terrorism by blocking websites is not limited to the United Kingdom. 
+Across the channel in France, a <A href="http://www.senat.fr/leg/pjl14-010.html" 
+target="_blank">new "anti-terrorism" law</A> that EFF <A href="https://www.eff.org/deeplinks/2014/09/proposed-anti-terror-law-france-would-erode-civil-liberties" 
+target="_blank">reported on earlier</A> was finally passed this month. The law 
+allows websites to be blocked if they "condone terrorism." "Terrorism" is as 
+slippery a concept in France as anywhere else. Indeed France's broad definition 
+of a terrorist act has <A href="http://www.hrw.org/en/reports/2008/07/01/preempting-justice" 
+target="_blank">drawn criticism</A> from Human Rights Watch for its legal 
+imprecision.</P>
+<H3 data-textannotation-id="e7a2fed0ac9ac48e61a7513670b2c07e">Australian Plans 
+to Block Copyright Infringing Sites</H3>
+<P data-textannotation-id="5040eebae6958a4a0bdab05f4ccbad11">Finally—though, 
+sadly, probably not—reports last week suggest that <A href="http://www.smh.com.au/digital-life/digital-life-news/online-piracy-websites-set-to-be-blocked-sources-20141117-11o8pz.html" 
+target="_blank">Australia will be next</A> to follow the <A href="http://www.bbc.com/news/technology-17894176" 
+target="_blank">example of the UK</A> and <A href="https://www.eff.org/deeplinks/2014/11/spanish-copyright-amendments-will-shakedown-news-sites-and-censor-web" 
+target="_blank">Spain</A> in blocking websites that host or link to allegedly 
+copyright material, following on from a <A href="https://www.eff.org/deeplinks/2014/07/australia-you-wouldnt-steal-dvd-you-would-block-websites-and-suspend-internet" 
+target="_blank">July discussion paper</A> that mooted this as a possible measure 
+to combat copyright infringement.</P>
+<P data-textannotation-id="21a497461aadcd9f683283bac48075fc">How did this become 
+the new normal? When did politicians around the world lose the will to tackle 
+social problems head-on, and instead decide to sweep them under the rug by 
+blocking evidence of them from the Web? It certainly isn't due to any evidence 
+that these policies actually <EM>work</EM>. Anyone who wants to access blocked 
+content can trivially do so, using software like <A href="https://www.torproject.org/" 
+target="_blank">Tor</A>.</P>
+<P data-textannotation-id="e9f5ded6cf267fc2feeb9ff9485d8bb5">Rather, it seems to 
+be that it's politically better for governments to be seen as doing something to 
+address such problems, no matter how token and ineffectual, than to do 
+nothing—and website blocking is the easiest "something" they can do. But not 
+only is blocking not effective, it is actively harmful—both at its point of 
+application due to the risk of over-blocking, but also for the Internet as a 
+whole, in the legitimization that it offers to repressive regimes to censor and 
+control content online.</P>
+<P data-textannotation-id="5addeaa62bb1a2461a184c4287168aa3">Like an <A href="https://duckduckgo.com/?q=keep+calm+and+meme+!i" 
+target="_blank">overused Internet meme that deserves to fade away</A>, so too it 
+is time that courts and regulators moved on from website blocking as a cure for 
+society's ills. If we wish to reduce political extremism, cut off the production 
+of counterfeits, or prevent children from being abused, then we should be 
+addressing those problems directly—rather than by merely covering up the 
+evidence and pretending they have gone away.</P>
   </div>
 </body>
 </html>
