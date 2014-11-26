@@ -1,4 +1,3 @@
-
 define(function(require, exports, module) {
     var Engine       = require('famous/core/Engine');
     var EventHandler = require('famous/core/EventHandler');
@@ -21,21 +20,21 @@ define(function(require, exports, module) {
     
     var tv = new Surface({
         size: [65,65],
-        content: '<img src="./growdemo/rsz_old-tv.png" />'
+        content: '<img src="./growdemo/tv.png" />'
     
     });
     
-    var knob = new Surface({
-      size:[15,15],
-      content: '<img src="./growdemo/knob.png" />',
-      properties: {
-        textAign: 'center'
-      }
-    })
+    // var knob = new Surface({
+    //   size:[15,15],
+    //   content: '<img src="./knob.png" />',
+    //   properties: {
+    //     textAign: 'center'
+    //   }
+    // })
 
     var tvScreen = new Surface({
-        size:[58,42],
-        content: '<iframe src="./growdemo/scroll.html" style="height:42px; width:58px"></iframe>'
+        size:[116,87],
+        content: '<iframe src="./growdemo/scroll.html" style="height:87px; width:116px"></iframe>'
     });
 
     var rotater = new StateModifier({
@@ -43,21 +42,21 @@ define(function(require, exports, module) {
     });
 
     var aligner = new StateModifier({
-      transform: Transform.translate(-100, -100, 0)
+      transform: Transform.translate(-250, -250, 0)
     });
     
 
     
-    var knobpos = new StateModifier({
-      origin: [0.5,0.5],
-      align: [0.14,0.7],
-      transform: Transform.translate(0,0,110)
-    })
+    // var knobpos = new StateModifier({
+    //   origin: [0.5,0.5],
+    //   align: [0.14,0.7],
+    //   transform: Transform.translate(0,0,110)
+    // })
     
-    var knobrotate = new StateModifier({
-      origin: [0.5,0.5],
-      transform: Transform.translate(0,0,110)
-    })
+    // var knobrotate = new StateModifier({
+    //   origin: [0.5,0.5],
+    //   transform: Transform.translate(0,0,110)
+    // })
     
 
 
@@ -67,8 +66,8 @@ define(function(require, exports, module) {
     })
     
     var modScreen = new StateModifier({
-      origin:[.41,.54 ],
-      transform: Transform.translate(0,0,100)
+      origin:[.15,.2 ],
+      transform: Transform.translate(0,0,200)
     });
     
     /****** these are the tv componenets ******/
@@ -76,7 +75,7 @@ define(function(require, exports, module) {
 
     //******************render tree****************//
     var node = context.add(aligner).add(rotater).add(mainMod)
-           node.add(knobrotate).add(knobpos).add(knob)
+           //node.add(knobrotate).add(knobpos).add(knob)
            node.add(modScreen).add(tvScreen)
            node.add(tv);
     
@@ -109,10 +108,10 @@ define(function(require, exports, module) {
        return +Date.now().toString().slice(-2)
      }
 
-     setInterval(function(){
-         //rotater.setTransform(Transform.rotate(0,0,Math.random()/10),spring)
-         knobpos.setTransform(Transform.rotate(0,0,timeNum()))
-     }, 500)
+     // setInterval(function(){
+     //     //rotater.setTransform(Transform.rotate(0,0,Math.random()/10),spring)
+     //     knobpos.setTransform(Transform.rotate(0,0,timeNum()))
+     // }, 500)
     
 
     // var bgmodifier = new StateModifier({
@@ -164,14 +163,14 @@ define(function(require, exports, module) {
     
     if(getContainerHeight() > 10 && !transCalled) {
       aligner.halt();
-      aligner.setTransform(Transform.translate(70,100,0), spring);
+      aligner.setTransform(Transform.translate(150,75,0), spring);
       transCalled = true;
        transOutCalled = false;
     }
     
-    if(getContainerHeight() < 85 && !transOutCalled) {
+    if(getContainerHeight() < 150 && !transOutCalled) {
       aligner.halt();
-      aligner.setTransform(Transform.translate(-100,-100,0), spring);
+      aligner.setTransform(Transform.translate(-250,-250,0), spring);
       transCalled = false;
       transOutCalled = true;
     }

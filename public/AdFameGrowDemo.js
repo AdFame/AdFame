@@ -1,4 +1,43 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+module.exports = function (css, customDocument) {
+  var doc = customDocument || document;
+  if (doc.createStyleSheet) {
+    var sheet = doc.createStyleSheet()
+    sheet.cssText = css;
+    return sheet.ownerNode;
+  } else {
+    var head = doc.getElementsByTagName('head')[0],
+        style = doc.createElement('style');
+
+    style.type = 'text/css';
+
+    if (style.styleSheet) {
+      style.styleSheet.cssText = css;
+    } else {
+      style.appendChild(doc.createTextNode(css));
+    }
+
+    head.appendChild(style);
+    return style;
+  }
+};
+
+module.exports.byUrl = function(url) {
+  if (document.createStyleSheet) {
+    return document.createStyleSheet(url).ownerNode;
+  } else {
+    var head = document.getElementsByTagName('head')[0],
+        link = document.createElement('link');
+
+    link.rel = 'stylesheet';
+    link.href = url;
+
+    head.appendChild(link);
+    return link;
+  }
+};
+
+},{}],2:[function(require,module,exports){
 
 /*
  * classList.js: Cross-browser full element.classList implementation.
@@ -138,7 +177,7 @@ if (objCtr.defineProperty) {
 
 }
 
-},{}],2:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 if (!Function.prototype.bind) {
     Function.prototype.bind = function (oThis) {
         if (typeof this !== "function") {
@@ -163,11 +202,11 @@ if (!Function.prototype.bind) {
     };
 }
 
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 require('./classList.js');
 require('./functionPrototypeBind.js');
 require('./requestAnimationFrame.js');
-},{"./classList.js":1,"./functionPrototypeBind.js":2,"./requestAnimationFrame.js":4}],4:[function(require,module,exports){
+},{"./classList.js":2,"./functionPrototypeBind.js":3,"./requestAnimationFrame.js":5}],5:[function(require,module,exports){
 // adds requestAnimationFrame functionality
 // Source: http://strd6.com/2011/05/better-window-requestanimationframe-shim/
 
@@ -182,7 +221,7 @@ window.requestAnimationFrame || (window.requestAnimationFrame =
   }, 1000 / 60);
 });
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 var RenderNode = require('./RenderNode');
 var EventHandler = require('./EventHandler');
 var ElementAllocator = require('./ElementAllocator');
@@ -287,7 +326,7 @@ Context.prototype.unpipe = function unpipe(target) {
     return this._eventOutput.unpipe(target);
 };
 module.exports = Context;
-},{"../transitions/Transitionable":35,"./ElementAllocator":6,"./EventHandler":11,"./RenderNode":14,"./Transform":17}],6:[function(require,module,exports){
+},{"../transitions/Transitionable":37,"./ElementAllocator":7,"./EventHandler":12,"./RenderNode":15,"./Transform":18}],7:[function(require,module,exports){
 function ElementAllocator(container) {
     if (!container)
         container = document.createDocumentFragment();
@@ -333,7 +372,7 @@ ElementAllocator.prototype.getNodeCount = function getNodeCount() {
     return this.nodeCount;
 };
 module.exports = ElementAllocator;
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 var Entity = require('./Entity');
 var EventHandler = require('./EventHandler');
 var Transform = require('./Transform');
@@ -514,7 +553,7 @@ ElementOutput.prototype.detach = function detach() {
     return target;
 };
 module.exports = ElementOutput;
-},{"./Entity":9,"./EventHandler":11,"./Transform":17}],8:[function(require,module,exports){
+},{"./Entity":10,"./EventHandler":12,"./Transform":18}],9:[function(require,module,exports){
 var Context = require('./Context');
 var EventHandler = require('./EventHandler');
 var OptionsManager = require('./OptionsManager');
@@ -670,7 +709,7 @@ optionsManager.on('change', function (data) {
     }
 });
 module.exports = Engine;
-},{"./Context":5,"./EventHandler":11,"./OptionsManager":13}],9:[function(require,module,exports){
+},{"./Context":6,"./EventHandler":12,"./OptionsManager":14}],10:[function(require,module,exports){
 var entities = [];
 function get(id) {
     return entities[id];
@@ -692,7 +731,7 @@ module.exports = {
     get: get,
     set: set
 };
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 function EventEmitter() {
     this.listeners = {};
     this._owner = this;
@@ -728,7 +767,7 @@ EventEmitter.prototype.bindThis = function bindThis(owner) {
     this._owner = owner;
 };
 module.exports = EventEmitter;
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 var EventEmitter = require('./EventEmitter');
 function EventHandler() {
     EventEmitter.apply(this, arguments);
@@ -829,7 +868,7 @@ EventHandler.prototype.unsubscribe = function unsubscribe(source) {
     return this;
 };
 module.exports = EventHandler;
-},{"./EventEmitter":10}],12:[function(require,module,exports){
+},{"./EventEmitter":11}],13:[function(require,module,exports){
 var Transform = require('./Transform');
 var Transitionable = require('../transitions/Transitionable');
 var TransitionableTransform = require('../transitions/TransitionableTransform');
@@ -1075,7 +1114,7 @@ Modifier.prototype.modify = function modify(target) {
     return this._output;
 };
 module.exports = Modifier;
-},{"../transitions/Transitionable":35,"../transitions/TransitionableTransform":36,"./Transform":17}],13:[function(require,module,exports){
+},{"../transitions/Transitionable":37,"../transitions/TransitionableTransform":38,"./Transform":18}],14:[function(require,module,exports){
 var EventHandler = require('./EventHandler');
 function OptionsManager(value) {
     this._value = value;
@@ -1150,7 +1189,7 @@ OptionsManager.prototype.unpipe = function unpipe() {
     return this.unpipe.apply(this, arguments);
 };
 module.exports = OptionsManager;
-},{"./EventHandler":11}],14:[function(require,module,exports){
+},{"./EventHandler":12}],15:[function(require,module,exports){
 var Entity = require('./Entity');
 var SpecParser = require('./SpecParser');
 function RenderNode(object) {
@@ -1248,7 +1287,7 @@ RenderNode.prototype.render = function render() {
     return this._isModifier ? this._object.modify(result) : result;
 };
 module.exports = RenderNode;
-},{"./Entity":9,"./SpecParser":15}],15:[function(require,module,exports){
+},{"./Entity":10,"./SpecParser":16}],16:[function(require,module,exports){
 var Transform = require('./Transform');
 function SpecParser() {
     this.result = {};
@@ -1373,7 +1412,7 @@ SpecParser.prototype._parseSpec = function _parseSpec(spec, parentContext, sizeC
     }
 };
 module.exports = SpecParser;
-},{"./Transform":17}],16:[function(require,module,exports){
+},{"./Transform":18}],17:[function(require,module,exports){
 var ElementOutput = require('./ElementOutput');
 function Surface(options) {
     ElementOutput.call(this);
@@ -1672,7 +1711,7 @@ Surface.prototype.setSize = function setSize(size) {
     return this;
 };
 module.exports = Surface;
-},{"./ElementOutput":7}],17:[function(require,module,exports){
+},{"./ElementOutput":8}],18:[function(require,module,exports){
 var Transform = {};
 Transform.precision = 0.000001;
 Transform.identity = [
@@ -2370,7 +2409,7 @@ Transform.behind = [
     1
 ];
 module.exports = Transform;
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 var EventHandler = require('./EventHandler');
 var OptionsManager = require('./OptionsManager');
 var RenderNode = require('./RenderNode');
@@ -2407,7 +2446,9 @@ View.prototype.getSize = function getSize() {
         return this.options.size;
 };
 module.exports = View;
-},{"../utilities/Utility":38,"./EventHandler":11,"./OptionsManager":13,"./RenderNode":14}],19:[function(require,module,exports){
+},{"../utilities/Utility":40,"./EventHandler":12,"./OptionsManager":14,"./RenderNode":15}],20:[function(require,module,exports){
+var css = "/* This Source Code Form is subject to the terms of the Mozilla Public\n * License, v. 2.0. If a copy of the MPL was not distributed with this\n * file, You can obtain one at http://mozilla.org/MPL/2.0/.\n *\n * Owner: mark@famo.us\n * @license MPL 2.0\n * @copyright Famous Industries, Inc. 2014\n */\n\n.famous-root {\n    width: 100%;\n    height: 100%;\n    margin: 0px;\n    padding: 0px;\n    overflow: hidden;\n    -webkit-transform-style: preserve-3d;\n    transform-style: preserve-3d;\n}\n\n.famous-container, .famous-group {\n    position: absolute;\n    top: 0px;\n    left: 0px;\n    bottom: 0px;\n    right: 0px;\n    overflow: visible;\n    -webkit-transform-style: preserve-3d;\n    transform-style: preserve-3d;\n    -webkit-backface-visibility: visible;\n    backface-visibility: visible;\n    pointer-events: none;\n}\n\n.famous-group {\n    width: 0px;\n    height: 0px;\n    margin: 0px;\n    padding: 0px;\n    -webkit-transform-style: preserve-3d;\n    transform-style: preserve-3d;\n}\n\n.famous-surface {\n    position: absolute;\n    -webkit-transform-origin: center center;\n    transform-origin: center center;\n    -webkit-backface-visibility: hidden;\n    backface-visibility: hidden;\n    -webkit-transform-style: preserve-3d;\n    transform-style: preserve-3d;\n    -webkit-box-sizing: border-box;\n    -moz-box-sizing: border-box;\n    box-sizing: border-box;\n    -webkit-tap-highlight-color: transparent;\n    pointer-events: auto;\n}\n\n.famous-container-group {\n    position: relative;\n    width: 100%;\n    height: 100%;\n}\n"; (require("c:\\Users\\Morgan\\desktop\\newproject\\adfame\\node_modules\\cssify"))(css); module.exports = css;
+},{"c:\\Users\\Morgan\\desktop\\newproject\\adfame\\node_modules\\cssify":1}],21:[function(require,module,exports){
 var Vector = require('./Vector');
 function Matrix(values) {
     this.values = values || [
@@ -2489,7 +2530,7 @@ Matrix.prototype.clone = function clone() {
     return new Matrix(M);
 };
 module.exports = Matrix;
-},{"./Vector":21}],20:[function(require,module,exports){
+},{"./Vector":23}],22:[function(require,module,exports){
 var Matrix = require('./Matrix');
 function Quaternion(w, x, y, z) {
     if (arguments.length === 1)
@@ -2676,7 +2717,7 @@ Quaternion.prototype.slerp = function slerp(q, t) {
     return register.set(this.scalarMultiply(scaleFrom / scaleTo).add(q).multiply(scaleTo));
 };
 module.exports = Quaternion;
-},{"./Matrix":19}],21:[function(require,module,exports){
+},{"./Matrix":21}],23:[function(require,module,exports){
 function Vector(x, y, z) {
     if (arguments.length === 1 && x !== undefined)
         this.set(x);
@@ -2824,7 +2865,7 @@ Vector.prototype.get1D = function () {
     return this.x;
 };
 module.exports = Vector;
-},{}],22:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 var Modifier = require('../core/Modifier');
 var Transform = require('../core/Transform');
 var Transitionable = require('../transitions/Transitionable');
@@ -2972,7 +3013,7 @@ StateModifier.prototype.modify = function modify(target) {
     return this._modifier.modify(target);
 };
 module.exports = StateModifier;
-},{"../core/Modifier":12,"../core/Transform":17,"../transitions/Transitionable":35,"../transitions/TransitionableTransform":36}],23:[function(require,module,exports){
+},{"../core/Modifier":13,"../core/Transform":18,"../transitions/Transitionable":37,"../transitions/TransitionableTransform":38}],25:[function(require,module,exports){
 var EventHandler = require('../core/EventHandler');
 function PhysicsEngine(options) {
     this.options = Object.create(PhysicsEngine.DEFAULT_OPTIONS);
@@ -3237,7 +3278,7 @@ PhysicsEngine.prototype.on = function on(event, fn) {
     this._eventHandler.on(event, fn);
 };
 module.exports = PhysicsEngine;
-},{"../core/EventHandler":11}],24:[function(require,module,exports){
+},{"../core/EventHandler":12}],26:[function(require,module,exports){
 var Particle = require('./Particle');
 var Transform = require('../../core/Transform');
 var Vector = require('../../math/Vector');
@@ -3346,7 +3387,7 @@ Body.prototype.integrateOrientation = function integrateOrientation(dt) {
     Integrator.integrateOrientation(this, dt);
 };
 module.exports = Body;
-},{"../../core/Transform":17,"../../math/Matrix":19,"../../math/Quaternion":20,"../../math/Vector":21,"../integrators/SymplecticEuler":31,"./Particle":26}],25:[function(require,module,exports){
+},{"../../core/Transform":18,"../../math/Matrix":21,"../../math/Quaternion":22,"../../math/Vector":23,"../integrators/SymplecticEuler":33,"./Particle":28}],27:[function(require,module,exports){
 var Body = require('./Body');
 var Matrix = require('../../math/Matrix');
 function Circle(options) {
@@ -3403,7 +3444,7 @@ Circle.prototype.setMomentsOfInertia = function setMomentsOfInertia() {
     ]);
 };
 module.exports = Circle;
-},{"../../math/Matrix":19,"./Body":24}],26:[function(require,module,exports){
+},{"../../math/Matrix":21,"./Body":26}],28:[function(require,module,exports){
 var Vector = require('../../math/Vector');
 var Transform = require('../../core/Transform');
 var EventHandler = require('../../core/EventHandler');
@@ -3600,7 +3641,7 @@ Particle.prototype.unpipe = function unpipe() {
     return this.unpipe.apply(this, arguments);
 };
 module.exports = Particle;
-},{"../../core/EventHandler":11,"../../core/Transform":17,"../../math/Vector":21,"../integrators/SymplecticEuler":31}],27:[function(require,module,exports){
+},{"../../core/EventHandler":12,"../../core/Transform":18,"../../math/Vector":23,"../integrators/SymplecticEuler":33}],29:[function(require,module,exports){
 var EventHandler = require('../../core/EventHandler');
 function Constraint() {
     this.options = this.options || {};
@@ -3616,7 +3657,7 @@ Constraint.prototype.getEnergy = function getEnergy() {
     return 0;
 };
 module.exports = Constraint;
-},{"../../core/EventHandler":11}],28:[function(require,module,exports){
+},{"../../core/EventHandler":12}],30:[function(require,module,exports){
 var Constraint = require('./Constraint');
 var Vector = require('../../math/Vector');
 function Wall(options) {
@@ -3729,7 +3770,7 @@ Wall.prototype.applyConstraint = function applyConstraint(targets, source, dt) {
     }
 };
 module.exports = Wall;
-},{"../../math/Vector":21,"./Constraint":27}],29:[function(require,module,exports){
+},{"../../math/Vector":23,"./Constraint":29}],31:[function(require,module,exports){
 var Vector = require('../../math/Vector');
 var EventHandler = require('../../core/EventHandler');
 function Force(force) {
@@ -3750,7 +3791,7 @@ Force.prototype.getEnergy = function getEnergy() {
     return 0;
 };
 module.exports = Force;
-},{"../../core/EventHandler":11,"../../math/Vector":21}],30:[function(require,module,exports){
+},{"../../core/EventHandler":12,"../../math/Vector":23}],32:[function(require,module,exports){
 var Force = require('./Force');
 var Vector = require('../../math/Vector');
 function Spring(options) {
@@ -3874,7 +3915,7 @@ Spring.prototype.getEnergy = function getEnergy(targets, source) {
     return energy;
 };
 module.exports = Spring;
-},{"../../math/Vector":21,"./Force":29}],31:[function(require,module,exports){
+},{"../../math/Vector":23,"./Force":31}],33:[function(require,module,exports){
 var SymplecticEuler = {};
 SymplecticEuler.integrateVelocity = function integrateVelocity(body, dt) {
     var v = body.velocity;
@@ -3906,7 +3947,7 @@ SymplecticEuler.integrateOrientation = function integrateOrientation(body, dt) {
     q.add(q.multiply(w).scalarMultiply(0.5 * dt)).put(q);
 };
 module.exports = SymplecticEuler;
-},{}],32:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 var Surface = require('../core/Surface');
 function ImageSurface(options) {
     this._imageUrl = undefined;
@@ -3972,7 +4013,7 @@ ImageSurface.prototype.recall = function recall(target) {
     target.src = '';
 };
 module.exports = ImageSurface;
-},{"../core/Surface":16}],33:[function(require,module,exports){
+},{"../core/Surface":17}],35:[function(require,module,exports){
 var Utility = require('../utilities/Utility');
 function MultipleTransition(method) {
     this.method = method;
@@ -4002,7 +4043,7 @@ MultipleTransition.prototype.reset = function reset(startState) {
     }
 };
 module.exports = MultipleTransition;
-},{"../utilities/Utility":38}],34:[function(require,module,exports){
+},{"../utilities/Utility":40}],36:[function(require,module,exports){
 var PE = require('../physics/PhysicsEngine');
 var Particle = require('../physics/bodies/Particle');
 var Spring = require('../physics/forces/Spring');
@@ -4135,7 +4176,7 @@ SpringTransition.prototype.set = function set(endState, definition, callback) {
     _setCallback.call(this, callback);
 };
 module.exports = SpringTransition;
-},{"../math/Vector":21,"../physics/PhysicsEngine":23,"../physics/bodies/Particle":26,"../physics/forces/Spring":30}],35:[function(require,module,exports){
+},{"../math/Vector":23,"../physics/PhysicsEngine":25,"../physics/bodies/Particle":28,"../physics/forces/Spring":32}],37:[function(require,module,exports){
 var MultipleTransition = require('./MultipleTransition');
 var TweenTransition = require('./TweenTransition');
 function Transitionable(start) {
@@ -4257,7 +4298,7 @@ Transitionable.prototype.halt = function halt() {
     return this.set(this.get());
 };
 module.exports = Transitionable;
-},{"./MultipleTransition":33,"./TweenTransition":37}],36:[function(require,module,exports){
+},{"./MultipleTransition":35,"./TweenTransition":39}],38:[function(require,module,exports){
 var Transitionable = require('./Transitionable');
 var Transform = require('../core/Transform');
 var Utility = require('../utilities/Utility');
@@ -4375,7 +4416,7 @@ TransitionableTransform.prototype.halt = function halt() {
     return this;
 };
 module.exports = TransitionableTransform;
-},{"../core/Transform":17,"../utilities/Utility":38,"./Transitionable":35}],37:[function(require,module,exports){
+},{"../core/Transform":18,"../utilities/Utility":40,"./Transitionable":37}],39:[function(require,module,exports){
 function TweenTransition(options) {
     this.options = Object.create(TweenTransition.DEFAULT_OPTIONS);
     if (options)
@@ -4614,7 +4655,7 @@ TweenTransition.customCurve = function customCurve(v1, v2) {
     };
 };
 module.exports = TweenTransition;
-},{}],38:[function(require,module,exports){
+},{}],40:[function(require,module,exports){
 var Utility = {};
 Utility.Direction = {
     X: 0,
@@ -4672,9 +4713,10 @@ Utility.clone = function clone(b) {
     return a;
 };
 module.exports = Utility;
-},{}],39:[function(require,module,exports){
+},{}],41:[function(require,module,exports){
 
 require('famous-polyfills');
+require('famous/src/core/famous.css');
 
 var Engine          = require('famous/src/core/Engine');
 
@@ -4863,4 +4905,4 @@ physicsEngine.attach( bottomWall,[circle]);
 
 
 
-},{"famous-polyfills":3,"famous/src/core/Engine":8,"famous/src/core/EventHandler":11,"famous/src/core/Modifier":12,"famous/src/core/Surface":16,"famous/src/core/Transform":17,"famous/src/core/View":18,"famous/src/modifiers/StateModifier":22,"famous/src/physics/PhysicsEngine":23,"famous/src/physics/bodies/Body":24,"famous/src/physics/bodies/Circle":25,"famous/src/physics/constraints/Wall":28,"famous/src/surfaces/ImageSurface":32,"famous/src/transitions/SpringTransition":34,"famous/src/transitions/Transitionable":35}]},{},[39]);
+},{"famous-polyfills":4,"famous/src/core/Engine":9,"famous/src/core/EventHandler":12,"famous/src/core/Modifier":13,"famous/src/core/Surface":17,"famous/src/core/Transform":18,"famous/src/core/View":19,"famous/src/core/famous.css":20,"famous/src/modifiers/StateModifier":24,"famous/src/physics/PhysicsEngine":25,"famous/src/physics/bodies/Body":26,"famous/src/physics/bodies/Circle":27,"famous/src/physics/constraints/Wall":30,"famous/src/surfaces/ImageSurface":34,"famous/src/transitions/SpringTransition":36,"famous/src/transitions/Transitionable":37}]},{},[41]);

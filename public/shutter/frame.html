@@ -4,19 +4,9 @@
 	<meta charset="UTF-8">
 	<title>Test Phone</title>
 </head>
-<script>
-var win = document.getElementById("iframe").contentWindow
-var message = function(){
-	window.pageYOffset
-}
-	window.onscroll = function(){
-		win.postMessage(message(), '*')
-		console.log('hello');
-	}
-</script>
-<body style="background-image:url(./growdemo/iphone.jpg); background-repeat:no-repeat;background-color:white;">
-	<div id="positioning" style="position: absolute;top: 110px;left: 221px;">
-	  <iframe id="iframe" src="./growdemo/containerGrow.html" style="height:398px;width: 253px;"></iframe>
+<body style="background-image:url(./iphone.jpg); background-repeat:no-repeat;background-color:white;">
+	<div id="positioning" style="position: absolute;top: 135px;left: 296px;">
+	  <iframe src="./windowScroll.html" style="height:578px;width: 335px;"></iframe>
     </div>
 </body>
 </html>

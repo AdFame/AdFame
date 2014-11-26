@@ -24,22 +24,9 @@
                     famous: '../../node_modules/famous/src'
                 }
             });
-            require(['./shutter.js']);
+            require(['./windowpane.js']);
     
-    window.addEventListener("message", receiveMessage, false);
-
-    function receiveMessage(event){
-      if(event.data === 'clicker'){
-        clicker.setSize([60,60], spring)
-        //.setTransform(Transform.rotate(0,0,Math.PI/4))
-
-      } else {
-
-        var win = document.getElementById('fe').contentWindow
-        win.postMessage(event.data, '*')
-       
-      }
-    }
+   
 
     </script>
 </head>

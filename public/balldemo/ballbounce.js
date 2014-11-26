@@ -1,5 +1,6 @@
 
 require('famous-polyfills');
+require('famous/core/famous.css');
 
 var Engine          = require('famous/core/Engine');
 

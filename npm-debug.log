@@ -1,30 +1,21 @@
 0 info it worked if it ends with ok
-1 verbose cli [ 'c:\\Program Files (x86)\\nodejs\\\\node.exe',
+1 verbose cli [ 'c:\\Program Files (x86)\\nodejs\\node.exe',
 1 verbose cli   'c:\\Program Files (x86)\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
 1 verbose cli   'run',
-1 verbose cli   'watcher' ]
+1 verbose cli   'start',
+1 verbose cli   'dev' ]
 2 info using npm@1.4.28
 3 info using node@v0.10.32
-4 verbose node symlink c:\Program Files (x86)\nodejs\\node.exe
-5 verbose run-script [ 'prewatcher', 'watcher', 'postwatcher' ]
-6 info prewatcher browserify-seed@0.3.2
-7 info watcher browserify-seed@0.3.2
-8 verbose unsafe-perm in lifecycle true
-9 info browserify-seed@0.3.2 Failed to exec watcher script
-10 error browserify-seed@0.3.2 watcher: `watchify balldemo/ballbounce.js -o balldemo/AdFame2.js --debug --verbose`
-10 error Exit status 8
-11 error Failed at the browserify-seed@0.3.2 watcher script.
-11 error This is most likely a problem with the browserify-seed package,
-11 error not with npm itself.
-11 error Tell the author that this fails on your system:
-11 error     watchify balldemo/ballbounce.js -o balldemo/AdFame2.js --debug --verbose
-11 error You can get their info via:
-11 error     npm owner ls browserify-seed
-11 error There is likely additional logging output above.
-12 error System Windows_NT 6.2.9200
-13 error command "c:\\Program Files (x86)\\nodejs\\\\node.exe" "c:\\Program Files (x86)\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "run" "watcher"
-14 error cwd c:\Users\Morgan\desktop\newproject\adfame
-15 error node -v v0.10.32
-16 error npm -v 1.4.28
-17 error code ELIFECYCLE
-18 verbose exit [ 1, true ]
+4 error Error: ENOENT, open 'c:\Users\Morgan\desktop\newproject\adfame\node_modules\start\package.json'
+5 error If you need help, you may report this *entire* log,
+5 error including the npm and node versions, at:
+5 error     <http://github.com/npm/npm/issues>
+6 error System Windows_NT 6.2.9200
+7 error command "c:\\Program Files (x86)\\nodejs\\node.exe" "c:\\Program Files (x86)\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "run" "start" "dev"
+8 error cwd c:\Users\Morgan\desktop\newproject\adfame
+9 error node -v v0.10.32
+10 error npm -v 1.4.28
+11 error path c:\Users\Morgan\desktop\newproject\adfame\node_modules\start\package.json
+12 error code ENOENT
+13 error errno 34
+14 verbose exit [ 34, true ]
