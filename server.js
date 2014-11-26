@@ -56,7 +56,7 @@ server.route({
     method: 'GET',
     path: '/ball',
     handler: function (request, reply) {
-        reply.file('./balldemo/ballbounce.html');
+        reply.file('./ball demo/ballbounce.html');
     }
 });
 
@@ -112,7 +112,6 @@ server.route({
     });
   }
 });
-
  
 // route for post requests to the database with the data objects
 server.route({
@@ -121,30 +120,10 @@ server.route({
   config: {
    
     handler: function (request, reply) {
-      // console.log('got here', request.payload)
-      // var form = new multiparty.Form();
-      // console.log('got here', form)
-
-      // form.parse(request.payload, function(err, fields, files) {
-      //   console.log(fields, "Files")
-              // fs.readFile(files.upload[0].path,function(err,data){
-              //   var newpath = __dirname + "/"+files.upload[0].originalFilename;
-              //   fs.writeFile(newpath,data,function(err){
-              //       if(err) console.log(err);
-              //       else console.log(files)
-              //   })
-              // })
-              //   console.log(files)
-
-            // });
-
       var Ad = {
         name: request.payload.name,
         data: request.payload.data
       };
-      console.log(Ad.data.logo.data)
-      // Ad.data.logo.data = fs.readFileSync(Ad.data.logo.data);
-      console.log(Ad.data.logo.data)
       var db = request.server.plugins['hapi-mongodb'].db;
 
 
@@ -168,5 +147,38 @@ server.route({
     }
   }
 });
+server.route({
+  method: 'POST',
+  path: '/analytics',
+  config: {
+   
+    handler: function (request, reply) {
+      var Ad = {
+        name: request.payload.name,
+        result:request.payload.result,
+        time:request.payload.time
+      };
+      var db = request.server.plugins['hapi-mongodb'].db;
+
+
+      db.collection('analytics').insert(Ad, {w:1}, function (err, doc){
+          if (err){
+            return reply(Hapi.error.internal('Internal MongoDB error', err));
+          }else{
+            reply(doc);
+          }
+      });
+    },
+    //validation to require that the objects sent have these properties in order for them to be stored
+    validate: {
+      payload: {
+        name: joi.string().required(),
+        result: joi.required(),
+        time:joi.number().required()
+      }
+    }
+  }
+});
+
 server.start();
 console.log('server started on port', port);
