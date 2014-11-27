@@ -85,7 +85,6 @@ $(function(){
             console.log('Data:', data);  
         });
     }
-<<<<<<< HEAD
 
     // Updates data values
     var generateData = function() {
@@ -97,16 +96,6 @@ $(function(){
         // Sets initial state data parameters
         sentData.data.campaign = $('#campaign').val();
         sentData.data.logo = sentData.data.logo || $('#logoUrl');
-=======
-    
-    $('#export').on('click', function(){
-        var selected = $('input[type="radio"]:checked').val()
-        var $info = $('#' + selected)
-        
-        //sets the data parameters to the selected in the input fields
-        sentData.name = $('#campaign').val();
-        sentData.data.logo = window.antipattern||sentData.data.logo;
->>>>>>> 8069b315f8f7d981a41e2edefe834e145fa18ecd
         sentData.data.url = $('#adLink').val();
 
         sentData.data.origin.x = $('#originX').val();
@@ -172,8 +161,6 @@ $(function(){
     $('#refresh').on('click', function() {
         generateData();
         var dataPackage = JSON.stringify(sentData.data)
-
-<<<<<<< HEAD
         document.getElementById('Iframe').contentWindow.postMessage(dataPackage, '*');
         // var ifr = $('#Iframe')[0];
         // ifr.src = ifr.src;
@@ -185,21 +172,6 @@ $(function(){
 
 
     document.getElementById('Iframe').contentWindow.postMessage(sentData, '*')
-=======
-    $('input[type="range"]').change(function() {
-        el = $(this);
-        width = el.width();
-        newPoint = (el.val() - el.attr('min')) / (el.attr('max') - el.attr('min'));
-        offset = -1.3;
-     
-        if (newPoint < 0) { newPlace = 0; }
-        else if (newPoint > 1) { newPlace = width; }
-        else { newPlace = width * newPoint + offset; offset -= newPoint; }
-     
-        el.next('output').text(el.val());
-    }).trigger('change');
->>>>>>> 8069b315f8f7d981a41e2edefe834e145fa18ecd
-
 
     $('ul').on('click', 'button', function(e){
         e.preventDefault()
