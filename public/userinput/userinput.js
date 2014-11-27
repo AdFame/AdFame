@@ -162,8 +162,8 @@ $(function(){
         generateData();
         var dataPackage = JSON.stringify(sentData.data)
         document.getElementById('Iframe').contentWindow.postMessage(dataPackage, '*');
-        // var ifr = $('#Iframe')[0];
-        // ifr.src = ifr.src;
+        var ifr = $('#Iframe')[0];
+        ifr.src = ifr.src;
     });
 
     // $('document').on('ready', function() {
