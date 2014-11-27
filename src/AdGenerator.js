@@ -18,20 +18,18 @@ var SnapTransition = require('famous/transitions/SnapTransition');
 
 // Importanting data form data.js dummy file
 // var data = require('../public/userinput/userinput.js');
-var data = require('./data.js');
-console.log(data);
 
-// var data = $.ajax({
-//     type: 'GET',
-//     url: '/user/data',
-//     async: false,
-//     data: data
-// }).done(function(data) {
-//     console.log('data:', data);
-// })
+// var data;
 
-// data = data.responseJSON;
-// data = data[3].data;
+window.addEventListener('message', recieveMessage, false);
+
+function recieveMessage(event) {
+    // data = JSON.parse(event.data);
+    console.log(event)
+    AdGenerator();
+}
+
+
 
 // Registry of transitions
 var transitionRegistry = {
@@ -87,6 +85,7 @@ transformer.setRotate([data.initialRotation.x, data.initialRotation.y, data.init
 
 // Constructor function for our AppView class
 function AdGenerator() {
+    console.log('in ad generator')
     var logo = getLogo();
     var modifier = getModifier();
     var enter = enterTransition();

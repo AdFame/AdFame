@@ -1,7 +1,7 @@
 $(function(){
     // Sets a default data set
     var data = {
-        logo: 'images/Coca-Cola.png',
+        logo: 'images/trees.png',
         url: 'http://us.coca-cola.com/home/',
         origin: {x: .5, y: 0, z: 0},
         campaign: 'undefined',
@@ -87,6 +87,7 @@ $(function(){
         });
     }
 
+    // Updates data values
     var generateData = function() {
         var selected = $('#selectTrans option:selected').val()
         
@@ -152,7 +153,7 @@ $(function(){
     // Exports data to database
     $('#export').on('click', function(){
         generateData();
-        console.log(sentData)
+        console.log('Sent:', sentData)
         saveData(sentData)
     });
 
@@ -160,11 +161,19 @@ $(function(){
     // Refreshes iFrame on button click
     $('#refresh').on('click', function() {
         generateData();
-        console.log(sentData);
-        module.exports = sentData;
-        var ifr = $('#Iframe')[0];
-        ifr.src = ifr.src;
-    })
+        var dataPackage = JSON.stringify(sentData.data)
+
+        document.getElementById('Iframe').contentWindow.postMessage(dataPackage, '*');
+        // var ifr = $('#Iframe')[0];
+        // ifr.src = ifr.src;
+    });
+
+    // $('document').on('ready', function() {
+        
+    // })
+
+
+    document.getElementById('Iframe').contentWindow.postMessage(sentData, '*')
 
 
     $('ul').on('click', 'button', function(e){
