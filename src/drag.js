@@ -47,6 +47,19 @@ var opacityNo = new Modifier({
     align:[.745, 0]
 })
 
+// Posts data to database 
+var analytics =function(data){ 
+    $.ajax({
+        type: 'POST',
+        url: '/analytics',
+        data: data,
+        dataType: 'application/json'
+    }).done(function(msg) {
+        console.log( 'Data Saved:', msg );
+    });
+}
+var data = {name:"Ale", result: "none", time: 2014}
+
 function drag(surface, link) {
     // Links sync to our surface parameter
     surface.pipe(sync);
@@ -84,10 +97,18 @@ function drag(surface, link) {
         if (currentPosition[0] > 200) {
            //Redirect to link if dragged right
             position.set([0,0], {curve : 'easeOutBounce', duration : 300});
+            console.log("positive")
+            data.result = 'positive';
+            data.time= Date.now();
+            analytics(data)
             window.open(link, '_blank');
         } else if (currentPosition[0] < (-200)) {
            // Transition out of dragged left
             position.set([-window.innerWidth,0], {curve : 'easeOutBounce', duration : 800});
+            console.log("negative")
+            data.result = 'negative';
+            data.time= Date.now();
+            analytics(data)
         }else{
              //Bounces the surface back to center if the drag was insufficient
             position.set([0,0], {curve : 'easeOutBounce', duration : 300});
@@ -103,10 +124,16 @@ function drag(surface, link) {
         //Redirect to link if dragged right
         if (currentPosition[0] > 150) {
             position.set([250,window.innerHeight], {curve : 'easeOutBounce', duration : 300});
+            data.result = 'positive';
+            data.time= Date.now();
+            analytics(data)
             window.open(link, '_blank');
         }else if (currentPosition[0] < (-150)) {
         // Transition out of dragged left
             position.set([window.innerWidth,0], {curve : 'easeOutBounce', duration : 800});
+            data.result = 'negative';
+            data.time= Date.now();
+            analytics(data)
         }else{
             //Bounces the surface back to center if the drag was insufficient
             position.set([0,0], {curve : 'easeOutBounce', duration : 300});
