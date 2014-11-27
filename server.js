@@ -65,7 +65,7 @@ server.route({
     method: 'GET',
     path: '/window',
     handler: function (request, reply) {
-        reply.file('./window demo/windowpane.html');
+        reply.file('./window demo/windowScroll.html');
     }
 });
 
