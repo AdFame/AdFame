@@ -33,14 +33,14 @@ define(function(require, exports, module) {
   
   var tv = new Surface({
       size: [141,200],
-      content: '<img src="./growdemo/tv.png" />'
+      content: '<img src="./tv.png" />'
   
   });
   
   //possibly refactor into a container surface to avoid iframe
   var tvScreen = new Surface({
       size:[116,87],
-      content: '<div id="wrapper"><iframe src="./growdemo/scroll.html" scrolling="no" seamless="seamless" frameBorder="0" style="height:87px; width:116px"></iframe></div>',
+      content: '<div id="wrapper"><iframe src="./scroll.html" scrolling="no" seamless="seamless" frameBorder="0" style="height:87px; width:116px"></iframe></div>',
       properties: {
       zIndex: '10',
       textAlign: 'center'
@@ -104,7 +104,7 @@ define(function(require, exports, module) {
 var targetPosition = document.getElementById('famous-container').offsetTop;
 
 //how far from bottom of page to trigger expanding container
-var padding = window.innerHeight - 100;
+var padding = window.innerHeight - 50;
 
 //max height set to 400 px or you can calculate based on window height
 var maxHeight = 400; //window.innerHeight - 400; 
@@ -137,7 +137,7 @@ window.onscroll = function(){
     //halt any trans to avoid duplicate calls if trans isnt finished
     moveTvOnOffStage.halt();
 
-    moveTvOnOffStage.setTransform(Transform.translate(110,25,0), spring);
+    moveTvOnOffStage.setTransform(Transform.translate(110,100,0), spring);
     
     transCalled = true;
     transOutCalled = false;

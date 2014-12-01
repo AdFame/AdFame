@@ -71,7 +71,7 @@ server.route({
 
 server.route({
     method: 'GET',
-    path: '/windowframe',
+    path: '/demos',
     handler: function (request, reply) {
         reply.file('./window demo/frame.html');
     }
