@@ -159,7 +159,7 @@ function slideInOut(dataInput) {
 function springInOut(dataInput) {
     return function() {
         var springProperties = {
-            type: 'spring',
+            method: 'spring',
             period: +dataInput.period,
             dampingRatio: +dataInput.dampingRatio,
         }
