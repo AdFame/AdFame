@@ -3,10 +3,55 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Test Phone</title>
+	<style>
+    a {
+        color: #3399CC;
+       text-decoration: none;
+    }
+
+    ul {
+    	list-style-type: none;
+    }
+
+    button {
+      width: 125px;
+      background-color: rgb(152, 152, 152);
+    }
+
+    li {
+    margin-left: 0px;
+    line-height: 28px;
+    }
+    
+    body {
+     font-family: "Segoe UI","proxima-nova","proxima-nova-1","proxima-nova-2","Proxima Nova";
+     margin: 0px;
+     margin-top: 75px;
+     background-color: white;
+     background-image:url('./window demo/iphonebg.jpg');
+     background-repeat:no-repeat;
+    }
+
+    p {
+     padding-left: 15px;
+     padding-right: 10px;
+    }
+    #positioning{
+    	position:absolute;
+    	top:135px;
+    	left:296px;
+    }
+   
+    </style>
+    <script src="./window demo/buttons.js"></script>
 </head>
-<body style="background-image:url('./window demo/iphonebg.jpg'); background-repeat:no-repeat;background-color:white;">
-	<div id="positioning" style="position: absolute;top: 135px;left: 296px;">
-	  <iframe src="./window demo/windowScroll.html" style="height:578px;width: 335px;"></iframe>
+<body>
+<ul><li><button onclick="clicker('ball')">BALL DEMO</button></li>
+<li><button onclick="clicker('grow')">GROW DEMO</button></li>
+<li><button onclick="clicker('pane')">WINDOW DEMO</button></li>
+</ul>
+	<div id="positioning">
+	  <iframe id="frame" src="./window demo/windowScroll.html" style="height:578px;width: 335px;"></iframe>
     </div>
 </body>
 </html>

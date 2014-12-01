@@ -3,7 +3,7 @@
     window.onscroll = function() {
   
       var targetPosition = document.getElementById('famous-container').offsetTop; //496
-      var padding = 202; // 294
+      var padding = 300; // 294
       var maxHeight = 1000; 
       var containerHeight = 100;
       var getContainerHeight = function(){ return parseFloat(document.getElementById('famous-container').height); }
