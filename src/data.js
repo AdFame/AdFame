@@ -5,7 +5,7 @@ for (var i = 0; i < window.parent.document.getElementById('selectTrans').childre
 }
 
 var data = {
-    logo: 'images/Coca-Cola.png',
+    logo:'images/Coca-Cola.png',
     url: window.parent.document.getElementById('adLink').value || 'http://us.coca-cola.com/home/',
     origin: {},
     initialPosition: {},
@@ -36,10 +36,16 @@ var data = {
         curve: null
     }
 }
-
+// data.logo = window.antipattern|| 'images/Coca-Cola.png';
 // Sets transition type
 data.enter.type = selected + 'InOut';
 data.exit.type = selected + 'InOut';
+
+
+//Set logo 
+if(window.parent.document.getElementById('imgpreview').src.length>50 ){
+    data.logo = window.parent.document.getElementById('imgpreview').src || 'images/Coca-Cola.png';
+}
 
 // Sets initial parameters
 data.origin.x = window.parent.document.getElementById('originX').value;
