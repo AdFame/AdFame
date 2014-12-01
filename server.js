@@ -69,6 +69,13 @@ server.route({
     }
 });
 
+server.route({
+    method: 'GET',
+    path: '/windowframe',
+    handler: function (request, reply) {
+        reply.file('./window demo/frame.html');
+    }
+});
 
 
 //route for the user input page
