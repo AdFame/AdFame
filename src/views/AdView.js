@@ -2,7 +2,6 @@
 var View = require('famous/core/View');
 
 // Load files
-var BannerView = require('./BannerView');
 var AdGenerator = require('../AdGenerator');
 var drag = require('../Drag');
 
@@ -25,10 +24,6 @@ function AdView() {
 AdView.prototype = Object.create(View.prototype);
 AdView.prototype.constructor = AdView;
 
-// AdView.DEFAULT_OPTIONS = {
-//     data: undefined
-// }
-
 // Applies surface and modifier so AdView
 function _createAd() {
     var mainNode= this.add(adObject.modifier)
@@ -44,16 +39,6 @@ function _createAd() {
 
         likeNode.add(dragObject.opacityNo)
         .add(dragObject.notLike);
-}
-
-function _createBanner() {
-        // this.add(adObject.modifier)
-        // .add(scrollObject.mainModifier)
-        // var notLike= like;
-        // .add(dragObject.opacityNopacityYes)
-        // .add(dragObject.like);
-        // notLike.add(dragObject.opacityNo)
-        // .add(dragObject.notLike);
 }
 
 // Exports AdView

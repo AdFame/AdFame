@@ -48,31 +48,89 @@
         <ul>
             <li><button>Origin</button>
                 <ul style='display: none'>
-                    <li>X:<input id='originX' size='4' type='range' min='-2' max='2' value='0' step='0.1'><output></output></li>
-                    <li>Y:<input id='originY' size='4' type='range' min='-2' max='2' value='0' step='0.1'><output></output></li>
-                    <li>Z:<input id='originZ' size='4' type='range' min='-2' max='2' value='0' step='0.1'><output></output></li>
+                    <li>
+                        Origin X: <input id='originX' type='range' min='0' max='1' value='0.5' step='0.01' onchange='updateOriginX(value)'>
+                        <output id='originXOutput' for='originX'>0.5</output>
+                        <script>
+                            function updateOriginX(val) { document.getElementById('originXOutput').value = val; }
+                        </script>
+                    </li>
+                    <li>
+                        Origin Y: <input id='originY' type='range' min='0' max='1' value='0' step='0.01' onchange='updateOriginY(value)'>
+                        <output id='originYOutput' for='originY'>0</output>
+                        <script>
+                            function updateOriginY(val) { document.getElementById('originYOutput').value = val; }
+                        </script>
+                    </li>
+                    <li>
+                        Origin Z: <input id='originZ' type='range' min='0' max='1' value='0' step='0.01' onchange='updateOriginZ(value)'>
+                        <output id='originZOutput' for='originZ'>0</output>
+                        <script>
+                            function updateOriginZ(val) { document.getElementById('originZOutput').value = val; }
+                        </script>
+                    </li>
                 </ul>
             </li>
             <li><button>Initial Position</button>
                 <ul style='display: none'>
-                    <li>X:<input id='initPosX' size='4' type='range' min='0' max='2*Math.PI' value='0' step=
-                    'Math.PI/2'><output></output></li>
-                    <li>Y:<input id='initPosY' size='4' type='range' min='0' max='2*Math.PI' value='0' step=
-                    'Math.PI/2'><output></output></li>
-                    <li>Z:<input id='initPosZ' size='4' type='range' min='0' max='2*Math.PI' value='0' step=
-                    'Math.PI/2'><output></output></li>
+                    <li>
+                        Position X: <input id='initPosX' type='range' min='-2' max='2' value='0' step='.1' onchange='updateInitPosX(value)'>
+                        <output id='initPosXOutput' for='initPosX'>0</output>
+                        <script>
+                            function updateInitPosX(val) { document.getElementById('initPosXOutput').value = val; }
+                        </script>
+                    </li>
+                    <li>
+                        Position Y: <input id='initPosY' type='range' min='-2' max='6' value='0' step='.1' onchange='updateInitPosY(value)'>
+                        <output id='initPosYOutput' for='initPosY'>0</output>
+                        <script>
+                            function updateInitPosY(val) { document.getElementById('initPosYOutput').value = val; }
+                        </script>
+                    <li>
+                        Position Z: <input id='initPosZ' type='range' min='-10' max='10' value='0' step='.1' onchange='updateInitPosZ(value)'>
+                        <output id='initPosZOutput' for='initPosZ'>0</output>
+                        <script>
+                            function updateInitPosZ(val) { document.getElementById('initPosZOutput').value = val; }
+                        </script>
+                    </li>
                 </ul>
             </li>
             <li><button>Initial Rotation</button> 
                 <ul style='display: none'>
-                    <li>X:<input id='initRotX' size='4' type='range'><output></output></li>
-                    <li>Y:<input id='initRotY' size='4' type='range'><output></output></li>
-                    <li>Z:<input id='initRotZ' size='4' type='range'><output></output></li>
+                    <li>
+                        Rotation X: <input id='initRotX' type='range' min='0' max='6.28318530718' value ='0' step='1.57079632679' onchange='updateInitRotX(value)'>
+                        <output id='initRotXOutput' for='initRotX'>0</output>
+                        <script>
+                            function updateInitRotX(val) { document.getElementById('initRotXOutput').value = Math.round(val * 180 / Math.PI); }
+                        </script>
+                    </li>
+                    <li>
+                        Rotation Y: <input id='initRotY' type='range' min='0' max='6.28318530718' value ='0' step='1.57079632679' onchange='updateInitRotY(value)'>
+                        <output id='initRotYOutput' for='initRotY'>0</output>
+                        <script>
+                            function updateInitRotY(val) { document.getElementById('initRotYOutput').value = Math.round(val * 180 / Math.PI); }
+                        </script>
+                    </li>
+                    <li>
+                        Rotation Z: <input id='initRotZ' type='range' min='0' max='6.28318530718' value ='0' step='1.57079632679' onchange='updateInitRotZ(value)'>
+                        <output id='initRotZOutput' for='initRotZ'>0</output>
+                        <script>
+                            function updateInitRotZ(val) { document.getElementById('initRotZOutput').value = Math.round(val * 180 / Math.PI); }
+                        </script>
+                    </li>
                 </ul>
             </li>
             <li><button>Opacity</button>
                 <ul style='display: none'>
-            <li><input id='opacity' max='1.0' min='0' step='.01' type='range'><output></output></li>
+                    <li>
+                        Opacity: <input id='opacity' min='0' max='1' step='.01' value='1' type='range' onchange='updateInitOpacity(value)'>
+                        <output id='initOpacityOutput' for='opacity'>1</output>
+                        <script>
+                            function updateInitOpacity(val) { document.getElementById('initOpacityOutput').value = val; }
+                        </script>
+                    </li>
+                </ul>
+            </li>
         </ul>
     </div>
     
@@ -95,20 +153,45 @@
             <ul>
                 <li><button>Rotation</button>
                     <ul style='display: none'>
-                        <li>X:<input id='rotateInRotX' size='4' type='range'><output></output></li>
-                        <li>Y:<input id='rotateInRotY' size='4' type='range'><output></output></li>
-                        <li>Z:<input id='rotateInRotZ' size='4' type='range'><output></output></li>
+                        <li>
+                            Rotation X: <input id='rotateInRotX' type='range' min='0' max='6.28318530718' value ='0' step='1.57079632679' onchange='updateRotateInRotX(value)'>
+                            <output id='rotateInRotXOutput' for='rotateInRotX'>0</output>
+                            <script>
+                                function updateRotateInRotX(val) { document.getElementById('rotateInRotXOutput').value = Math.round(val * 180 / Math.PI); }
+                            </script>
+                        </li>
+                        <li>
+                            Rotation Y: <input id='rotateInRotY' type='range' min='0' max='6.28318530718' value ='0' step='1.57079632679' onchange='updateRotateInRotY(value)'>
+                            <output id='rotateInRotYOutput' for='rotateInRotY'>0</output>
+                            <script>
+                                function updateRotateInRotY(val) { document.getElementById('rotateInRotYOutput').value = Math.round(val * 180 / Math.PI); }
+                            </script>
+                        </li>
+                        <li>
+                            Rotation Z: <input id='rotateInRotZ' type='range' min='0' max='6.28318530718' value ='0' step='1.57079632679' onchange='updateRotateInRotZ(value)'>
+                            <output id='rotateInRotZOutput' for='rotateInRotZ'>0</output>
+                            <script>
+                                function updateRotateInRotZ(val) { document.getElementById('rotateInRotZOutput').value = Math.round(val * 180 / Math.PI); }
+                            </script>
+                        </li>
                     </ul>
                 </li>
                 <li><button>Duration</button>
                     <ul style='display: none'>
-                        <li><input id='rotateInDuration' max='5000' min='0' step='500' type='range'><output></output></li>
+                        <li>
+                            Duration: <input id='rotateInDuration' type='range' max='5000' min='0' value='1000' step='200' onchange='updateRotateInDuration(value)'>
+                            <output id='rotateInDurationOutput' for='rotateInDuration'>1</output>
+                            <script>
+                                function updateRotateInDuration(val) { document.getElementById('rotateInDurationOutput').value = val / 1000; }
+                            </script>
+                        </li>
                     </ul>
                 </li>          
                 <li><button>Curve</button>
                     <ul style='display: none'>
                         <li>
                             <select id='rotateInCurve' name='curve'>
+                                <option value='null'>None</option>
                                 <option value='inQuad'>inQuad</option>
                                 <option value='outQuad'>outQuad</option>
                                 <option value='inOutQuad'>inOutQuad</option>
@@ -127,7 +210,13 @@
                 </li>
                 <li><button>Opacity</button>
                     <ul style='display: none'>
-                        <li><input id='rotateInOpacity' max='1.0' min='0' step='.01' type='range'><output></output></li>
+                        <li>
+                            Opacity: <input id='rotateInOpacity' min='0' max='1' step='.01' value='1' type='range' onchange='updateRotateInOpacity(value)'>
+                            <output id='rotateInOpacityOutput' for='rotateInOpacity'>1</output>
+                            <script>
+                                function updateRotateInOpacity(val) { document.getElementById('rotateInOpacityOutput').value = val; }
+                            </script>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -138,20 +227,45 @@
             <ul>
                 <li><button>Rotation</button>
                     <ul style='display: none'>
-                        <li>X:<input id='rotateOutRotX' size='4' type='range'><output></output></li>
-                        <li>Y:<input id='rotateOutRotY' size='4' type='range'><output></output></li>
-                        <li>Z:<input id='rotateOutRotZ' size='4' type='range'><output></output></li>
+                        <li>
+                            Rotation X: <input id='rotateOutRotX' type='range' min='0' max='6.28318530718' value ='0' step='1.57079632679' onchange='updateRotateOutRotX(value)'>
+                            <output id='rotateOutRotXOutput' for='rotateOutRotX'>0</output>
+                            <script>
+                                function updateRotateOutRotX(val) { document.getElementById('rotateOutRotXOutput').value = Math.round(val * 180 / Math.PI); }
+                            </script>
+                        </li>
+                        <li>
+                            Rotation Y: <input id='rotateOutRotY' type='range' min='0' max='6.28318530718' value ='0' step='1.57079632679' onchange='updateRotateOutRotY(value)'>
+                            <output id='rotateOutRotYOutput' for='rotateOutRotY'>0</output>
+                            <script>
+                                function updateRotateOutRotY(val) { document.getElementById('rotateOutRotYOutput').value = Math.round(val * 180 / Math.PI); }
+                            </script>
+                        </li>
+                        <li>
+                            Rotation Z: <input id='rotateOutRotZ' type='range' min='0' max='6.28318530718' value ='0' step='1.57079632679' onchange='updateRotateOutRotZ(value)'>
+                            <output id='rotateOutRotZOutput' for='rotateOutRotZ'>0</output>
+                            <script>
+                                function updateRotateOutRotZ(val) { document.getElementById('rotateOutRotZOutput').value = Math.round(val * 180 / Math.PI); }
+                            </script>
+                        </li>
                     </ul>
                 </li>
                 <li><button>Duration</button>
                     <ul style='display: none'>
-                        <li><input id='rotateOutDuration' max='5000' min='0' step='500' type='range'><output></output></li>
+                        <li>
+                            Duration: <input id='rotateOutDuration' type='range' max='5000' min='0' value='1000' step='200' onchange='updateRotateOutDuration(value)'>
+                            <output id='rotateOutDurationOutput' for='rotateOutDuration'>1</output>
+                            <script>
+                                function updateRotateOutDuration(val) { document.getElementById('rotateOutDurationOutput').value = val / 1000; }
+                            </script>
+                        </li>
                     </ul>
                 </li>          
                 <li><button>Curve</button>
                     <ul style='display: none'>
                         <li>
                             <select id='rotateOutCurve' name='curve'>
+                                <option value='null'>None</option>
                                 <option value='inQuad'>inQuad</option>
                                 <option value='outQuad'>outQuad</option>
                                 <option value='inOutQuad'>inOutQuad</option>
@@ -170,7 +284,13 @@
                 </li>
                 <li><button>Opacity</button>
                     <ul style='display: none'>
-                        <li><input id='rotateOutOpacity' max='1.0' min='0' step='.01' type='range'><output></output></li>
+                        <li>
+                            Opacity: <input id='rotateOutOpacity' min='0' max='1' step='.01' value='1' type='range' onchange='updateRotateOutOpacity(value)'>
+                            <output id='rotateOutOpacityOutput' for='rotateOutOpacity'>1</output>
+                            <script>
+                                function updateRotateOutOpacity(val) { document.getElementById('rotateOutOpacityOutput').value = val; }
+                            </script>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -183,20 +303,44 @@
             <ul>
                 <li><button>Position</button>
                     <ul style='display: none'>
-                        <li>X:<input id='slideInRotX' size='4' type='range'><output></output></li>
-                        <li>Y:<input id='slideInRotY' size='4' type='range'><output></output></li>
-                        <li>Z:<input id='slideInRotZ' size='4' type='range'><output></output></li>
+                        <li>
+                            Position X: <input id='slideInPosX' type='range' min='-5000' max='5000' value='0' step='100' onchange='updateSlideInPosX(value)'>
+                            <output id='slideInPosXOutput' for='slideInPosX'>0</output>
+                            <script>
+                                function updateSlideInPosX(val) { document.getElementById('slideInPosXOutput').value = val; }
+                            </script>
+                        </li>
+                        <li>
+                            Position Y: <input id='slideInPosY' type='range' min='-5000' max='5000' value='0' step='100' onchange='updateSlideInPosY(value)'>
+                            <output id='slideInPosYOutput' for='slideInPosY'>0</output>
+                            <script>
+                                function updateSlideInPosY(val) { document.getElementById('slideInPosYOutput').value = val; }
+                            </script>
+                        <li>
+                            Position Z: <input id='slideInPosZ' type='range' min='-5000' max='5000' value='0' step='100' onchange='updateSlideInPosZ(value)'>
+                            <output id='slideInPosZOutput' for='slideInPosZ'>0</output>
+                            <script>
+                                function updateSlideInPosZ(val) { document.getElementById('slideInPosZOutput').value = val; }
+                            </script>
+                        </li>
                     </ul>
                 </li>
                 <li><button>Duration</button>
                     <ul style='display: none'>
-                        <li><input id='slideInDuration' max='5000' min='0' step='500' type='range'><output></output></li>
+                        <li>
+                            Duration: <input id='slideInDuration' type='range' max='5000' min='0' value='1000' step='200' onchange='updateSlideInDuration(value)'>
+                            <output id='slideInDurationOutput' for='slideInDuration'>1</output>
+                            <script>
+                                function updateSlideInDuration(val) { document.getElementById('slideInDurationOutput').value = val / 1000; }
+                            </script>
+                        </li>
                     </ul>
                 </li>
                 <li><button>Curve</button>
                     <ul style='display: none'>
                         <li>
                             <select id='slideInCurve' name='curve'>
+                                <option value='null'>None</option>
                                 <option value='inQuad'>inQuad</option>
                                 <option value='outQuad'>outQuad</option>
                                 <option value='inOutQuad'>inOutQuad</option>
@@ -215,7 +359,13 @@
                 </li>
                 <li><button>Opacity</button>
                     <ul style='display: none'>
-                        <li><input id='slideInOpacity' max='1.0' min='0' step='.01' type='range'><output></output></li>
+                        <li>
+                            Opacity: <input id='slideInOpacity' min='0' max='1' step='.01' value='1' type='range' onchange='updateSlideInOpacity(value)'>
+                            <output id='slideInOpacityOutput' for='slideInOpacity'>1</output>
+                            <script>
+                                function updateSlideInOpacity(val) { document.getElementById('slideInOpacityOutput').value = val; }
+                            </script>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -226,20 +376,44 @@
             <ul>
                 <li><button>Position</button>
                     <ul style='display: none'>
-                        <li>X:<input id='slideOutRotX' size='4' type='range'><output></output></li>
-                        <li>Y:<input id='slideOutRotY' size='4' type='range'><output></output></li>
-                        <li>Z:<input id='slideOutRotZ' size='4' type='range'><output></output></li>
+                    <li>
+                        Position X: <input id='slideOutPosX' type='range' min='-5000' max='5000' value='0' step='.1' onchange='updateSlideOutPosX(value)'>
+                        <output id='slideOutPosXOutput' for='slideOutPosX'>0</output>
+                        <script>
+                            function updateSlideOutPosX(val) { document.getElementById('slideOutPosXOutput').value = val; }
+                        </script>
+                    </li>
+                    <li>
+                        Position Y: <input id='slideOutPosY' type='range' min='-5000' max='5000' value='0' step='.1' onchange='updateSlideOutPosY(value)'>
+                        <output id='slideOutPosYOutput' for='slideOutPosY'>0</output>
+                        <script>
+                            function updateSlideOutPosY(val) { document.getElementById('slideOutPosYOutput').value = val; }
+                        </script>
+                    <li>
+                        Position Z: <input id='slideOutPosZ' type='range' min='-5000' max='5000' value='0' step='.1' onchange='updateSlideOutPosZ(value)'>
+                        <output id='slideOutPosZOutput' for='slideOutPosZ'>0</output>
+                        <script>
+                            function updateSlideOutPosZ(val) { document.getElementById('slideOutPosZOutput').value = val; }
+                        </script>
+                    </li>
                     </ul>
                 </li>
                 <li><button>Duration</button>
                     <ul style='display: none'>
-                        <li><input id='slideOutDuration' max='5000' min='0' step='500' type='range'><output></output></li>
+                        <li>
+                            Duration: <input id='slideOutDuration' type='range' max='5000' min='0' value='1000' step='200' onchange='updateSlideOutDuration(value)'>
+                            <output id='slideOutDurationOutput' for='slideOutDuration'>1</output>
+                            <script>
+                                function updateSlideOutDuration(val) { document.getElementById('slideOutDurationOutput').value = val / 1000; }
+                            </script>
+                        </li>
                     </ul>
                 </li>
                 <li><button>Curve</button>
                     <ul style='display: none'>
                         <li>
                             <select id='slideOutCurve' name='curve'>
+                                <option value='null'>None</option>
                                 <option value='inQuad'>inQuad</option>
                                 <option value='outQuad'>outQuad</option>
                                 <option value='inOutQuad'>inOutQuad</option>
@@ -258,7 +432,13 @@
                 </li>
                 <li><button>Opacity</button>
                     <ul style='display: none'>
-                        <li><input id='slideOutOpacity' max='1.0' min='0' step='.01' type='range'><output></output></li>
+                        <li>
+                            Opacity: <input id='slideOutOpacity' min='0' max='1' step='.01' value='1' type='range' onchange='updateSlideOutOpacity(value)'>
+                            <output id='slideOutOpacityOutput' for='slideOutOpacity'>1</output>
+                            <script>
+                                function updateSlideOutOpacity(val) { document.getElementById('slideOutOpacityOutput').value = val; }
+                            </script>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -271,28 +451,69 @@
             <ul>
                 <li><button>Position</button>
                     <ul style='display: none'>
-                        <li>X:<input id='springInPosX' size='4' type='range'></li>
-                        <li>Y:<input id='springInPosY' size='4' type='range'></li>
-                        <li>Z:<input id='springInPosZ' size='4' type='range'></li>
+                        <li>
+                            Position X: <input id='springInPosX' type='range' min='-5000' max='5000' value='0' step='.1' onchange='updateSpringInPosX(value)'>
+                            <output id='springInPosXOutput' for='springInPosX'>0</output>
+                            <script>
+                                function updateSpringInPosX(val) { document.getElementById('springInPosXOutput').value = val; }
+                            </script>
+                        </li>
+                        <li>
+                            Position Y: <input id='springInPosY' type='range' min='-5000' max='5000' value='0' step='.1' onchange='updateSpringInPosY(value)'>
+                            <output id='springInPosYOutput' for='springInPosY'>0</output>
+                            <script>
+                                function updateSpringInPosY(val) { document.getElementById('springInPosYOutput').value = val; }
+                            </script>
+                        <li>
+                            Position Z: <input id='springInPosZ' type='range' min='-5000' max='5000' value='0' step='.1' onchange='updateSpringInPosZ(value)'>
+                            <output id='springInPosZOutput' for='springInPosZ'>0</output>
+                            <script>
+                                function updateSpringInPosZ(val) { document.getElementById('springInPosZOutput').value = val; }
+                            </script>
+                        </li>
                     </ul>
                 </li>
                 <li><button>Duration</button></li>
                 <ul style='display: none'>
-                    <input id='springInDuration' max='5000' min='0' step='500' type='range'><output></output></li>
+                    <li>
+                        Duration: <input id='springInDuration' type='range' max='5000' min='0' value='1000' step='200' onchange='updateSpringInDuration(value)'>
+                        <output id='springInDurationOutput' for='springInDuration'>1</output>
+                        <script>
+                            function updateSpringInDuration(val) { document.getElementById('springInDurationOutput').value = val / 1000; }
+                        </script>
+                    </li>
                 </ul>
                 <li><button>Period</button>
                     <ul style='display: none'>
-                        <li><input id='springInPeriod' type='range'><output></output></li>
+                        <li>
+                            <input id='springInPeriod' type='range' min='0' max='150' value='0' step='10' onchange='updateSpringInPeriod(value)'>
+                            <output id='springInPeriodOutput' for='springInPeriod'>0</output>
+                            <script>
+                                function updateSpringInPeriod(val) { document.getElementById('springInPeriodOutput').value = val; }
+                            </script>
+                        </li>
                     </ul>
                 </li>
                 <li><button>Dampening Ratio</button>
                     <ul style='display: none'>
-                        <li><input id='springInDampeningRatio' type='range'><output></output></li>
+                        <li>
+                            <input id='springInDampeningRatio' type='range' min='0' max='1' value='.40' step='0.01' onchange='updateSpringInDampeningRatio(value)'>
+                            <output id='springInDampeningRatioOutput' for='springInDampeningRatio'>.40</output>
+                            <script>
+                                function updateSpringInDampeningRatio(val) { document.getElementById('springInDampeningRatioOutput').value = val; }
+                            </script>
+                        </li>
                     </ul>
                 </li>
                 <li><button>Opacity</button>
                     <ul style='display: none'>
-                        <li><input id='springInOpacity' type='range'><output></output></li>
+                        <li>
+                            Opacity: <input id='springInOpacity' min='0' max='1' step='.01' value='1' type='range' onchange='updateSpringInOpacity(value)'>
+                            <output id='springInOpacityOutput' for='springInOpacity'>1</output>
+                            <script>
+                                function updateSpringInOpacity(val) { document.getElementById('springInOpacityOutput').value = val; }
+                            </script>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -303,28 +524,69 @@
             <ul>
                 <li><button>Position</button>
                     <ul style='display: none'>
-                        <li>X:<input id='springOutPosX' size='4' type='range'></li>
-                        <li>Y:<input id='springOutPosY' size='4' type='range'></li>
-                        <li>Z:<input id='springOutPosZ' size='4' type='range'></li>
+                        <li>
+                            Position X: <input id='springOutPosX' type='range' min='-5000' max='5000' value='0' step='.1' onchange='updateSpringOutPosX(value)'>
+                            <output id='springOutPosXOutput' for='springOutPosX'>0</output>
+                            <script>
+                                function updateSpringOutPosX(val) { document.getElementById('springOutPosXOutput').value = val; }
+                            </script>
+                        </li>
+                        <li>
+                            Position Y: <input id='springOutPosY' type='range' min='-5000' max='5000' value='0' step='.1' onchange='updateSpringOutPosY(value)'>
+                            <output id='springOutPosYOutput' for='springOutPosY'>0</output>
+                            <script>
+                                function updateSpringOutPosY(val) { document.getElementById('springOutPosYOutput').value = val; }
+                            </script>
+                        <li>
+                            Position Z: <input id='springOutPosZ' type='range' min='-5000' max='5000' value='0' step='.1' onchange='updateSpringOutPosZ(value)'>
+                            <output id='springOutPosZOutput' for='springOutPosZ'>0</output>
+                            <script>
+                                function updateSpringOutPosZ(val) { document.getElementById('springOutPosZOutput').value = val; }
+                            </script>
+                        </li>
                     </ul>
                 </li>
                 <li><button>Duration</button></li>
                 <ul style='display: none'>
-                    <input id='springOutDuration' max='5000' min='0' step='500' type='range'><output></output></li>
+                    <li>
+                        Duration: <input id='springOutDuration' type='range' max='5000' min='0' value='1000' step='200' onchange='updateSpringOutDuration(value)'>
+                        <output id='springOutDurationOutput' for='springOutDuration'>1</output>
+                        <script>
+                            function updateSpringOutDuration(val) { document.getElementById('springOutDurationOutput').value = val / 1000; }
+                        </script>
+                    </li>
                 </ul>
                 <li><button>Period</button>
                     <ul style='display: none'>
-                        <li><input id='springOutPeriod' type='range'><output></output></li>
+                        <li>
+                            <input id='springOutPeriod' type='range' min='0' max='3000' value='1000' step='200' onchange='updateSpringOutPeriod(value)'>
+                            <output id='springOutPeriodOutput' for='springOutPeriod'>1</output>
+                            <script>
+                                function updateSpringOutPeriod(val) { document.getElementById('springOutPeriodOutput').value = val / 1000; }
+                            </script>
+                        </li>
                     </ul>
                 </li>
                 <li><button>Dampening Ratio</button>
                     <ul style='display: none'>
-                        <li><input id='springOutDampeningRatio' type='range'><output></output></li>
+                        <li>
+                            <input id='springOutDampeningRatio' type='range' min='0' max='1' value='.40' step='0.01' onchange='updateSpringOutDampeningRatio(value)'>
+                            <output id='springOutDampeningRatioOutput' for='springOutDampeningRatio'>.40</output>
+                            <script>
+                                function updateSpringOutDampeningRatio(val) { document.getElementById('springOutDampeningRatioOutput').value = val; }
+                            </script>
+                        </li>
                     </ul>
                 </li>
                 <li><button>Opacity</button>
                     <ul style='display: none'>
-                        <li><input id='springOutOpacity' type='range'><output></output></li>
+                        <li>
+                            Opacity: <input id='springOutOpacity' min='0' max='1' step='.01' value='1' type='range' onchange='updateSpringOutOpacity(value)'>
+                            <output id='springOutOpacityOutput' for='springOutOpacity'>1</output>
+                            <script>
+                                function updateSpringOutOpacity(val) { document.getElementById('springOutOpacityOutput').value = val; }
+                            </script>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -337,29 +599,70 @@
             <ul>
                 <li><button>Position</button>
                     <ul style='display: none'> 
-                        <li>X:<input id='wallInPosX' size='4' type='range'></li>
-                        <li>Y:<input id='wallInPosY' size='4' type='range'></li>
-                        <li>Z:<input id='wallInPosZ' size='4' type='range'></li>
+                        <li>
+                            Position X: <input id='wallInPosX' type='range' min='-5000' max='5000' value='0' step='.1' onchange='updateWallInPosX(value)'>
+                            <output id='wallInPosXOutput' for='wallInPosX'>0</output>
+                            <script>
+                                function updateWallInPosX(val) { document.getElementById('wallInPosXOutput').value = val; }
+                            </script>
+                        </li>
+                        <li>
+                            Position Y: <input id='wallInPosY' type='range' min='-5000' max='5000' value='0' step='.1' onchange='updateWallInPosY(value)'>
+                            <output id='wallInPosYOutput' for='wallInPosY'>0</output>
+                            <script>
+                                function updateWallInPosY(val) { document.getElementById('wallInPosYOutput').value = val; }
+                            </script>
+                        <li>
+                            Position Z: <input id='wallInPosZ' type='range' min='-5000' max='5000' value='0' step='.1' onchange='updateWallInPosZ(value)'>
+                            <output id='wallInPosZOutput' for='wallInPosZ'>0</output>
+                            <script>
+                                function updateWallInPosZ(val) { document.getElementById('wallInPosZOutput').value = val; }
+                            </script>
+                        </li>
                     </ul>
                 </li>
                 <li><button>Duration</button>
                     <ul style='display: none'>
-                        <li><input id='wallInDuration' type='range'><output></output></li>
+                        <li>
+                            Duration: <input id='wallInDuration' type='range' max='5000' min='0' value='1000' step='200' onchange='updateWallInDuration(value)'>
+                            <output id='wallInDurationOutput' for='wallInDuration'>1</output>
+                            <script>
+                                function updateWallInDuration(val) { document.getElementById('wallInDurationOutput').value = val / 1000; }
+                            </script>
+                        </li>
                     </ul>
                 </li>
                 <li><button>Period</button>
                     <ul style='display: none'>
-                        <li><input id='wallInPeriod' type='range'><output></output></li>
+                        <li>
+                            <input id='wallInPeriod' type='range' min='0' max='3000' value='1000' step='200' onchange='updateWallInPeriod(value)'>
+                            <output id='wallInPeriodOutput' for='wallInPeriod'>1</output>
+                            <script>
+                                function updateWallInPeriod(val) { document.getElementById('wallInPeriodOutput').value = val / 1000; }
+                            </script>
+                        </li>
                     </ul>
                 </li>
                 <li><button>Dampening ratio</button>
                     <ul style='display: none'>
-                        <li><input id='wallInDampeningRatio' max='1.0' min='0' step='.01' type='range'><output></output></li>
+                        <li>
+                            <input id='wallInDampeningRatio' type='range' min='0' max='1' value='.40' step='0.01' onchange='updateWallInDampeningRatio(value)'>
+                            <output id='wallInDampeningRatioOutput' for='wallInDampeningRatio'>.40</output>
+                            <script>
+                                function updateWallInDampeningRatio(val) { document.getElementById('wallInDampeningRatioOutput').value = val; }
+                            </script>
+                        </li>
                     </ul>
                 </li>
                 <li><button>Opacity</button>
                     <ul style='display: none'>
-                        <li><input id='wallInOpacity' type='range'><output></output></li>
+                        <li>
+                            Opacity: <input id='wallInOpacity' min='0' max='1' step='.01' value='1' type='range' onchange='updateWallInOpacity(value)'>
+                            <output id='wallInOpacityOutput' for='wallInOpacity'>1</output>
+                            <script>
+                                function updateWallInOpacity(val) { document.getElementById('wallInOpacityOutput').value = val; }
+                            </script>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -370,29 +673,70 @@
             <ul>
                 <li><button>Position</button>
                     <ul style='display: none'> 
-                        <li>X:<input id='wallOutPosX' size='4' type='range'></li>
-                        <li>Y:<input id='wallOutPosY' size='4' type='range'></li>
-                        <li>Z:<input id='wallOutPosZ' size='4' type='range'></li>
+                        <li>
+                            Position X: <input id='wallOutPosX' type='range' min='-5000' max='5000' value='0' step='.1' onchange='updateWallOutPosX(value)'>
+                            <output id='wallOutPosXOutput' for='wallOutPosX'>0</output>
+                            <script>
+                                function updateWallOutPosX(val) { document.getElementById('wallOutPosXOutput').value = val; }
+                            </script>
+                        </li>
+                        <li>
+                            Position Y: <input id='wallOutPosY' type='range' min='-5000' max='5000' value='0' step='.1' onchange='updateWallOutPosY(value)'>
+                            <output id='wallOutPosYOutput' for='wallOutPosY'>0</output>
+                            <script>
+                                function updateWallOutPosY(val) { document.getElementById('wallOutPosYOutput').value = val; }
+                            </script>
+                        <li>
+                            Position Z: <input id='wallOutPosZ' type='range' min='-5000' max='5000' value='0' step='.1' onchange='updateWallOutPosZ(value)'>
+                            <output id='wallOutPosZOutput' for='wallOutPosZ'>0</output>
+                            <script>
+                                function updateWallOutPosZ(val) { document.getElementById('wallOutPosZOutput').value = val; }
+                            </script>
+                        </li>
                     </ul>
                 </li>
                 <li><button>Duration</button>
                     <ul style='display: none'>
-                        <li><input id='wallOutDuration' type='range'><output></output></li>
+                        <li>
+                            Duration: <input id='wallOutDuration' type='range' max='5000' min='0' value='1000' step='200' onchange='updateWallOutDuration(value)'>
+                            <output id='wallOutDurationOutput' for='wallOutDuration'>1</output>
+                            <script>
+                                function updateWallOutDuration(val) { document.getElementById('wallOutDurationOutput').value = val / 1000; }
+                            </script>
+                        </li>
                     </ul>
                 </li>
                 <li><button>Period</button>
                     <ul style='display: none'>
-                        <li><input id='wallOutPeriod' type='range'><output></output></li>
+                        <li>
+                            <input id='wallOutPeriod' type='range' min='0' max='3000' value='1000' step='200' onchange='updateWallOutPeriod(value)'>
+                            <output id='wallOutPeriodOutput' for='wallOutPeriod'>1</output>
+                            <script>
+                                function updateWallOutPeriod(val) { document.getElementById('wallOutPeriodOutput').value = val / 1000; }
+                            </script>
+                        </li>
                     </ul>
                 </li>
                 <li><button>Dampening ratio</button>
                     <ul style='display: none'>
-                        <li><input id='wallOutDampeningRatio' max='1.0' min='0' step='.01' type='range'><output></output></li>
+                        <li>
+                            <input id='wallOutDampeningRatio' type='range' min='0' max='1' value='.40' step='0.01' onchange='updateWallOutDampeningRatio(value)'>
+                            <output id='wallOutDampeningRatioOutput' for='wallOutDampeningRatio'>.40</output>
+                            <script>
+                                function updateWallOutDampeningRatio(val) { document.getElementById('wallOutDampeningRatioOutput').value = val; }
+                            </script>
+                        </li>
                     </ul>
                 </li>
                 <li><button>Opacity</button>
                     <ul style='display: none'>
-                        <li><input id='wallOutOpacity' type='range'><output></output></li>
+                        <li>
+                            Opacity: <input id='wallOutOpacity' min='0' max='1' step='.01' value='1' type='range' onchange='updateWallOutOpacity(value)'>
+                            <output id='wallOutOpacityOutput' for='wallOutOpacity'>1</output>
+                            <script>
+                                function updateWallOutOpacity(val) { document.getElementById('wallOutOpacityOutput').value = val; }
+                            </script>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -406,13 +750,12 @@
     <script src='userinput/userinput.js'></script> 
     </div>
 
-  <div id='iframeContainer'>
-      <div id='iphone' style='position: absolute;top: 20px; left:330px;'>
-        <iframe id='Iframe' src='./index.html' style='margin-top: 100px; margin-left:222px; height:433px;width: 252px; background-color: white'></iframe>
-
-        <button id='refresh' style='margin-left: 215px'>Update Ad Preview</button>
-      </div>
-  </div>
+    <div id='iframeContainer'>
+        <div id='iphone' style='position: absolute;top: 20px; left:330px;'>
+            <iframe id='Iframe' src='./index.html' style='margin-top: 100px; margin-left:222px; height:433px;width: 252px; background-color: white'></iframe>
+            <button id='refresh' style='margin-left: 215px'>Update Ad Preview</button>
+        </div>
+    </div>
 
 </body>
 </html>

@@ -5,17 +5,14 @@ $(function(){
         url: 'http://us.coca-cola.com/home/',
         origin: {x: .5, y: 0, z: 0},
         initialPosition: {x: 0, y: 0, z: 0},
-        initialVelocity: {x: 0, y: 0, z: 0},
         initialRotation: {x: 0, y: 0, z: 0},
         opacity: 1,
         enter: {
             type: 'slideInOut',
             position: {x: 0, y: 0, z: 0},
-            velocity: {x: 0, y: 0, z: 0},
             rotation: {x: 0, y: 0, z: 0},
             period: 1000,
             dampingRatio: 0,
-            restitution: 0,
             opacity: 1,
             duration: 1000,
             curve: null
@@ -23,11 +20,9 @@ $(function(){
         exit: {
             type: 'slideInOut',
             position: {x: 0, y: 0, z: 0},
-            velocity: {x: 0, y: 0, z: 0},
             rotation: {x: 0, y: 0, z: 0},
             period: 1000,
             dampingRatio: 0,
-            restitution: 0,
             opacity: 1,
             duration: 1000,
             curve: null
@@ -44,18 +39,16 @@ $(function(){
     }).trigger('change');
      
     // Creates an object with the name of the company and the data selected to store in the database
-    var sentData={
+    var sentData = {
         name: '',
         data: data
     }
 
-    //NEED TO CHECK IF IT EXISTS IN DB FIRST
-
     // Show's either transitions in or out on button click
     $('.out').hide();
     $('#inButton').on('click', function() {
-            $('.out').hide();
-            $('.in').show(); 
+        $('.out').hide();
+        $('.in').show(); 
     });
 
     $('#outButton').on('click', function() {
@@ -64,7 +57,7 @@ $(function(){
     });
      
     // Posts data to database 
-    var saveData =function(data){ 
+    var saveData = function(data){ 
         $.ajax({
             type: 'POST',
             url: '/user/data',
@@ -95,7 +88,7 @@ $(function(){
 
         // Sets initial state data parameters
         sentData.data.campaign = $('#campaign').val();
-        sentData.data.logo = sentData.data.logo || $('#logoUrl');
+        sentData.data.logo = window.antipattern||sentData.data.logo ;
         sentData.data.url = $('#adLink').val();
 
         sentData.data.origin.x = $('#originX').val();
@@ -159,17 +152,9 @@ $(function(){
 
     // Refreshes iFrame on button click
     $('#refresh').on('click', function() {
-        generateData();
-        var dataPackage = JSON.stringify(sentData.data)
-        document.getElementById('Iframe').contentWindow.postMessage(dataPackage, '*');
         var ifr = $('#Iframe')[0];
         ifr.src = ifr.src;
     });
-
-    // $('document').on('ready', function() {
-        
-    // })
-
 
     document.getElementById('Iframe').contentWindow.postMessage(sentData, '*')
 

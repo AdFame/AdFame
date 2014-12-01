@@ -11,10 +11,6 @@ function AppView() {
 AppView.prototype = Object.create(View.prototype);
 AppView.prototype.constructor = AppView;
 
-// AppView.DEFAULT_OPTIONS = {
-//     data: undefined
-// }
-
 // Add adView as child of AppView
 function createAdView() {
     var adView = new AdView();
