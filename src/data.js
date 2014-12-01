@@ -1,16 +1,20 @@
+for (var i = 0; i < window.parent.document.getElementById('selectTrans').children.length; i++) {
+    if (window.parent.document.getElementById('selectTrans').children[i].selected) {
+        var selected = window.parent.document.getElementById('selectTrans').children[i].value;
+    }
+}
+
 var data = {
     logo: 'images/Coca-Cola.png',
-    url: 'http://us.coca-cola.com/home/',
-    origin: {x: .5, y: 0, z: 0},
-    initialPosition: {x: 0, y: 0, z: 0},
-    initialVelocity: {x: 0, y: 0, z: 0},
-    initialRotation: {x: Math.PI/2, y: 0, z: 0},
-    opacity: 1,
+    url: window.parent.document.getElementById('adLink').value || 'http://us.coca-cola.com/home/',
+    origin: {},
+    initialPosition: {},
+    initialRotation: {},
     enter: {
         type: 'rotateInOut',
-        position: {x: 0, y: 0, z: 0},
-        velocity: {x: 0, y: 0, z: 0},
-        rotation: {x: 0, y: 0, z: 0},
+        position: {},
+        velocity: {},
+        rotation: {},
         period: 1000,
         dampingRatio: 0,
         restitution: 0,
@@ -20,9 +24,9 @@ var data = {
     },
     exit: {
         type: 'rotateInOut',
-        position: {x: 0, y: 0, z: 0},
-        velocity: {x: 0, y: 0, z: 0},
-        rotation: {x: Math.PI/2, y: 0, z: 0},
+        position: {},
+        velocity: {},
+        rotation: {},
         period: 1000,
         dampingRatio: 0,
         restitution: 0,
@@ -32,58 +36,82 @@ var data = {
     }
 }
 
+// Sets transition type
+data.enter.type = selected + 'InOut';
+data.exit.type = selected + 'InOut';
+
+// Sets initial parameters
+data.origin.x = window.parent.document.getElementById('originX').value;
+data.origin.y = window.parent.document.getElementById('originY').value;
+data.origin.z = window.parent.document.getElementById('originZ').value;
+
+data.initialPosition.x = window.parent.document.getElementById('initPosX').value;
+data.initialPosition.y = window.parent.document.getElementById('initPosY').value;
+data.initialPosition.z = window.parent.document.getElementById('initPosZ').value;
+
+data.initialRotation.x = window.parent.document.getElementById('initRotX').value;
+data.initialRotation.y = window.parent.document.getElementById('initRotY').value;
+data.initialRotation.z = window.parent.document.getElementById('initRotZ').value;
+
+data.opacity = window.parent.document.getElementById('opacity').value;
+
+// Sets enter transition data parameters
+if (selected !== 'rotate') {
+    data.enter.position.x = window.parent.document.getElementById(selected + 'InPosX').value;
+    data.enter.position.y = window.parent.document.getElementById(selected + 'InPosY').value;
+    data.enter.position.z = window.parent.document.getElementById(selected + 'InPosZ').value;
+}
+
+if (selected === 'rotate') {
+    data.enter.rotation.x = window.parent.document.getElementById(selected + 'InRotX').value;
+    data.enter.rotation.y = window.parent.document.getElementById(selected + 'InRotY').value;
+    data.enter.rotation.z = window.parent.document.getElementById(selected + 'InRotZ').value;
+}
+
+if (selected === 'slide' || selected === 'rotate') {
+    for (var i = 0; i < window.parent.document.getElementById(selected + 'InCurve').children.length; i++) {
+        if (window.parent.document.getElementById(selected + 'InCurve').children[i].selected) {
+            window.parent.document.getElementById(selected + 'InCurve').children[i].value;
+        }
+    }
+}
+
+if (selected === 'spring' || selected === 'wall') {
+    data.enter.period = window.parent.document.getElementById(selected + 'InPeriod').value;
+    data.enter.dampingRatio = window.parent.document.getElementById(selected + 'InDampeningRatio').value;
+}
+
+data.enter.opacity = window.parent.document.getElementById(selected + 'InOpacity').value;
+data.enter.duration = window.parent.document.getElementById(selected + 'InDuration').value;
+
+// Sets exit transition data parameters
+if (selected !== 'rotate') {
+    data.exit.position.x = window.parent.document.getElementById(selected + 'OutPosX').value;
+    data.exit.position.y = window.parent.document.getElementById(selected + 'OutPosY').value;
+    data.exit.position.z = window.parent.document.getElementById(selected + 'OutPosZ').value;
+}
+
+if (selected === 'rotate') {
+    data.exit.rotation.x = window.parent.document.getElementById(selected + 'OutRotX').value;
+    data.exit.rotation.y = window.parent.document.getElementById(selected + 'OutRotY').value;
+    data.exit.rotation.z = window.parent.document.getElementById(selected + 'OutRotZ').value;
+}
+
+if (selected === 'slide' || selected === 'rotate') {
+    for (var i = 0; i < window.parent.document.getElementById(selected + 'OutCurve').children.length; i++) {
+        if (window.parent.document.getElementById(selected + 'OutCurve').children[i].selected) {
+            window.parent.document.getElementById(selected + 'OutCurve').children[i].value;
+        }
+    }
+}
+
+if (selected === 'spring' || selected === 'wall') {
+    data.exit.period = window.parent.document.getElementById(selected + 'OutPeriod').value;
+    data.exit.dampingRatio = window.parent.document.getElementById(selected + 'OutDampeningRatio').value;
+}
+
+data.exit.opacity = window.parent.document.getElementById(selected + 'OutOpacity').value;
+data.exit.duration = window.parent.document.getElementById(selected + 'OutDuration').value;
+
+console.log(data);
 module.exports = data;
-
-// var sentData={
-//   name:'Ale',
-//   data:data
-// }
-
-//   $('#refresh').on('click', function(){
-//     var selected = $('input[type='radio']:checked').val()
-//     var $info = $('#' + selected)
-//     //sets the data parameters to the selected in the input fields
-//     sentData.data.campaign = $('#campaign').val();
-//     sentData.data.logo = sentData.data.logo || $('#logoUrl');
-//     sentData.data.url = $('#adLink').val();
-//     sentData.data.origin.x = 
-//     sentData.data.origin.y = $('#originY').val();
-//     sentData.data.origin.z = $('#originZ').val();
-
-//     sentData.data.initialPosition.x = $('#initPosX').val();
-//     sentData.data.initialPosition.y = $('#initPosY').val();
-//     sentData.data.initialPosition.z = $('#initPosZ').val();
-
-//     sentData.data.initialVelocity.x = $('#initVelX').val();
-//     sentData.data.initialVelocity.y = $('#initVelY').val();
-//     sentData.data.initialVelocity.z = $('#initVelZ').val();
-
-//     sentData.data.initialRotation.x = $('#initRotX').val();
-//     sentData.data.initialRotation.y = $('#initRotY').val();
-//     sentData.data.initialRotation.z = $('#initRotZ').val();
-
-//     sentData.data.opacity = $('#opacity').val();
-
-//     sentData.data.enter.type = selected;
-  
-//     sentData.data.enter.position.x = $('#'+selected+'PosX').val();
-//     sentData.data.enter.position.y = $('#'+selected+'PosY').val();
-//     sentData.data.enter.position.z = $('#'+selected+'PosZ').val();
-
-//     sentData.data.enter.velocity.x = $('#'+selected+'VelX').val();
-//     sentData.data.enter.velocity.y = $('#'+selected+'VelY').val();
-//     sentData.data.enter.velocity.z = $('#'+selected+'VelZ').val();
-
-//     sentData.data.enter.rotation.x = $('#'+selected+'RotX').val();
-//     sentData.data.enter.rotation.y = $('#'+selected+'RotY').val();
-//     sentData.data.enter.rotation.z = $('#'+selected+'RotZ').val();
-  
-//     sentData.data.enter.period = $('#'+selected+'Period').val();
-
-//     sentData.data.enter.dampingRatio = $('#'+selected+'DampeningRatio').val();
-//     sentData.data.enter.restitution = $('#'+selected+'Restitution').val();
-//     sentData.data.enter.opacity = $('#'+selected+'Opacity').val()
-//     sentData.data.enter.duration = $('#'+selected+'Duration').val()
-//     sentData.data.enter.curve = $('#'+selected+'Curve option:selected').val()
-//     console.log(sentData)
-//   });

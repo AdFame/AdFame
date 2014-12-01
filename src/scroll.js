@@ -15,10 +15,6 @@ windowScrollEvents.hitEnd = false;
 // Target elements and duration in pixels;
 var elementIdStart = 'startAdFame';
 var elementIdEnd = 'endAdFame';
-// var padding = 100;
-//var duration = 1000;
-
-console.log('this is working')
 
 // Native scroll main function
 window.onscroll = function (){
@@ -28,7 +24,7 @@ window.onscroll = function (){
     var windowTopPosition = window.pageYOffset;
 
     // Check to see if you reach enter element scrolling down
-    if(!windowScrollEvents.called && (windowTopPosition) > targetPosition) {
+    if (!windowScrollEvents.called && (windowTopPosition) > targetPosition) {
         scrollEvents.emit('targetStartReached');
         windowScrollEvents.called = true;
     }
@@ -40,34 +36,16 @@ window.onscroll = function (){
     }
 
     // Check to see if you reach end element scrolling down
-    if(!windowScrollEvents.hitEnd && (windowTopPosition > targetEndPosition)) {
+    if (!windowScrollEvents.hitEnd && (windowTopPosition > targetEndPosition)) {
         scrollEvents.emit('targetEndReached');
         windowScrollEvents.hitEnd = true;
-     }
+    }
 
      // Check to see if you reach end element scrolling up
-     if(windowScrollEvents.hitEnd && (windowTopPosition < targetEndPosition)) {
-         scrollEvents.emit('targetEndReached');
-         windowScrollEvents.hitEnd = false;
-      }
-
-     
-    // Emits window position
-    // scrollEvents.emit('positionYChange', {position: windowTopPosition, called: windowScrollEvents.called});
-
-    // If you are not yet at the target element, windowScrollEvents.called is false
-    // if((windowTopPosition + padding) < targetPosition){
-    //     windowScrollEvents.called = false;
-    //     windowScrollEvents.hitEnd = false;
-      
-    //     //emit event when target not reached 
-    //     scrollEvents.emit('targetNotReached');
-    // }
-
-    // If you reach X duration pixels below target element alert abd only call once
-    // if(!windowScrollEvents.hitEnd && windowTopPosition > (targetPosition+duration)){
-    //     windowScrollEvents.hitEnd = true;
-    // }
+    if (windowScrollEvents.hitEnd && (windowTopPosition < targetEndPosition)) {
+        scrollEvents.emit('targetEndReached');
+        windowScrollEvents.hitEnd = false;
+    }
 }
 
 module.exports = windowScrollEvents

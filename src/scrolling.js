@@ -6,13 +6,13 @@ var AdGenerator = require('./AdGenerator');
 
 var data = require('./data.js');
 
-//listen to scroll events
+// Listens to scroll events
 var scrollEventsListener = new EventHandler();
 
-//subscribe to scroll events
+// Subscribes to scroll events
 scrollEventsListener.subscribe(Scroll.scrollEvents);
 
-//add adGenerator that contains entry transitions
+// Requires adGenerator object
 var adGenerator = AdGenerator();
 
 transitionCalled = false
@@ -20,12 +20,8 @@ transitionCalled = false
 // Create scrollModifier
 var scrollModifier = new Modifier(); 
 
-
-/******************************************************************
-             TARGET  REACHED  EVENT  HANDLER                                      
-******************************************************************/
+// Call adGenerator enter/exit methods when begin target is reached
 scrollEventsListener.on('targetStartReached', function(){
-    // Call adGenerator enter/exit methods when target is reached
     adGenerator.transformer.halt();
     if(!transitionCalled) {
         adGenerator.enter();
@@ -36,11 +32,8 @@ scrollEventsListener.on('targetStartReached', function(){
     }
 });
 
-/******************************************************************
-             TARGET  END  REACHED  EVENT  HANDLER                                      
-******************************************************************/
+// Call adGenerator enter/exit methods when end target is reached
 scrollEventsListener.on('targetEndReached', function(){  
-    // Call adGenerator enter/exit methods when target is reached
     adGenerator.transformer.halt();
     if(transitionCalled) {
         adGenerator.exit();

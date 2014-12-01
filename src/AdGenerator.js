@@ -17,21 +17,8 @@ var SpringTransition = require('famous/transitions/SpringTransition');
 var SnapTransition = require('famous/transitions/SnapTransition');
 
 // Importanting data form data.js dummy file
-// var data = require('../public/userinput/userinput');
-var data = require('./data');
-// console.log(data);
-
-// var data = $.ajax({
-//     type: 'GET',
-//     url: '/user/data',
-//     async: false,
-//     data: data
-// }).done(function(data) {
-//     console.log('data:', data);
-// })
-
-// data = data.responseJSON;
-// data = data[3].data;
+// var data = require('../public/userinput/userinput.js');
+var data = require('./data.js')
 
 // Registry of transitions
 var transitionRegistry = {
@@ -76,7 +63,7 @@ var easingRegistry = {
 }
 
 // Rester spring and wall transitions
-Transitionable.registerMethod('spring', SnapTransition);
+Transitionable.registerMethod('spring', SpringTransition);
 Transitionable.registerMethod('wall', WallTransition);
 
 // Create new transitionable transform and set initial rotation
@@ -84,7 +71,6 @@ var transformer = new TransitionableTransform();
 transformer.setRotate([data.initialRotation.x, data.initialRotation.y, data.initialRotation.z]);
 
 /* GENERATORS */
-
 // Constructor function for our AppView class
 function AdGenerator() {
     var logo = getLogo();
