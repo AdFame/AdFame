@@ -158,6 +158,7 @@ $(function(){
 
     document.getElementById('Iframe').contentWindow.postMessage(sentData, '*')
 
+    // Expands and hides user input sections on toggle
     $('ul').on('click', 'button', function(e){
         e.preventDefault()
         $(this).parent().children('ul').toggle()
