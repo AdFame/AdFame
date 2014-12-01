@@ -70,13 +70,16 @@ Transitionable.registerMethod('wall', WallTransition);
 var transformer = new TransitionableTransform();
 transformer.setRotate([data.initialRotation.x, data.initialRotation.y, data.initialRotation.z]);
 
+// Declare adGenerator variables
+var logo, modifier, enter, exit;
+
 /* GENERATORS */
 // Constructor function for our AppView class
 function AdGenerator() {
-    var logo = getLogo();
-    var modifier = getModifier();
-    var enter = enterTransition();
-    var exit = exitTransition();
+    logo = getLogo();
+    modifier = getModifier();
+    enter = enterTransition();
+    exit = exitTransition();
 
     return {
         logo: logo, 
@@ -106,6 +109,7 @@ function getLogo() {
 // state
 function getModifier() {
     var modifier = new Modifier({
+        opacity: data.opacity,
         size: [undefined, undefined],
         origin: [+data.origin.x, +data.origin.y, +data.origin.z],
         align:[+data.initialPosition.x , +data.initialPosition.y, +data.initialPosition.z],
@@ -139,6 +143,8 @@ function rotateInOut(dataInput) {
             [+dataInput.rotation.x, +dataInput.rotation.y, +dataInput.rotation.z],
             rotationProperties
         );
+
+        modifier.setOpacity(+dataInput.opacity, {duration: +dataInput.duration});
     }
 }
 
@@ -153,6 +159,8 @@ function slideInOut(dataInput) {
             [+dataInput.position.x, +dataInput.position.y, +dataInput.position.z],
             slideProperties
         );
+
+        modifier.setOpacity(+dataInput.opacity, {duration: +dataInput.duration});
     }
 }
 
@@ -168,6 +176,8 @@ function springInOut(dataInput) {
             [+dataInput.position.x, +dataInput.position.y, +dataInput.position.z],
             springProperties
         );
+
+        modifier.setOpacity(+dataInput.opacity, {duration: +dataInput.duration});
     }
 }
 
@@ -184,6 +194,8 @@ function wallInOut(dataInput) {
             [+dataInput.position.x, +dataInput.position.y, +dataInput.position.z],
             wallProperties
         );
+
+        modifier.setOpacity(+dataInput.opacity, {duration: +dataInput.duration});
     }
 }
 module.exports = AdGenerator;

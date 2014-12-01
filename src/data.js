@@ -10,6 +10,7 @@ var data = {
     origin: {},
     initialPosition: {},
     initialRotation: {},
+    opacity: 1,
     enter: {
         type: 'rotateInOut',
         position: {},
