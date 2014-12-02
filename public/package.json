@@ -1,0 +1,52 @@
+{
+  "name": "browserify-seed",
+  "version": "0.3.2",
+  "description": "seed for a browserified version of famous",
+  "browser": "src/index.js",
+  "main": "server.js",
+  "browserify": {
+    "transform": [
+      "famousify",
+      "cssify",
+      "brfs",
+      "deamdify"
+    ]
+  },
+  "scripts": {
+    "start": "npm run build && node server.js",
+    "start-ball": "browserify public/balldemo/ballbounce.js | uglifyjs > public/balldemo/AdFame2.js",
+    "start-dev": "npm run watch & node server.js",
+    "test": "npm run lint -s && npm run build",
+    "build": "browserify src/index.js | uglifyjs > public/bundle.js",
+    "watch": "watchify src/index.js -o public/bundle.js --debug --verbose",
+    "lint-eslint": "eslint src/",
+    "lint-jscs": "jscs src/",
+    "lint": "npm run lint-eslint && npm run lint-jscs",
+    "main": "server.js"
+  },
+  "devDependencies": {
+    "eslint": "^0.9.1",
+    "jscs": "^1.7.3",
+    "watchify": "^2.1.0"
+  },
+  "author": "TheAlphaNerd",
+  "license": "ISC",
+  "dependencies": {
+    "brfs": "^1.2.0",
+    "browserify": "^6.2.0",
+    "cssify": "^0.6.0",
+    "deamdify": "^0.1.1",
+    "famous": "^0.3.0",
+    "famous-polyfills": "^0.3.0",
+    "famousify": "^0.1.5",
+    "grunt": "^0.4.5",
+    "grunt-nodemon": "^0.3.0",
+    "hapi": "^7.1.1",
+    "hapi-mongodb": "^2.2.0",
+    "joi": "^4.9.0",
+    "multiparty": "^4.0.0",
+    "nodemon": "^1.2.1",
+    "uglify-js": "^2.4.15",
+    "watchify": "^2.0.0"
+  }
+}
