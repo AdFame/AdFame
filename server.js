@@ -5,11 +5,13 @@ var joi = require('joi');
 var multiparty= require('multiparty');
 var fs = require('fs');
 var port = Number(process.argv[2]) || 3000;
+
 //create a hapi server
 var server = new Hapi.Server('0.0.0.0', port, { files: { relativeTo: Path.join(__dirname, 'public') } });
 //set the database options for the mongo db.
+var dburl = process.env.mongo_db_url || "mongodb://localhost:27017/AdFame";
 var dbOpts = {
-  "url"       : "mongodb://localhost:27017/AdFame",
+  "url"       : dburl,
   "options"   : {
     "db"    : {
       "native_parser" : false
