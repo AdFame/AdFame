@@ -16,6 +16,7 @@ var ImageSurface = require('famous/surfaces/ImageSurface');
 var Transitionable = require('famous/transitions/Transitionable');
 var SpringTransition = require('famous/transitions/SpringTransition');
 
+
 //register and set spring transition
 Transitionable.registerMethod('spring', SpringTransition);
 
@@ -81,22 +82,38 @@ var tinyBallShineMod = new StateModifier({
 
 /******main ball******/
 var banner = new Surface({
-    size:[200,75],
-    content: 'Your Ad Here',
+    size:[245,70],
     properties: {
     backgroundColor: colorScheme,
-    borderRadius: "15px",
+    borderRadius: "10px",
     textAlign: "center"
     }
 });
 
+var bannerOpacity = new StateModifier({
+  opacity: 0.5
+})
+
 var bannerMod = new StateModifier({
   align:[0.5,1],
   origin:[0.5,0],
-  opacity: .5,
   transform: Transform.translate(0,window.innerHeight + 100,0)
 });
 
+var adMod = new StateModifier({
+  align: [0,0.5],
+  origin: [0,0],
+  
+})
+
+var ad = new Surface({
+  content: '<a href="http://famo.us"><img src="./banner.JPG" /></a>',
+  properties: {
+    textAlign: 'center',
+    zIndex: 200,
+    marginTop:'5px'
+  }
+});
 
 //set initial ball off the screen
 var initStateBall = new StateModifier({
@@ -168,7 +185,9 @@ physicsEngine.addBody(circle);
 /******render tree******/
 
 //add a functional modfier(apply trnasform) or add a particle 
-context.add(bannerMod).add(banner);
+var mainBanner = context.add(bannerMod)
+ mainBanner.add(bannerOpacity).add(banner)
+ mainBanner.add(adMod).add(ad)
 
 var node = context.add(initStateBall).add(mainBallModPE)
 node.add(innerBallShineMod).add(innerBallShine)
